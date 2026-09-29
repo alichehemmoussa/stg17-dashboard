@@ -20,8 +20,10 @@
  "vallée de l'est": "eastern valley",
  "hauts plateaux": "highlands",
  "extrême ouest": "far west",
- "mu rwanda": "Mu Rwanda",
- "mu byaro": "Mu byaro",
- "mu mijyi": "Mu mijyi",
- "imbonerahamwe_igaragaza_inca": "Imbonerahamwe igaragaza incamake y'ihindagurika ry'ibiciro mu Rwanda kuva muri Kanama 2025 kugeza muri Kanama 2026."
+ "mu rwanda": "In Rwanda",
+ "mu byaro": "In villages",
+ "mu mijyi": "In cities",
+ "inflation_annual": "Annual price change rate",
+ "inflation_monthly": "Monthly price change rate",
+ "%": "%"
 }
