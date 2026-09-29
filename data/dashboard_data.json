@@ -33,63 +33,115 @@
   {
    "id": "mu-rwanda",
    "fr": "Mu Rwanda",
-   "en": "Mu Rwanda"
+   "en": "In Rwanda"
   },
   {
    "id": "mu-byaro",
    "fr": "Mu byaro",
-   "en": "Mu byaro"
+   "en": "In villages"
   },
   {
    "id": "mu-mijyi",
    "fr": "Mu mijyi",
-   "en": "Mu mijyi"
+   "en": "In cities"
   }
  ],
  "kpis": [
   {
    "labels": {
-    "en": "Imbonerahamwe igaragaza incamake y'ihindagurika ry'ibiciro mu Rwanda kuva muri Kanama 2025 kugeza muri Kanama 2026., Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2026 (8)",
-    "fr": "Imbonerahamwe igaragaza incamake y'ihindagurika ry'ibiciro mu Rwanda kuva muri Kanama 2025 kugeza muri Kanama 2026., Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2026 (8)"
+    "en": "Annual inflation – Rwanda – January",
+    "fr": "Inflation annuelle – Rwanda – Janvier"
    },
-   "value": 15.7,
+   "value": 7.5,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "delta": null,
+   "deltaLabel": {
+    "en": "vs None",
+    "fr": "vs None"
+   },
    "good": "down",
-   "highlight": true
+   "highlight": false
+  },
+  {
+   "labels": {
+    "en": "Annual inflation – Rural – June",
+    "fr": "Inflation annuelle – Rural – Juin"
+   },
+   "value": 12.1,
+   "unit": {
+    "en": "%",
+    "fr": "%"
+   },
+   "delta": null,
+   "deltaLabel": {
+    "en": "vs None",
+    "fr": "vs None"
+   },
+   "good": "down",
+   "highlight": false
+  },
+  {
+   "labels": {
+    "en": "Monthly inflation – Urban – December",
+    "fr": "Inflation mensuelle – Urbain – Décembre"
+   },
+   "value": 0.0,
+   "unit": {
+    "en": "%",
+    "fr": "%"
+   },
+   "delta": null,
+   "deltaLabel": {
+    "en": "vs None",
+    "fr": "vs None"
+   },
+   "good": "down",
+   "highlight": false
+  },
+  {
+   "labels": {
+    "en": "Monthly inflation – Rwanda – July",
+    "fr": "Inflation mensuelle – Rwanda – Juillet"
+   },
+   "value": 0.3,
+   "unit": {
+    "en": "%",
+    "fr": "%"
+   },
+   "delta": null,
+   "deltaLabel": {
+    "en": "vs None",
+    "fr": "vs None"
+   },
+   "good": "down",
+   "highlight": false
   }
  ],
  "series": {
-  "imbonerahamwe_igaragaza_inca": {
+  "inflation_annual": {
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "periods": [
-    "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2025",
-    "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2025 (2)",
-    "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2025 (3)",
-    "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2025 (4)",
-    "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2025 (5)",
-    "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2026",
-    "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2026 (2)",
-    "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2026 (3)",
-    "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2026 (4)",
-    "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2026 (5)",
-    "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2026 (6)",
-    "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2026 (7)",
-    "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2026 (8)"
+    "01",
+    "02",
+    "03",
+    "04",
+    "05",
+    "06",
+    "07",
+    "08",
+    "09",
+    "10",
+    "11",
+    "12"
    ],
    "values": {
     "mu-rwanda": [
-     6.4,
-     6.2,
-     5.1,
-     4.1,
-     5.2,
      7.5,
      7.9,
      7.7,
@@ -97,14 +149,13 @@
      12.3,
      12.7,
      13.8,
-     15.9
+     6.4,
+     6.2,
+     5.1,
+     4.1,
+     5.2
     ],
     "mu-byaro": [
-     5.9,
-     5.5,
-     3.8,
-     2.0,
-     3.3,
      6.5,
      7.0,
      6.7,
@@ -112,14 +163,13 @@
      11.8,
      12.1,
      13.3,
-     16.0
+     5.9,
+     5.5,
+     3.8,
+     2.0,
+     3.3
     ],
     "mu-mijyi": [
-     7.1,
-     7.3,
-     7.1,
-     7.2,
-     8.0,
      8.9,
      9.2,
      9.2,
@@ -127,46 +177,138 @@
      12.9,
      13.6,
      14.5,
-     15.7
+     7.1,
+     7.3,
+     7.1,
+     7.2,
+     8.0
+    ]
+   }
+  },
+  "inflation_monthly": {
+   "unit": {
+    "en": "%",
+    "fr": "%"
+   },
+   "periods": [
+    "01",
+    "02",
+    "03",
+    "04",
+    "05",
+    "06",
+    "07",
+    "08",
+    "09",
+    "10",
+    "11",
+    "12"
+   ],
+   "values": {
+    "mu-rwanda": [
+     0.6,
+     1.2,
+     1.7,
+     5.9,
+     0.6,
+     0.4,
+     0.3,
+     0.7,
+     1.3,
+     1.0,
+     -0.1,
+     -0.6
+    ],
+    "mu-byaro": [
+     0.1,
+     1.4,
+     1.9,
+     6.8,
+     0.7,
+     0.4,
+     -0.2,
+     0.7,
+     1.2,
+     0.8,
+     -0.3,
+     -0.9
+    ],
+    "mu-mijyi": [
+     1.3,
+     0.9,
+     1.3,
+     4.7,
+     0.5,
+     0.4,
+     0.9,
+     0.7,
+     1.4,
+     1.3,
+     0.2,
+     0.0
     ]
    }
   }
  },
  "views": [
   {
-   "id": "imbonerahamwe_igaragaza_inca",
-   "chart": "grouped",
+   "id": "inflation_annual",
+   "chart": "line",
    "tab": {
-    "en": "Imbonerahamwe igaragaza incamake y'ihindagurika ry'ibiciro mu Rwanda kuva muri Kanama 2025 kugeza muri Kanama 2026.",
-    "fr": "Imbonerahamwe igaragaza incamake y'ihindagurika ry'ibiciro mu Rwanda kuva muri Kanama 2025 kugeza muri Kanama 2026."
+    "en": "Annual Inflation",
+    "fr": "Inflation annuelle"
    },
    "title": {
-    "en": "Imbonerahamwe igaragaza incamake y'ihindagurika ry'ibiciro mu Rwanda kuva muri Kanama 2025 kugeza muri Kanama 2026.",
-    "fr": "Imbonerahamwe igaragaza incamake y'ihindagurika ry'ibiciro mu Rwanda kuva muri Kanama 2025 kugeza muri Kanama 2026."
+    "en": "Annual inflation rate (%)",
+    "fr": "Taux d’inflation annuel (%)"
    },
    "sub": {
-    "en": "",
-    "fr": ""
+    "en": "Annual inflation by area",
+    "fr": "Inflation annuelle par zone"
    },
    "lede": {
-    "en": "",
-    "fr": ""
+    "en": "All areas show a peak in the middle of the year.",
+    "fr": "Toutes les zones affichent un pic au milieu de l’année."
    },
    "src": {
-    "en": "Source: STATISTICS OF RWANDA",
-    "fr": "Source : STATISTICS OF RWANDA"
+    "en": "National Institute of Statistics, Rwanda",
+    "fr": "Institut National de la Statistique, Rwanda"
+   }
+  },
+  {
+   "id": "inflation_monthly",
+   "chart": "line",
+   "tab": {
+    "en": "Monthly Inflation",
+    "fr": "Inflation mensuelle"
+   },
+   "title": {
+    "en": "Monthly inflation rate (%)",
+    "fr": "Taux d’inflation mensuel (%)"
+   },
+   "sub": {
+    "en": "Monthly inflation by area",
+    "fr": "Inflation mensuelle par zone"
+   },
+   "lede": {
+    "en": "All areas display seasonal variation throughout the year.",
+    "fr": "Toutes les zones présentent une variation saisonnière tout au long de l’année."
+   },
+   "src": {
+    "en": "National Institute of Statistics, Rwanda",
+    "fr": "Institut National de la Statistique, Rwanda"
    }
   }
  ],
  "facts": [
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_annual",
    "area": "mu-mijyi",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2025",
+   "period": "08",
    "value": 7.1,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu mijyi 7,1 7,3 7,1 7,2 8,0 8,9 9,2 9,2 13,0 12,9 13,6 14,5 15,7",
@@ -174,13 +316,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_annual",
    "area": "mu-mijyi",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2025 (2)",
+   "period": "09",
    "value": 7.3,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu mijyi 7,1 7,3 7,1 7,2 8,0 8,9 9,2 9,2 13,0 12,9 13,6 14,5 15,7",
@@ -188,13 +330,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_annual",
    "area": "mu-mijyi",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2025 (3)",
+   "period": "10",
    "value": 7.1,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu mijyi 7,1 7,3 7,1 7,2 8,0 8,9 9,2 9,2 13,0 12,9 13,6 14,5 15,7",
@@ -202,13 +344,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_annual",
    "area": "mu-mijyi",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2025 (4)",
+   "period": "11",
    "value": 7.2,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu mijyi 7,1 7,3 7,1 7,2 8,0 8,9 9,2 9,2 13,0 12,9 13,6 14,5 15,7",
@@ -216,13 +358,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_annual",
    "area": "mu-mijyi",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2025 (5)",
+   "period": "12",
    "value": 8.0,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu mijyi 7,1 7,3 7,1 7,2 8,0 8,9 9,2 9,2 13,0 12,9 13,6 14,5 15,7",
@@ -230,13 +372,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_annual",
    "area": "mu-mijyi",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2026",
+   "period": "01",
    "value": 8.9,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu mijyi 7,1 7,3 7,1 7,2 8,0 8,9 9,2 9,2 13,0 12,9 13,6 14,5 15,7",
@@ -244,13 +386,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_annual",
    "area": "mu-mijyi",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2026 (2)",
+   "period": "02",
    "value": 9.2,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu mijyi 7,1 7,3 7,1 7,2 8,0 8,9 9,2 9,2 13,0 12,9 13,6 14,5 15,7",
@@ -258,13 +400,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_annual",
    "area": "mu-mijyi",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2026 (3)",
+   "period": "03",
    "value": 9.2,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu mijyi 7,1 7,3 7,1 7,2 8,0 8,9 9,2 9,2 13,0 12,9 13,6 14,5 15,7",
@@ -272,13 +414,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_annual",
    "area": "mu-mijyi",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2026 (4)",
+   "period": "04",
    "value": 13.0,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu mijyi 7,1 7,3 7,1 7,2 8,0 8,9 9,2 9,2 13,0 12,9 13,6 14,5 15,7",
@@ -286,13 +428,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_annual",
    "area": "mu-mijyi",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2026 (5)",
+   "period": "05",
    "value": 12.9,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu mijyi 7,1 7,3 7,1 7,2 8,0 8,9 9,2 9,2 13,0 12,9 13,6 14,5 15,7",
@@ -300,13 +442,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_annual",
    "area": "mu-mijyi",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2026 (6)",
+   "period": "06",
    "value": 13.6,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu mijyi 7,1 7,3 7,1 7,2 8,0 8,9 9,2 9,2 13,0 12,9 13,6 14,5 15,7",
@@ -314,13 +456,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_annual",
    "area": "mu-mijyi",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2026 (7)",
+   "period": "07",
    "value": 14.5,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu mijyi 7,1 7,3 7,1 7,2 8,0 8,9 9,2 9,2 13,0 12,9 13,6 14,5 15,7",
@@ -328,13 +470,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_annual",
    "area": "mu-mijyi",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2026 (8)",
+   "period": "08",
    "value": 15.7,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu mijyi 7,1 7,3 7,1 7,2 8,0 8,9 9,2 9,2 13,0 12,9 13,6 14,5 15,7",
@@ -342,13 +484,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_annual",
    "area": "mu-byaro",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2025",
+   "period": "08",
    "value": 5.9,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu byaro 5,9 5,5 3,8 2,0 3,3 6,5 7,0 6,7 10,6 11,8 12,1 13,3 16,0",
@@ -356,13 +498,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_annual",
    "area": "mu-byaro",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2025 (2)",
+   "period": "09",
    "value": 5.5,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu byaro 5,9 5,5 3,8 2,0 3,3 6,5 7,0 6,7 10,6 11,8 12,1 13,3 16,0",
@@ -370,13 +512,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_annual",
    "area": "mu-byaro",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2025 (3)",
+   "period": "10",
    "value": 3.8,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu byaro 5,9 5,5 3,8 2,0 3,3 6,5 7,0 6,7 10,6 11,8 12,1 13,3 16,0",
@@ -384,13 +526,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_annual",
    "area": "mu-byaro",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2025 (4)",
+   "period": "11",
    "value": 2.0,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu byaro 5,9 5,5 3,8 2,0 3,3 6,5 7,0 6,7 10,6 11,8 12,1 13,3 16,0",
@@ -398,13 +540,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_annual",
    "area": "mu-byaro",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2025 (5)",
+   "period": "12",
    "value": 3.3,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu byaro 5,9 5,5 3,8 2,0 3,3 6,5 7,0 6,7 10,6 11,8 12,1 13,3 16,0",
@@ -412,13 +554,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_annual",
    "area": "mu-byaro",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2026",
+   "period": "01",
    "value": 6.5,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu byaro 5,9 5,5 3,8 2,0 3,3 6,5 7,0 6,7 10,6 11,8 12,1 13,3 16,0",
@@ -426,13 +568,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_annual",
    "area": "mu-byaro",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2026 (2)",
+   "period": "02",
    "value": 7.0,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu byaro 5,9 5,5 3,8 2,0 3,3 6,5 7,0 6,7 10,6 11,8 12,1 13,3 16,0",
@@ -440,13 +582,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_annual",
    "area": "mu-byaro",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2026 (3)",
+   "period": "03",
    "value": 6.7,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu byaro 5,9 5,5 3,8 2,0 3,3 6,5 7,0 6,7 10,6 11,8 12,1 13,3 16,0",
@@ -454,13 +596,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_annual",
    "area": "mu-byaro",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2026 (4)",
+   "period": "04",
    "value": 10.6,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu byaro 5,9 5,5 3,8 2,0 3,3 6,5 7,0 6,7 10,6 11,8 12,1 13,3 16,0",
@@ -468,13 +610,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_annual",
    "area": "mu-byaro",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2026 (5)",
+   "period": "05",
    "value": 11.8,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu byaro 5,9 5,5 3,8 2,0 3,3 6,5 7,0 6,7 10,6 11,8 12,1 13,3 16,0",
@@ -482,13 +624,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_annual",
    "area": "mu-byaro",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2026 (6)",
+   "period": "06",
    "value": 12.1,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu byaro 5,9 5,5 3,8 2,0 3,3 6,5 7,0 6,7 10,6 11,8 12,1 13,3 16,0",
@@ -496,13 +638,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_annual",
    "area": "mu-byaro",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2026 (7)",
+   "period": "07",
    "value": 13.3,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu byaro 5,9 5,5 3,8 2,0 3,3 6,5 7,0 6,7 10,6 11,8 12,1 13,3 16,0",
@@ -510,13 +652,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_annual",
    "area": "mu-byaro",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2026 (8)",
+   "period": "08",
    "value": 16.0,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu byaro 5,9 5,5 3,8 2,0 3,3 6,5 7,0 6,7 10,6 11,8 12,1 13,3 16,0",
@@ -524,13 +666,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_annual",
    "area": "mu-rwanda",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2025",
+   "period": "08",
    "value": 6.4,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu Rwanda 6,4 6,2 5,1 4,1 5,2 7,5 7,9 7,7 11,5 12,3 12,7 13,8 15,9",
@@ -538,13 +680,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_annual",
    "area": "mu-rwanda",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2025 (2)",
+   "period": "09",
    "value": 6.2,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu Rwanda 6,4 6,2 5,1 4,1 5,2 7,5 7,9 7,7 11,5 12,3 12,7 13,8 15,9",
@@ -552,13 +694,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_annual",
    "area": "mu-rwanda",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2025 (3)",
+   "period": "10",
    "value": 5.1,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu Rwanda 6,4 6,2 5,1 4,1 5,2 7,5 7,9 7,7 11,5 12,3 12,7 13,8 15,9",
@@ -566,13 +708,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_annual",
    "area": "mu-rwanda",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2025 (4)",
+   "period": "11",
    "value": 4.1,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu Rwanda 6,4 6,2 5,1 4,1 5,2 7,5 7,9 7,7 11,5 12,3 12,7 13,8 15,9",
@@ -580,13 +722,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_annual",
    "area": "mu-rwanda",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2025 (5)",
+   "period": "12",
    "value": 5.2,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu Rwanda 6,4 6,2 5,1 4,1 5,2 7,5 7,9 7,7 11,5 12,3 12,7 13,8 15,9",
@@ -594,13 +736,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_annual",
    "area": "mu-rwanda",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2026",
+   "period": "01",
    "value": 7.5,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu Rwanda 6,4 6,2 5,1 4,1 5,2 7,5 7,9 7,7 11,5 12,3 12,7 13,8 15,9",
@@ -608,13 +750,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_annual",
    "area": "mu-rwanda",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2026 (2)",
+   "period": "02",
    "value": 7.9,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu Rwanda 6,4 6,2 5,1 4,1 5,2 7,5 7,9 7,7 11,5 12,3 12,7 13,8 15,9",
@@ -622,13 +764,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_annual",
    "area": "mu-rwanda",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2026 (3)",
+   "period": "03",
    "value": 7.7,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu Rwanda 6,4 6,2 5,1 4,1 5,2 7,5 7,9 7,7 11,5 12,3 12,7 13,8 15,9",
@@ -636,13 +778,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_annual",
    "area": "mu-rwanda",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2026 (4)",
+   "period": "04",
    "value": 11.5,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu Rwanda 6,4 6,2 5,1 4,1 5,2 7,5 7,9 7,7 11,5 12,3 12,7 13,8 15,9",
@@ -650,13 +792,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_annual",
    "area": "mu-rwanda",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2026 (5)",
+   "period": "05",
    "value": 12.3,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu Rwanda 6,4 6,2 5,1 4,1 5,2 7,5 7,9 7,7 11,5 12,3 12,7 13,8 15,9",
@@ -664,13 +806,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_annual",
    "area": "mu-rwanda",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2026 (6)",
+   "period": "06",
    "value": 12.7,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu Rwanda 6,4 6,2 5,1 4,1 5,2 7,5 7,9 7,7 11,5 12,3 12,7 13,8 15,9",
@@ -678,13 +820,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_annual",
    "area": "mu-rwanda",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2026 (7)",
+   "period": "07",
    "value": 13.8,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu Rwanda 6,4 6,2 5,1 4,1 5,2 7,5 7,9 7,7 11,5 12,3 12,7 13,8 15,9",
@@ -692,13 +834,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_annual",
    "area": "mu-rwanda",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2026 (8)",
+   "period": "08",
    "value": 15.9,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu Rwanda 6,4 6,2 5,1 4,1 5,2 7,5 7,9 7,7 11,5 12,3 12,7 13,8 15,9",
@@ -706,13 +848,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_monthly",
    "area": "mu-mijyi",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2025",
+   "period": "08",
    "value": 0.7,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu mijyi 0,7 1,4 1,3 0,2 0,0 1,3 0,9 1,3 4,7 0,5 0,4 0,9 1,8",
@@ -720,13 +862,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_monthly",
    "area": "mu-mijyi",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2025 (2)",
+   "period": "09",
    "value": 1.4,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu mijyi 0,7 1,4 1,3 0,2 0,0 1,3 0,9 1,3 4,7 0,5 0,4 0,9 1,8",
@@ -734,13 +876,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_monthly",
    "area": "mu-mijyi",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2025 (3)",
+   "period": "10",
    "value": 1.3,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu mijyi 0,7 1,4 1,3 0,2 0,0 1,3 0,9 1,3 4,7 0,5 0,4 0,9 1,8",
@@ -748,13 +890,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_monthly",
    "area": "mu-mijyi",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2025 (4)",
+   "period": "11",
    "value": 0.2,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu mijyi 0,7 1,4 1,3 0,2 0,0 1,3 0,9 1,3 4,7 0,5 0,4 0,9 1,8",
@@ -762,13 +904,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_monthly",
    "area": "mu-mijyi",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2025 (5)",
+   "period": "12",
    "value": 0.0,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu mijyi 0,7 1,4 1,3 0,2 0,0 1,3 0,9 1,3 4,7 0,5 0,4 0,9 1,8",
@@ -776,13 +918,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_monthly",
    "area": "mu-mijyi",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2026",
+   "period": "01",
    "value": 1.3,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu mijyi 0,7 1,4 1,3 0,2 0,0 1,3 0,9 1,3 4,7 0,5 0,4 0,9 1,8",
@@ -790,13 +932,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_monthly",
    "area": "mu-mijyi",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2026 (2)",
+   "period": "02",
    "value": 0.9,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu mijyi 0,7 1,4 1,3 0,2 0,0 1,3 0,9 1,3 4,7 0,5 0,4 0,9 1,8",
@@ -804,13 +946,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_monthly",
    "area": "mu-mijyi",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2026 (3)",
+   "period": "03",
    "value": 1.3,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu mijyi 0,7 1,4 1,3 0,2 0,0 1,3 0,9 1,3 4,7 0,5 0,4 0,9 1,8",
@@ -818,13 +960,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_monthly",
    "area": "mu-mijyi",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2026 (4)",
+   "period": "04",
    "value": 4.7,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu mijyi 0,7 1,4 1,3 0,2 0,0 1,3 0,9 1,3 4,7 0,5 0,4 0,9 1,8",
@@ -832,13 +974,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_monthly",
    "area": "mu-mijyi",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2026 (5)",
+   "period": "05",
    "value": 0.5,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu mijyi 0,7 1,4 1,3 0,2 0,0 1,3 0,9 1,3 4,7 0,5 0,4 0,9 1,8",
@@ -846,13 +988,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_monthly",
    "area": "mu-mijyi",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2026 (6)",
+   "period": "06",
    "value": 0.4,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu mijyi 0,7 1,4 1,3 0,2 0,0 1,3 0,9 1,3 4,7 0,5 0,4 0,9 1,8",
@@ -860,13 +1002,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_monthly",
    "area": "mu-mijyi",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2026 (7)",
+   "period": "07",
    "value": 0.9,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu mijyi 0,7 1,4 1,3 0,2 0,0 1,3 0,9 1,3 4,7 0,5 0,4 0,9 1,8",
@@ -874,13 +1016,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_monthly",
    "area": "mu-mijyi",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2026 (8)",
+   "period": "08",
    "value": 1.8,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu mijyi 0,7 1,4 1,3 0,2 0,0 1,3 0,9 1,3 4,7 0,5 0,4 0,9 1,8",
@@ -888,13 +1030,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_monthly",
    "area": "mu-byaro",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2025",
+   "period": "08",
    "value": 0.7,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu byaro 0,7 1,2 0,8 -0,3 -0,9 0,1 1,4 1,9 6,8 0,7 0,4 -0,2 3,1",
@@ -902,13 +1044,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_monthly",
    "area": "mu-byaro",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2025 (2)",
+   "period": "09",
    "value": 1.2,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu byaro 0,7 1,2 0,8 -0,3 -0,9 0,1 1,4 1,9 6,8 0,7 0,4 -0,2 3,1",
@@ -916,13 +1058,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_monthly",
    "area": "mu-byaro",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2025 (3)",
+   "period": "10",
    "value": 0.8,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu byaro 0,7 1,2 0,8 -0,3 -0,9 0,1 1,4 1,9 6,8 0,7 0,4 -0,2 3,1",
@@ -930,13 +1072,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_monthly",
    "area": "mu-byaro",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2025 (4)",
+   "period": "11",
    "value": -0.3,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu byaro 0,7 1,2 0,8 -0,3 -0,9 0,1 1,4 1,9 6,8 0,7 0,4 -0,2 3,1",
@@ -944,13 +1086,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_monthly",
    "area": "mu-byaro",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2025 (5)",
+   "period": "12",
    "value": -0.9,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu byaro 0,7 1,2 0,8 -0,3 -0,9 0,1 1,4 1,9 6,8 0,7 0,4 -0,2 3,1",
@@ -958,13 +1100,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_monthly",
    "area": "mu-byaro",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2026",
+   "period": "01",
    "value": 0.1,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu byaro 0,7 1,2 0,8 -0,3 -0,9 0,1 1,4 1,9 6,8 0,7 0,4 -0,2 3,1",
@@ -972,13 +1114,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_monthly",
    "area": "mu-byaro",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2026 (2)",
+   "period": "02",
    "value": 1.4,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu byaro 0,7 1,2 0,8 -0,3 -0,9 0,1 1,4 1,9 6,8 0,7 0,4 -0,2 3,1",
@@ -986,13 +1128,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_monthly",
    "area": "mu-byaro",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2026 (3)",
+   "period": "03",
    "value": 1.9,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu byaro 0,7 1,2 0,8 -0,3 -0,9 0,1 1,4 1,9 6,8 0,7 0,4 -0,2 3,1",
@@ -1000,13 +1142,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_monthly",
    "area": "mu-byaro",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2026 (4)",
+   "period": "04",
    "value": 6.8,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu byaro 0,7 1,2 0,8 -0,3 -0,9 0,1 1,4 1,9 6,8 0,7 0,4 -0,2 3,1",
@@ -1014,13 +1156,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_monthly",
    "area": "mu-byaro",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2026 (5)",
+   "period": "05",
    "value": 0.7,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu byaro 0,7 1,2 0,8 -0,3 -0,9 0,1 1,4 1,9 6,8 0,7 0,4 -0,2 3,1",
@@ -1028,13 +1170,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_monthly",
    "area": "mu-byaro",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2026 (6)",
+   "period": "06",
    "value": 0.4,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu byaro 0,7 1,2 0,8 -0,3 -0,9 0,1 1,4 1,9 6,8 0,7 0,4 -0,2 3,1",
@@ -1042,13 +1184,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_monthly",
    "area": "mu-byaro",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2026 (7)",
+   "period": "07",
    "value": -0.2,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu byaro 0,7 1,2 0,8 -0,3 -0,9 0,1 1,4 1,9 6,8 0,7 0,4 -0,2 3,1",
@@ -1056,13 +1198,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_monthly",
    "area": "mu-byaro",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2026 (8)",
+   "period": "08",
    "value": 3.1,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu byaro 0,7 1,2 0,8 -0,3 -0,9 0,1 1,4 1,9 6,8 0,7 0,4 -0,2 3,1",
@@ -1070,13 +1212,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_monthly",
    "area": "mu-rwanda",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2025",
+   "period": "08",
    "value": 0.7,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu Rwanda 0,7 1,3 1,0 -0,1 -0,6 0,6 1,2 1,7 5,9 0,6 0,4 0,3 2,6",
@@ -1084,13 +1226,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_monthly",
    "area": "mu-rwanda",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2025 (2)",
+   "period": "09",
    "value": 1.3,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu Rwanda 0,7 1,3 1,0 -0,1 -0,6 0,6 1,2 1,7 5,9 0,6 0,4 0,3 2,6",
@@ -1098,13 +1240,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_monthly",
    "area": "mu-rwanda",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2025 (3)",
+   "period": "10",
    "value": 1.0,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu Rwanda 0,7 1,3 1,0 -0,1 -0,6 0,6 1,2 1,7 5,9 0,6 0,4 0,3 2,6",
@@ -1112,13 +1254,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_monthly",
    "area": "mu-rwanda",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2025 (4)",
+   "period": "11",
    "value": -0.1,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu Rwanda 0,7 1,3 1,0 -0,1 -0,6 0,6 1,2 1,7 5,9 0,6 0,4 0,3 2,6",
@@ -1126,13 +1268,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_monthly",
    "area": "mu-rwanda",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2025 (5)",
+   "period": "12",
    "value": -0.6,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu Rwanda 0,7 1,3 1,0 -0,1 -0,6 0,6 1,2 1,7 5,9 0,6 0,4 0,3 2,6",
@@ -1140,13 +1282,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_monthly",
    "area": "mu-rwanda",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2026",
+   "period": "01",
    "value": 0.6,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu Rwanda 0,7 1,3 1,0 -0,1 -0,6 0,6 1,2 1,7 5,9 0,6 0,4 0,3 2,6",
@@ -1154,13 +1296,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_monthly",
    "area": "mu-rwanda",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2026 (2)",
+   "period": "02",
    "value": 1.2,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu Rwanda 0,7 1,3 1,0 -0,1 -0,6 0,6 1,2 1,7 5,9 0,6 0,4 0,3 2,6",
@@ -1168,13 +1310,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_monthly",
    "area": "mu-rwanda",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2026 (3)",
+   "period": "03",
    "value": 1.7,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu Rwanda 0,7 1,3 1,0 -0,1 -0,6 0,6 1,2 1,7 5,9 0,6 0,4 0,3 2,6",
@@ -1182,13 +1324,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_monthly",
    "area": "mu-rwanda",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2026 (4)",
+   "period": "04",
    "value": 5.9,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu Rwanda 0,7 1,3 1,0 -0,1 -0,6 0,6 1,2 1,7 5,9 0,6 0,4 0,3 2,6",
@@ -1196,13 +1338,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_monthly",
    "area": "mu-rwanda",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2026 (5)",
+   "period": "05",
    "value": 0.6,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu Rwanda 0,7 1,3 1,0 -0,1 -0,6 0,6 1,2 1,7 5,9 0,6 0,4 0,3 2,6",
@@ -1210,13 +1352,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_monthly",
    "area": "mu-rwanda",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2026 (6)",
+   "period": "06",
    "value": 0.4,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu Rwanda 0,7 1,3 1,0 -0,1 -0,6 0,6 1,2 1,7 5,9 0,6 0,4 0,3 2,6",
@@ -1224,13 +1366,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_monthly",
    "area": "mu-rwanda",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2026 (7)",
+   "period": "07",
    "value": 0.3,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu Rwanda 0,7 1,3 1,0 -0,1 -0,6 0,6 1,2 1,7 5,9 0,6 0,4 0,3 2,6",
@@ -1238,13 +1380,13 @@
    "note": null
   },
   {
-   "indicator": "imbonerahamwe_igaragaza_inca",
+   "indicator": "inflation_monthly",
    "area": "mu-rwanda",
-   "period": "Ijanisha ry'ihinduka ry'ibiciro ugereranyije n'ukwezi bisa k'umwaka ushize ndetse n'ukwezi kwakubanjirije 2026 (8)",
+   "period": "08",
    "value": 2.6,
    "unit": {
-    "en": "",
-    "fr": ""
+    "en": "%",
+    "fr": "%"
    },
    "page": 4,
    "snippet": "Mu Rwanda 0,7 1,3 1,0 -0,1 -0,6 0,6 1,2 1,7 5,9 0,6 0,4 0,3 2,6",
@@ -1253,9 +1395,13 @@
   }
  ],
  "indicators": {
-  "imbonerahamwe_igaragaza_inca": {
-   "fr": "Imbonerahamwe igaragaza incamake y'ihindagurika ry'ibiciro mu Rwanda kuva muri Kanama 2025 kugeza muri Kanama 2026.",
-   "en": "Imbonerahamwe igaragaza incamake y'ihindagurika ry'ibiciro mu Rwanda kuva muri Kanama 2025 kugeza muri Kanama 2026."
+  "inflation_annual": {
+   "fr": "Ijanisha ry'ihinduka ry'ibiciro ku mwaka",
+   "en": "Annual price change rate"
+  },
+  "inflation_monthly": {
+   "fr": "Ijanisha ry'ihinduka ry'ibiciro ku kwezi",
+   "en": "Monthly price change rate"
   }
  },
  "i18n": {
@@ -1293,11 +1439,11 @@
    "fBuiltBody": "Python, an LLM extraction pipeline, Chart.js. No tracking, no cookies, no server — a single HTML file.",
    "stamp": "Dashboard generated on {date}. Figures are the responsibility of the source institution; the presentation is the responsibility of the team that built this page.",
    "syntheticWarn": "Demonstration data — fictional country, for training purposes only.",
-   "kicker": "STATISTICS OF RWANDA",
-   "title": "Statistics dashboard",
-   "subtitle": "",
+   "kicker": "Statistics of Rwanda",
+   "title": "Inflation",
+   "subtitle": "Annual and monthly consumer price inflation rates",
    "ovTitle": "Overview",
-   "ovLede": "",
+   "ovLede": "Inflation rates expressed as percent change over the previous period, by area.",
    "limBody": "",
    "publisher": "National Institute of Statistics",
    "period": ""
@@ -1336,14 +1482,30 @@
    "fBuiltBody": "Python, une chaîne d'extraction par LLM, Chart.js. Aucun traceur, aucun cookie, aucun serveur — un seul fichier HTML.",
    "stamp": "Tableau de bord généré le {date}. Les chiffres relèvent de la responsabilité de l'institution source ; la présentation relève de la responsabilité de l'équipe qui a construit cette page.",
    "syntheticWarn": "Données de démonstration — pays fictif, à usage pédagogique uniquement.",
-   "kicker": "STATISTICS OF RWANDA",
-   "title": "Tableau de bord statistique",
-   "subtitle": "",
-   "ovTitle": "Vue d'ensemble",
-   "ovLede": "",
+   "kicker": "Statistiques du Rwanda",
+   "title": "Inflation",
+   "subtitle": "Taux d’inflation des prix à la consommation annuels et mensuels",
+   "ovTitle": "Aperçu",
+   "ovLede": "Taux d’inflation exprimés en pourcentage de variation par rapport à la période précédente, par zone.",
    "limBody": "",
    "publisher": "Institut National de la Statistique",
    "period": ""
+  }
+ },
+ "overviewScatter": {
+  "x": "inflation_annual",
+  "y": "inflation_monthly",
+  "title": {
+   "en": "Monthly price change rate against Annual price change rate",
+   "fr": "Ijanisha ry'ihinduka ry'ibiciro ku kwezi et Ijanisha ry'ihinduka ry'ibiciro ku mwaka"
+  },
+  "sub": {
+   "en": "One point per area — an association, not a causal claim",
+   "fr": "Un point par zone — une association, pas une relation causale"
+  },
+  "src": {
+   "en": "No significance test performed.",
+   "fr": "Aucun test de significativité réalisé."
   }
  }
 }
