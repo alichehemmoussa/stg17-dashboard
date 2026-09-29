@@ -1,12 +1,6 @@
-**Tableau de bord en ligne : <https://alichehemmoussa.github.io/stg17-dashboard/>**
-
-Reconstruit en exécutant le notebook de ce dépôt sur la publication source. Dernière publication le 2026-09-29.
-
----
-
 # Tableau de bord statistique
 
-Tableau de bord bilingue (EN/FR) construit à partir de **STATISTIQUE DE DJIBOUTI**, pages 3, 6, 7.
+Tableau de bord bilingue (EN/FR) construit à partir de **STATISTICS OF RWANDA**, pages 3, 4, 5.
 
 Built during the STG17 technical workshop *Emerging Issues, Emerging Practice*
 (African Development Bank / AU STATAFRIC), lab 02 — from a statistical document
@@ -39,7 +33,7 @@ Results of the run that produced this page:
 
 | Outcome | Cells |
 |---|---|
-| verified | 356 |
+| verified | 78 |
 | published but flagged | 0 |
 | discarded | 0 |
 
