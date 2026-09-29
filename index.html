@@ -1,0 +1,6427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>National statistics dashboard</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  :root{
+    --green:#00A86A; --deep:#00704A; --forest:#00553A; --gold:#F5C242; --ochre:#D49A00;
+    --teal:#0E7C86; --terracotta:#C4621D; --brick:#B83B2E;
+    --ink:#231F20; --slate:#5E6964; --mist:#F4F7F5; --mint:#E8F5EF; --sage:#D5DED9;
+    --shadow:0 1px 2px rgba(35,31,32,.06);
+    --maxw:1160px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; background:#fff; color:var(--ink);
+    font-family:Calibri,Carlito,"Segoe UI",system-ui,-apple-system,"Helvetica Neue",sans-serif;
+    font-size:16px; line-height:1.5; -webkit-font-smoothing:antialiased;
+  }
+  .topbar{height:5px;background:#00A86A;position:relative}
+  .topbar::before{content:"";position:absolute;left:0;top:0;height:5px;width:130px;background:var(--gold)}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+
+  /* ---------- hero ---------- */
+  header.hero{
+    background:linear-gradient(115deg,#00553A 0%,#00704A 48%,#00A86A 100%);
+    color:#fff;padding:34px 0 0;position:relative;overflow:hidden;
+  }
+  header.hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:6px;background:var(--gold)}
+  .hero-arcs{position:absolute;right:-90px;top:-120px;width:420px;height:420px;border-radius:50%;
+    border:1px solid rgba(255,255,255,.16);pointer-events:none}
+  .hero-arcs::before{content:"";position:absolute;inset:58px;border-radius:50%;border:1px solid rgba(255,255,255,.13)}
+  .hero-arcs::after{content:"";position:absolute;inset:118px;border-radius:50%;border:1px solid rgba(255,255,255,.10)}
+  .hero-row{display:flex;gap:24px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap}
+  .kicker{font-size:11px;font-weight:700;letter-spacing:2.4px;text-transform:uppercase;color:var(--gold);margin:0 0 8px}
+  h1{font-size:34px;line-height:1.15;margin:0 0 8px;font-weight:700;max-width:22ch}
+  .hero-sub{font-size:16px;color:#E6F6EE;margin:0;max-width:60ch}
+  .hero-meta{margin:16px 0 0;font-size:13px;color:#CFEADD;display:flex;gap:18px;flex-wrap:wrap}
+  .hero-meta a{color:#fff;text-decoration:underline;text-underline-offset:2px}
+
+  .lang{display:inline-flex;border:1px solid rgba(255,255,255,.45);border-radius:999px;overflow:hidden;flex:0 0 auto}
+  .lang button{
+    background:transparent;border:0;color:#fff;font:inherit;font-size:13px;font-weight:700;
+    padding:7px 16px;cursor:pointer;letter-spacing:.5px;
+  }
+  .lang button[aria-pressed="true"]{background:var(--gold);color:var(--forest)}
+  .lang button:focus-visible{outline:2px solid #fff;outline-offset:-4px}
+
+  /* ---------- tabs ---------- */
+  nav.tabs{background:#fff;border-bottom:1px solid var(--sage);position:sticky;top:0;z-index:20;
+    box-shadow:0 1px 0 rgba(35,31,32,.03)}
+  .tabs-inner{display:flex;gap:4px;overflow-x:auto;scrollbar-width:thin}
+  nav.tabs button{
+    background:none;border:0;border-bottom:3px solid transparent;color:var(--slate);
+    font:inherit;font-size:14.5px;font-weight:600;padding:14px 16px;cursor:pointer;white-space:nowrap;
+  }
+  nav.tabs button[aria-selected="true"]{color:var(--deep);border-bottom-color:var(--green)}
+  nav.tabs button:hover{color:var(--ink)}
+  nav.tabs button:focus-visible{outline:2px solid var(--green);outline-offset:-3px}
+
+  main{padding:28px 0 0}
+  .panel[hidden]{display:none}
+  h2{font-size:21px;margin:0 0 4px;font-weight:700}
+  .lede{color:var(--slate);font-size:14.5px;margin:0 0 20px;max-width:75ch}
+
+  /* ---------- KPI ---------- */
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:14px;margin:0 0 26px}
+  .kpi{background:var(--mist);border:1px solid var(--sage);border-radius:10px;padding:16px 18px}
+  .kpi.hi{background:var(--mint);border-color:var(--green);border-width:1.5px}
+  .kpi .lbl{font-size:12.5px;color:var(--slate);font-weight:600;margin:0 0 6px;min-height:2.6em}
+  .kpi .val{font-size:34px;font-weight:700;line-height:1;color:var(--deep);font-variant-numeric:tabular-nums}
+  .kpi .val small{font-size:15px;font-weight:600;margin-left:3px;color:var(--slate)}
+  .kpi .delta{font-size:12.5px;margin-top:7px;font-weight:600}
+  .delta.up{color:var(--brick)} .delta.down{color:var(--green)} .delta.flat{color:var(--slate)}
+
+  /* ---------- filters ---------- */
+  .filters{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:0 0 18px}
+  .filters .flabel{font-size:12px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--deep);margin-right:4px}
+  .chip{
+    border:1px solid var(--sage);background:#fff;color:var(--slate);border-radius:999px;
+    font:inherit;font-size:13px;padding:5px 13px;cursor:pointer;
+  }
+  .chip[aria-pressed="true"]{background:var(--mint);border-color:var(--green);color:var(--deep);font-weight:700}
+  .chip:focus-visible{outline:2px solid var(--green);outline-offset:1px}
+  .chip.reset{border-style:dashed}
+
+  /* ---------- cards & charts ---------- */
+  .grid{display:grid;gap:18px}
+  .grid.two{grid-template-columns:repeat(auto-fit,minmax(360px,1fr))}
+  .card{border:1px solid var(--sage);border-radius:10px;padding:18px 18px 12px;background:#fff;box-shadow:var(--shadow)}
+  .card h3{margin:0 0 2px;font-size:15.5px;font-weight:700}
+  .card .sub{margin:0 0 14px;font-size:12.5px;color:var(--slate)}
+  .chartbox{position:relative;height:330px}
+  .chartbox.tall{height:390px}
+  .src{font-size:11.5px;font-style:italic;color:var(--slate);margin:10px 0 0;border-top:1px solid var(--mist);padding-top:8px}
+
+  /* ---------- table ---------- */
+  .tablebar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:0 0 12px}
+  .tablebar input[type=search]{
+    flex:1 1 240px;min-width:200px;font:inherit;font-size:14px;padding:8px 12px;
+    border:1px solid var(--sage);border-radius:8px;background:var(--mist);color:var(--ink)
+  }
+  .tablebar input:focus{outline:2px solid var(--green);outline-offset:-1px;background:#fff}
+  .btn{
+    font:inherit;font-size:13.5px;font-weight:600;padding:8px 15px;border-radius:8px;cursor:pointer;
+    border:1px solid var(--deep);background:var(--deep);color:#fff;
+  }
+  .btn.ghost{background:#fff;color:var(--deep)}
+  .btn:hover{background:var(--forest);border-color:var(--forest);color:#fff}
+  .btn:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+  .tscroll{overflow:auto;max-height:68vh;border:1px solid var(--sage);border-radius:10px}
+  table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:720px}
+  thead th{
+    background:var(--deep);color:#fff;text-align:left;padding:10px 12px;font-weight:700;
+    position:sticky;top:0;cursor:pointer;white-space:nowrap;font-size:12.5px
+  }
+  thead th[aria-sort="ascending"]::after{content:" ▲";font-size:9px}
+  thead th[aria-sort="descending"]::after{content:" ▼";font-size:9px}
+  tbody td{padding:9px 12px;border-bottom:1px solid var(--sage);vertical-align:top}
+  tbody tr:nth-child(even){background:var(--mist)}
+  tbody tr.open{background:var(--mint)}
+  td.num{text-align:right;font-variant-numeric:tabular-nums;font-weight:600;white-space:nowrap}
+  .badge{display:inline-block;font-size:11px;font-weight:700;padding:2px 9px;border-radius:999px;white-space:nowrap}
+  .badge.ok{background:var(--mint);color:var(--deep);border:1px solid var(--green)}
+  .badge.warn{background:#FDF3DC;color:#8A6400;border:1px solid var(--ochre)}
+  .prov{background:var(--mint)!important}
+  .prov td{font-size:12.5px;color:var(--slate);padding:12px 16px 14px}
+  .prov q{display:block;font-style:italic;color:var(--ink);border-left:3px solid var(--green);
+    padding:6px 0 6px 12px;margin:6px 0 0;quotes:none;white-space:pre-wrap}
+  .rowbtn{background:none;border:0;padding:0;cursor:pointer;color:var(--deep);font:inherit;
+    font-size:13.5px;font-weight:600;text-align:left;text-decoration:underline;text-underline-offset:3px;
+    text-decoration-color:var(--sage)}
+  .rowbtn:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+  .empty{padding:26px;text-align:center;color:var(--slate);font-size:14px}
+
+  /* ---------- callout ---------- */
+  .callout{border:1px solid var(--ochre);background:#FDF6E4;border-radius:10px;padding:14px 18px;margin:0 0 20px}
+  .callout h3{margin:0 0 4px;font-size:14.5px;color:#8A6400}
+  .callout p{margin:0;font-size:13.5px;color:var(--ink)}
+  .notes{border:1px solid var(--sage);border-radius:10px;padding:18px 20px;background:var(--mist)}
+  .notes h3{margin:0 0 6px;font-size:14.5px}
+  .notes p{margin:0 0 12px;font-size:13.5px;color:var(--slate);max-width:80ch}
+  .notes p:last-child{margin-bottom:0}
+  .notes code{background:#fff;border:1px solid var(--sage);border-radius:4px;padding:1px 5px;font-size:12.5px}
+
+  footer{margin-top:40px;border-top:1px solid var(--sage);background:var(--mist);padding:24px 0 34px}
+  footer .fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:22px}
+  footer h4{margin:0 0 6px;font-size:12px;letter-spacing:1.6px;text-transform:uppercase;color:var(--deep)}
+  footer p{margin:0;font-size:12.5px;color:var(--slate);line-height:1.6}
+  footer a{color:var(--deep)}
+  .stamp{margin-top:18px;font-size:11.5px;color:var(--slate);border-top:1px solid var(--sage);padding-top:14px}
+
+  @media (max-width:620px){
+    h1{font-size:26px} .kpi .val{font-size:28px} .chartbox{height:280px} .wrap{padding:0 16px}
+  }
+  /* the page is read on phones and inside viewers that have their own theme */
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --ink:#E8EFEB; --slate:#9FADA7; --mist:#141D19; --mint:#12302A; --sage:#2B3A34;
+      --deep:#3ED69C; --green:#3ED69C; --ochre:#E8B34A;
+    }
+    :root:not([data-theme="light"]) body{background:#0B1310}
+    :root:not([data-theme="light"]) .card,
+    :root:not([data-theme="light"]) nav.tabs,
+    :root:not([data-theme="light"]) .tscroll{background:#101A16}
+    :root:not([data-theme="light"]) tbody tr:nth-child(even){background:#141D19}
+    :root:not([data-theme="light"]) thead th{background:#123328;color:#E8EFEB}
+    :root:not([data-theme="light"]) .btn{background:#123328;border-color:#3ED69C;color:#E8EFEB}
+    :root:not([data-theme="light"]) .btn.ghost{background:transparent;color:#3ED69C}
+    :root:not([data-theme="light"]) .chip{background:transparent}
+    :root:not([data-theme="light"]) .callout{background:#241D0F;border-color:#E8B34A}
+    :root:not([data-theme="light"]) .callout h3{color:#E8B34A}
+    :root:not([data-theme="light"]) .badge.warn{background:#241D0F;color:#E8B34A}
+    :root:not([data-theme="light"]) .tablebar input[type=search]{background:#141D19;color:#E8EFEB}
+    :root:not([data-theme="light"]) footer{background:#101A16}
+    :root:not([data-theme="light"]) #synthBar{background:#241D0F!important;color:#E8B34A!important}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+  @media print{nav.tabs,.lang,.filters,.tablebar{display:none}.panel[hidden]{display:block!important}}
+</style>
+</head>
+<body>
+<div class="topbar"></div>
+<div id="synthBar" hidden style="background:#FDF3DC;border-bottom:1px solid var(--ochre);
+     color:#8A6400;font-size:12.5px;font-weight:700;text-align:center;padding:7px 16px"></div>
+
+<header class="hero">
+  <div class="hero-arcs" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="hero-row">
+      <div>
+        <p class="kicker" data-i18n="kicker"></p>
+        <h1 data-i18n="title"></h1>
+        <p class="hero-sub" data-i18n="subtitle"></p>
+      </div>
+      <div class="lang" role="group" aria-label="Language / Langue">
+        <button type="button" data-lang="en" aria-pressed="true">EN</button>
+        <button type="button" data-lang="fr" aria-pressed="false">FR</button>
+      </div>
+    </div>
+    <p class="hero-meta">
+      <span data-i18n="publisher"></span>
+      <span data-i18n="period"></span>
+      <span><a id="srcLink" href="#" target="_blank" rel="noopener" data-i18n="sourceDoc"></a></span>
+    </p>
+    <div style="height:26px"></div>
+  </div>
+</header>
+
+<nav class="tabs" aria-label="Sections">
+  <div class="wrap tabs-inner" id="tabs" role="tablist"></div>
+</nav>
+
+<main class="wrap" id="panels"></main>
+
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div><h4 data-i18n="fSource"></h4><p id="fSourceBody"></p></div>
+      <div><h4 data-i18n="fLicence"></h4><p id="fLicenceBody"></p></div>
+      <div><h4 data-i18n="fBuilt"></h4><p data-i18n="fBuiltBody"></p></div>
+      <div><h4 data-i18n="fContact"></h4><p id="fContactBody"></p></div>
+    </div>
+    <p class="stamp" data-i18n="stamp"></p>
+  </div>
+</footer>
+
+
+<script>
+const DATA = /*__DATA__*/{
+ "meta": {
+  "publisher": {
+   "en": "National Institute of Statistics",
+   "fr": "Institut National de la Statistique"
+  },
+  "country": {
+   "en": "",
+   "fr": ""
+  },
+  "docTitle": {
+   "en": "STATISTIQUE DE DJIBOUTI",
+   "fr": "STATISTIQUE DE DJIBOUTI"
+  },
+  "period": {
+   "en": "",
+   "fr": ""
+  },
+  "sourceUrl": "https://firebasestorage.googleapis.com/v0/b/instad-dj.appspot.com/o/Indice%20des%20prix%20%C3%A0%20la%20consommation%2F2026%2FIPC_%20JUILLET_2026_VF.pdf?alt=media&token=b5b48986-356e-4904-874c-58fbac8d49b9",
+  "licence": {
+   "en": "Source data: as published by the institute. Dashboard code: MIT.",
+   "fr": "Données source : telles que publiées par l'institut. Code : MIT."
+  },
+  "contact": {
+   "en": "Built at the STG17 technical workshop, lab 02.",
+   "fr": "Réalisé lors de l'atelier technique STG17, labo 02."
+  },
+  "defaultLang": "fr",
+  "synthetic": false,
+  "generated": "2026-09-29"
+ },
+ "areas": [
+  {
+   "id": "alimentation-et-boissons-non-alcoolisees",
+   "fr": "ALIMENTATION ET BOISSONS NON ALCOOLISÉES",
+   "en": "ALIMENTATION ET BOISSONS NON ALCOOLISÉES"
+  },
+  {
+   "id": "articles-d-habillement-et-chaussures",
+   "fr": "ARTICLES D'HABILLEMENT ET CHAUSSURES",
+   "en": "ARTICLES D'HABILLEMENT ET CHAUSSURES"
+  },
+  {
+   "id": "agrumes",
+   "fr": "Agrumes",
+   "en": "Agrumes"
+  },
+  {
+   "id": "biens-et-services-divers",
+   "fr": "BIENS ET SERVICES DIVERS",
+   "en": "BIENS ET SERVICES DIVERS"
+  },
+  {
+   "id": "boissons-alcoolisees-tabac-et-stupefiant",
+   "fr": "BOISSONS ALCOOLISÉES, TABAC ET STUPÉFIANT",
+   "en": "BOISSONS ALCOOLISÉES, TABAC ET STUPÉFIANT"
+  },
+  {
+   "id": "buf",
+   "fr": "Bœuf",
+   "en": "Bœuf"
+  },
+  {
+   "id": "communication",
+   "fr": "COMMUNICATION",
+   "en": "COMMUNICATION"
+  },
+  {
+   "id": "cereales-non-transformees",
+   "fr": "Céréales non transformées",
+   "en": "Céréales non transformées"
+  },
+  {
+   "id": "durable",
+   "fr": "Durable",
+   "en": "Durable"
+  },
+  {
+   "id": "enseignement",
+   "fr": "ENSEIGNEMENT",
+   "en": "ENSEIGNEMENT"
+  },
+  {
+   "id": "energie",
+   "fr": "Energie",
+   "en": "Energie"
+  },
+  {
+   "id": "farines-semoules-et-gruaux",
+   "fr": "Farines, semoules et gruaux",
+   "en": "Farines, semoules et gruaux"
+  },
+  {
+   "id": "global",
+   "fr": "GLOBAL",
+   "en": "GLOBAL"
+  },
+  {
+   "id": "huiles",
+   "fr": "Huiles",
+   "en": "Huiles"
+  },
+  {
+   "id": "importe",
+   "fr": "Importé",
+   "en": "Importé"
+  },
+  {
+   "id": "khat-petite-bote",
+   "fr": "Khat Petite Bote",
+   "en": "Khat Petite Bote"
+  },
+  {
+   "id": "logement-eau-electricite-gaz-et-autres-combustibles",
+   "fr": "LOGEMENT, EAU, ÉLECTRICITÉ, GAZ ET AUTRES COMBUSTIBLES",
+   "en": "LOGEMENT, EAU, ÉLECTRICITÉ, GAZ ET AUTRES COMBUSTIBLES"
+  },
+  {
+   "id": "loisirs-et-cultures",
+   "fr": "LOISIRS ET CULTURES",
+   "en": "LOISIRS ET CULTURES"
+  },
+  {
+   "id": "lait",
+   "fr": "Lait",
+   "en": "Lait"
+  },
+  {
+   "id": "local",
+   "fr": "Local",
+   "en": "Local"
+  },
+  {
+   "id": "legumes-frais-en-fruits-ou-racine",
+   "fr": "Légumes frais en fruits ou racine",
+   "en": "Légumes frais en fruits ou racine"
+  },
+  {
+   "id": "meubles-articles-de-menages-et-entretien-courant-du-foyer",
+   "fr": "MEUBLES, ARTICLES DE MÉNAGES ET ENTRETIEN COURANT DU FOYER",
+   "en": "MEUBLES, ARTICLES DE MÉNAGES ET ENTRETIEN COURANT DU FOYER"
+  },
+  {
+   "id": "non-durable",
+   "fr": "Non-Durable",
+   "en": "Non-Durable"
+  },
+  {
+   "id": "pains",
+   "fr": "Pains",
+   "en": "Pains"
+  },
+  {
+   "id": "poissons-frais",
+   "fr": "Poissons frais",
+   "en": "Poissons frais"
+  },
+  {
+   "id": "produits-frais",
+   "fr": "Produits frais",
+   "en": "Produits frais"
+  },
+  {
+   "id": "pates-alimentaires",
+   "fr": "Pâtes alimentaires",
+   "en": "Pâtes alimentaires"
+  },
+  {
+   "id": "restaurants-et-hotels",
+   "fr": "RESTAURANTS ET HÔTELS",
+   "en": "RESTAURANTS ET HÔTELS"
+  },
+  {
+   "id": "sante",
+   "fr": "SANTE",
+   "en": "SANTE"
+  },
+  {
+   "id": "sel-epices-sauces-et-produits-alimentaires-n-d-a",
+   "fr": "Sel, épices, sauces et produits alimentaires n.d.a",
+   "en": "Sel, épices, sauces et produits alimentaires n.d.a"
+  },
+  {
+   "id": "semi-durable",
+   "fr": "Semi-Durable",
+   "en": "Semi-Durable"
+  },
+  {
+   "id": "service",
+   "fr": "Service",
+   "en": "Service"
+  },
+  {
+   "id": "sucre",
+   "fr": "Sucre",
+   "en": "Sucre"
+  },
+  {
+   "id": "transports",
+   "fr": "TRANSPORTS",
+   "en": "TRANSPORTS"
+  },
+  {
+   "id": "tabac-et-stupefiant",
+   "fr": "Tabac et stupéfiant",
+   "en": "Tabac et stupéfiant"
+  },
+  {
+   "id": "tubercules-et-plantain",
+   "fr": "Tubercules et plantain",
+   "en": "Tubercules et plantain"
+  },
+  {
+   "id": "frais-et-energie",
+   "fr": "frais et Energie",
+   "en": "frais et Energie"
+  },
+  {
+   "id": "secondaires",
+   "fr": "secondaires",
+   "en": "secondaires"
+  }
+ ],
+ "kpis": [
+  {
+   "labels": {
+    "en": "Indice des Prix à la Consommation base 100 en 2022 des Nomenclatures secondaires, col9",
+    "fr": "Indice des Prix à la Consommation base 100 en 2022 des Nomenclatures secondaires, col9"
+   },
+   "value": -0.3,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "delta": null,
+   "good": "down",
+   "highlight": true
+  }
+ ],
+ "series": {
+  "indice_des_prix_à_la_consomm": {
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "periods": [
+    "col1",
+    "col10",
+    "col2",
+    "col3",
+    "col4",
+    "col5",
+    "col6",
+    "col7",
+    "col8",
+    "col9"
+   ],
+   "values": {
+    "alimentation-et-boissons-non-alcoolisees": [
+     4619102.8,
+     null,
+     105.1,
+     106.6,
+     108.8,
+     108.3,
+     -0.5,
+     3.1,
+     5.3,
+     -0.3
+    ],
+    "articles-d-habillement-et-chaussures": [
+     508100.9,
+     null,
+     100.6,
+     100.5,
+     100.8,
+     100.9,
+     0.1,
+     0.4,
+     0.0,
+     0.0
+    ],
+    "agrumes": [
+     107115.3,
+     null,
+     109.6,
+     110.5,
+     111.1,
+     110.6,
+     -0.5,
+     0.9,
+     -4.1,
+     0.0
+    ],
+    "biens-et-services-divers": [
+     79100.2,
+     null,
+     101.9,
+     101.8,
+     101.6,
+     100.9,
+     -0.7,
+     -1.0,
+     0.7,
+     0.0
+    ],
+    "boissons-alcoolisees-tabac-et-stupefiant": [
+     765.0,
+     0.0,
+     96.1,
+     100.2,
+     105.2,
+     104.7,
+     104.2,
+     -0.4,
+     4.0,
+     8.4
+    ],
+    "buf": [
+     186109.9,
+     null,
+     120.1,
+     121.3,
+     120.1,
+     113.5,
+     -5.5,
+     -5.5,
+     3.3,
+     -0.1
+    ],
+    "communication": [
+     320.0,
+     0.1,
+     90.7,
+     95.9,
+     96.7,
+     96.7,
+     99.4,
+     2.8,
+     3.6,
+     9.7
+    ],
+    "cereales-non-transformees": [
+     329114.4,
+     null,
+     110.6,
+     115.4,
+     114.6,
+     118.3,
+     3.3,
+     7.0,
+     3.4,
+     0.1
+    ],
+    "durable": [
+     94.6,
+     null,
+     101.0,
+     103.9,
+     106.6,
+     106.3,
+     -0.3,
+     3.8,
+     12.4,
+     0.0
+    ],
+    "enseignement": [
+     128101.9,
+     null,
+     101.9,
+     101.9,
+     101.9,
+     101.9,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "energie": [
+     100.1,
+     null,
+     100.9,
+     101.1,
+     103.6,
+     103.8,
+     0.2,
+     2.6,
+     3.7,
+     0.0
+    ],
+    "farines-semoules-et-gruaux": [
+     189.0,
+     0.0,
+     96.9,
+     93.8,
+     107.1,
+     101.0,
+     99.4,
+     -1.6,
+     5.9,
+     2.6
+    ],
+    "global": [
+     102.8,
+     null,
+     103.2,
+     105.56,
+     106.9,
+     106.7,
+     -0.2,
+     2.0,
+     3.8,
+     -0.2
+    ],
+    "huiles": [
+     227.0,
+     0.0,
+     82.2,
+     89.1,
+     93.4,
+     110.8,
+     111.0,
+     0.3,
+     24.7,
+     35.1
+    ],
+    "importe": [
+     100.6,
+     null,
+     101.0,
+     103.9,
+     106.6,
+     106.3,
+     -0.3,
+     3.8,
+     5.6,
+     -0.2
+    ],
+    "khat-petite-bote": [
+     343105.6,
+     null,
+     107.1,
+     117.1,
+     115.1,
+     116.3,
+     1.1,
+     8.7,
+     10.2,
+     0.0
+    ],
+    "logement-eau-electricite-gaz-et-autres-combustibles": [
+     2011103.3,
+     null,
+     104.0,
+     103.9,
+     104.2,
+     104.3,
+     0.1,
+     0.3,
+     0.9,
+     0.0
+    ],
+    "loisirs-et-cultures": [
+     158101.5,
+     null,
+     102.4,
+     102.5,
+     102.3,
+     102.3,
+     -0.1,
+     -0.1,
+     0.7,
+     0.0
+    ],
+    "lait": [
+     434110.7,
+     null,
+     114.2,
+     114.7,
+     114.5,
+     114.7,
+     0.2,
+     0.4,
+     3.6,
+     0.0
+    ],
+    "local": [
+     102.3,
+     null,
+     103.3,
+     105.7,
+     107.4,
+     107.3,
+     -0.1,
+     2.9,
+     4.8,
+     -0.1
+    ],
+    "legumes-frais-en-fruits-ou-racine": [
+     470.0,
+     -0.1,
+     86.2,
+     83.5,
+     83.5,
+     108.2,
+     107.1,
+     -1.0,
+     28.2,
+     24.1
+    ],
+    "meubles-articles-de-menages-et-entretien-courant-du-foyer": [
+     263102.6,
+     null,
+     102.4,
+     101.7,
+     100.2,
+     98.0,
+     -2.2,
+     -4.2,
+     -4.5,
+     -0.1
+    ],
+    "non-durable": [
+     101.9,
+     null,
+     102.5,
+     106.2,
+     108.4,
+     107.9,
+     -0.4,
+     3.3,
+     5.9,
+     -0.3
+    ],
+    "pains": [
+     250.0,
+     -0.1,
+     87.1,
+     102.0,
+     94.7,
+     100.2,
+     95.6,
+     -4.6,
+     -6.3,
+     9.7
+    ],
+    "poissons-frais": [
+     95.0,
+     0.1,
+     89.5,
+     94.6,
+     92.5,
+     82.1,
+     94.6,
+     15.2,
+     0.0,
+     5.6
+    ],
+    "produits-frais": [
+     102.9,
+     null,
+     101.9,
+     106.5,
+     109.5,
+     108.9,
+     -0.5,
+     4.1,
+     5.8,
+     -0.2
+    ],
+    "pates-alimentaires": [
+     413103.6,
+     null,
+     107.1,
+     107.5,
+     104.9,
+     104.9,
+     -0.1,
+     -2.1,
+     1.3,
+     0.0
+    ],
+    "restaurants-et-hotels": [
+     516101.3,
+     null,
+     101.3,
+     101.3,
+     101.3,
+     101.3,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "sante": [
+     145109.0,
+     null,
+     111.3,
+     109.8,
+     109.6,
+     109.7,
+     0.1,
+     -1.5,
+     0.6,
+     0.0
+    ],
+    "sel-epices-sauces-et-produits-alimentaires-n-d-a": [
+     321101.6,
+     null,
+     100.1,
+     102.2,
+     102.2,
+     97.8,
+     -4.3,
+     -2.3,
+     -3.7,
+     -0.1
+    ],
+    "semi-durable": [
+     101.9,
+     null,
+     101.5,
+     101.3,
+     101.7,
+     101.5,
+     -0.2,
+     -0.1,
+     -0.4,
+     0.0
+    ],
+    "service": [
+     106.2,
+     null,
+     106.2,
+     106.2,
+     106.3,
+     106.3,
+     0.0,
+     0.1,
+     0.2,
+     0.0
+    ],
+    "sucre": [
+     213117.3,
+     null,
+     111.5,
+     113.4,
+     111.8,
+     105.0,
+     -6.1,
+     -5.8,
+     -10.5,
+     -0.1
+    ],
+    "transports": [
+     488121.4,
+     null,
+     122.5,
+     122.5,
+     128.9,
+     128.9,
+     0.0,
+     5.3,
+     6.2,
+     0.0
+    ],
+    "tabac-et-stupefiant": [
+     755.0,
+     0.0,
+     96.2,
+     100.3,
+     105.4,
+     104.8,
+     104.4,
+     -0.4,
+     4.0,
+     8.6
+    ],
+    "tubercules-et-plantain": [
+     161.0,
+     0.0,
+     89.5,
+     101.3,
+     94.9,
+     94.1,
+     91.8,
+     -2.5,
+     -9.3,
+     2.6
+    ],
+    "frais-et-energie": [
+     103.4,
+     null,
+     105.1,
+     106.3,
+     106.0,
+     106.0,
+     0.0,
+     0.4,
+     2.5,
+     0.0
+    ],
+    "secondaires": [
+     25.0,
+     null,
+     26.0,
+     26.0,
+     26.0,
+     26.0,
+     null,
+     null,
+     null,
+     null
+    ]
+   }
+  }
+ },
+ "views": [
+  {
+   "id": "indice_des_prix_à_la_consomm",
+   "chart": "grouped",
+   "tab": {
+    "en": "Indice des Prix à la Consommation base 100 en 2022 des douze (12) fonctions et quelques postes de consommation au mois de juillet",
+    "fr": "Indice des Prix à la Consommation base 100 en 2022 des douze (12) fonctions et quelques postes de consommation au mois de juillet"
+   },
+   "title": {
+    "en": "Indice des Prix à la Consommation base 100 en 2022 des douze (12) fonctions et quelques postes de consommation au mois de juillet",
+    "fr": "Indice des Prix à la Consommation base 100 en 2022 des douze (12) fonctions et quelques postes de consommation au mois de juillet"
+   },
+   "sub": {
+    "en": "",
+    "fr": ""
+   },
+   "lede": {
+    "en": "",
+    "fr": ""
+   },
+   "src": {
+    "en": "Source: STATISTIQUE DE DJIBOUTI",
+    "fr": "Source : STATISTIQUE DE DJIBOUTI"
+   }
+  }
+ ],
+ "facts": [
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "alimentation-et-boissons-non-alcoolisees",
+   "period": "col1",
+   "value": 4619102.8,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "1 ALIMENTATION ET BOISSONS NON ALCOOLISÉES 4 619 102,8 105,1 106,6 108,8 108,3 -0,5 3,1 5,3 -0,3",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "alimentation-et-boissons-non-alcoolisees",
+   "period": "col2",
+   "value": 105.1,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "1 ALIMENTATION ET BOISSONS NON ALCOOLISÉES 4 619 102,8 105,1 106,6 108,8 108,3 -0,5 3,1 5,3 -0,3",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "alimentation-et-boissons-non-alcoolisees",
+   "period": "col3",
+   "value": 106.6,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "1 ALIMENTATION ET BOISSONS NON ALCOOLISÉES 4 619 102,8 105,1 106,6 108,8 108,3 -0,5 3,1 5,3 -0,3",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "alimentation-et-boissons-non-alcoolisees",
+   "period": "col4",
+   "value": 108.8,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "1 ALIMENTATION ET BOISSONS NON ALCOOLISÉES 4 619 102,8 105,1 106,6 108,8 108,3 -0,5 3,1 5,3 -0,3",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "alimentation-et-boissons-non-alcoolisees",
+   "period": "col5",
+   "value": 108.3,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "1 ALIMENTATION ET BOISSONS NON ALCOOLISÉES 4 619 102,8 105,1 106,6 108,8 108,3 -0,5 3,1 5,3 -0,3",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "alimentation-et-boissons-non-alcoolisees",
+   "period": "col6",
+   "value": -0.5,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "1 ALIMENTATION ET BOISSONS NON ALCOOLISÉES 4 619 102,8 105,1 106,6 108,8 108,3 -0,5 3,1 5,3 -0,3",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "alimentation-et-boissons-non-alcoolisees",
+   "period": "col7",
+   "value": 3.1,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "1 ALIMENTATION ET BOISSONS NON ALCOOLISÉES 4 619 102,8 105,1 106,6 108,8 108,3 -0,5 3,1 5,3 -0,3",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "alimentation-et-boissons-non-alcoolisees",
+   "period": "col8",
+   "value": 5.3,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "1 ALIMENTATION ET BOISSONS NON ALCOOLISÉES 4 619 102,8 105,1 106,6 108,8 108,3 -0,5 3,1 5,3 -0,3",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "alimentation-et-boissons-non-alcoolisees",
+   "period": "col9",
+   "value": -0.3,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "1 ALIMENTATION ET BOISSONS NON ALCOOLISÉES 4 619 102,8 105,1 106,6 108,8 108,3 -0,5 3,1 5,3 -0,3",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "cereales-non-transformees",
+   "period": "col1",
+   "value": 329114.4,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Céréales non transformées 329 114,4 110,6 115,4 114,6 118,3 3,3 7,0 3,4 0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "cereales-non-transformees",
+   "period": "col2",
+   "value": 110.6,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Céréales non transformées 329 114,4 110,6 115,4 114,6 118,3 3,3 7,0 3,4 0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "cereales-non-transformees",
+   "period": "col3",
+   "value": 115.4,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Céréales non transformées 329 114,4 110,6 115,4 114,6 118,3 3,3 7,0 3,4 0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "cereales-non-transformees",
+   "period": "col4",
+   "value": 114.6,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Céréales non transformées 329 114,4 110,6 115,4 114,6 118,3 3,3 7,0 3,4 0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "cereales-non-transformees",
+   "period": "col5",
+   "value": 118.3,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Céréales non transformées 329 114,4 110,6 115,4 114,6 118,3 3,3 7,0 3,4 0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "cereales-non-transformees",
+   "period": "col6",
+   "value": 3.3,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Céréales non transformées 329 114,4 110,6 115,4 114,6 118,3 3,3 7,0 3,4 0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "cereales-non-transformees",
+   "period": "col7",
+   "value": 7.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Céréales non transformées 329 114,4 110,6 115,4 114,6 118,3 3,3 7,0 3,4 0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "cereales-non-transformees",
+   "period": "col8",
+   "value": 3.4,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Céréales non transformées 329 114,4 110,6 115,4 114,6 118,3 3,3 7,0 3,4 0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "cereales-non-transformees",
+   "period": "col9",
+   "value": 0.1,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Céréales non transformées 329 114,4 110,6 115,4 114,6 118,3 3,3 7,0 3,4 0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "farines-semoules-et-gruaux",
+   "period": "col1",
+   "value": 189.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Farines, semoules et gruaux 189 96,9 93,8 107,1 101,0 99,4 -1,6 5,9 2,6 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "farines-semoules-et-gruaux",
+   "period": "col2",
+   "value": 96.9,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Farines, semoules et gruaux 189 96,9 93,8 107,1 101,0 99,4 -1,6 5,9 2,6 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "farines-semoules-et-gruaux",
+   "period": "col3",
+   "value": 93.8,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Farines, semoules et gruaux 189 96,9 93,8 107,1 101,0 99,4 -1,6 5,9 2,6 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "farines-semoules-et-gruaux",
+   "period": "col4",
+   "value": 107.1,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Farines, semoules et gruaux 189 96,9 93,8 107,1 101,0 99,4 -1,6 5,9 2,6 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "farines-semoules-et-gruaux",
+   "period": "col5",
+   "value": 101.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Farines, semoules et gruaux 189 96,9 93,8 107,1 101,0 99,4 -1,6 5,9 2,6 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "farines-semoules-et-gruaux",
+   "period": "col6",
+   "value": 99.4,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Farines, semoules et gruaux 189 96,9 93,8 107,1 101,0 99,4 -1,6 5,9 2,6 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "farines-semoules-et-gruaux",
+   "period": "col7",
+   "value": -1.6,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Farines, semoules et gruaux 189 96,9 93,8 107,1 101,0 99,4 -1,6 5,9 2,6 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "farines-semoules-et-gruaux",
+   "period": "col8",
+   "value": 5.9,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Farines, semoules et gruaux 189 96,9 93,8 107,1 101,0 99,4 -1,6 5,9 2,6 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "farines-semoules-et-gruaux",
+   "period": "col9",
+   "value": 2.6,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Farines, semoules et gruaux 189 96,9 93,8 107,1 101,0 99,4 -1,6 5,9 2,6 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "farines-semoules-et-gruaux",
+   "period": "col10",
+   "value": 0.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Farines, semoules et gruaux 189 96,9 93,8 107,1 101,0 99,4 -1,6 5,9 2,6 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "pates-alimentaires",
+   "period": "col1",
+   "value": 413103.6,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Pâtes alimentaires 413 103,6 107,1 107,5 104,9 104,9 -0,1 -2,1 1,3 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "pates-alimentaires",
+   "period": "col2",
+   "value": 107.1,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Pâtes alimentaires 413 103,6 107,1 107,5 104,9 104,9 -0,1 -2,1 1,3 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "pates-alimentaires",
+   "period": "col3",
+   "value": 107.5,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Pâtes alimentaires 413 103,6 107,1 107,5 104,9 104,9 -0,1 -2,1 1,3 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "pates-alimentaires",
+   "period": "col4",
+   "value": 104.9,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Pâtes alimentaires 413 103,6 107,1 107,5 104,9 104,9 -0,1 -2,1 1,3 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "pates-alimentaires",
+   "period": "col5",
+   "value": 104.9,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Pâtes alimentaires 413 103,6 107,1 107,5 104,9 104,9 -0,1 -2,1 1,3 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "pates-alimentaires",
+   "period": "col6",
+   "value": -0.1,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Pâtes alimentaires 413 103,6 107,1 107,5 104,9 104,9 -0,1 -2,1 1,3 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "pates-alimentaires",
+   "period": "col7",
+   "value": -2.1,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Pâtes alimentaires 413 103,6 107,1 107,5 104,9 104,9 -0,1 -2,1 1,3 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "pates-alimentaires",
+   "period": "col8",
+   "value": 1.3,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Pâtes alimentaires 413 103,6 107,1 107,5 104,9 104,9 -0,1 -2,1 1,3 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "pates-alimentaires",
+   "period": "col9",
+   "value": 0.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Pâtes alimentaires 413 103,6 107,1 107,5 104,9 104,9 -0,1 -2,1 1,3 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "pains",
+   "period": "col1",
+   "value": 250.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Pains 250 87,1 102,0 94,7 100,2 95,6 -4,6 -6,3 9,7 -0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "pains",
+   "period": "col2",
+   "value": 87.1,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Pains 250 87,1 102,0 94,7 100,2 95,6 -4,6 -6,3 9,7 -0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "pains",
+   "period": "col3",
+   "value": 102.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Pains 250 87,1 102,0 94,7 100,2 95,6 -4,6 -6,3 9,7 -0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "pains",
+   "period": "col4",
+   "value": 94.7,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Pains 250 87,1 102,0 94,7 100,2 95,6 -4,6 -6,3 9,7 -0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "pains",
+   "period": "col5",
+   "value": 100.2,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Pains 250 87,1 102,0 94,7 100,2 95,6 -4,6 -6,3 9,7 -0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "pains",
+   "period": "col6",
+   "value": 95.6,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Pains 250 87,1 102,0 94,7 100,2 95,6 -4,6 -6,3 9,7 -0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "pains",
+   "period": "col7",
+   "value": -4.6,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Pains 250 87,1 102,0 94,7 100,2 95,6 -4,6 -6,3 9,7 -0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "pains",
+   "period": "col8",
+   "value": -6.3,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Pains 250 87,1 102,0 94,7 100,2 95,6 -4,6 -6,3 9,7 -0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "pains",
+   "period": "col9",
+   "value": 9.7,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Pains 250 87,1 102,0 94,7 100,2 95,6 -4,6 -6,3 9,7 -0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "pains",
+   "period": "col10",
+   "value": -0.1,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Pains 250 87,1 102,0 94,7 100,2 95,6 -4,6 -6,3 9,7 -0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "buf",
+   "period": "col1",
+   "value": 186109.9,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Bœuf 186 109,9 120,1 121,3 120,1 113,5 -5,5 -5,5 3,3 -0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "buf",
+   "period": "col2",
+   "value": 120.1,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Bœuf 186 109,9 120,1 121,3 120,1 113,5 -5,5 -5,5 3,3 -0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "buf",
+   "period": "col3",
+   "value": 121.3,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Bœuf 186 109,9 120,1 121,3 120,1 113,5 -5,5 -5,5 3,3 -0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "buf",
+   "period": "col4",
+   "value": 120.1,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Bœuf 186 109,9 120,1 121,3 120,1 113,5 -5,5 -5,5 3,3 -0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "buf",
+   "period": "col5",
+   "value": 113.5,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Bœuf 186 109,9 120,1 121,3 120,1 113,5 -5,5 -5,5 3,3 -0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "buf",
+   "period": "col6",
+   "value": -5.5,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Bœuf 186 109,9 120,1 121,3 120,1 113,5 -5,5 -5,5 3,3 -0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "buf",
+   "period": "col7",
+   "value": -5.5,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Bœuf 186 109,9 120,1 121,3 120,1 113,5 -5,5 -5,5 3,3 -0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "buf",
+   "period": "col8",
+   "value": 3.3,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Bœuf 186 109,9 120,1 121,3 120,1 113,5 -5,5 -5,5 3,3 -0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "buf",
+   "period": "col9",
+   "value": -0.1,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Bœuf 186 109,9 120,1 121,3 120,1 113,5 -5,5 -5,5 3,3 -0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "poissons-frais",
+   "period": "col1",
+   "value": 95.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Poissons frais 95 89,5 94,6 92,5 82,1 94,6 15,2 0,0 5,6 0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "poissons-frais",
+   "period": "col2",
+   "value": 89.5,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Poissons frais 95 89,5 94,6 92,5 82,1 94,6 15,2 0,0 5,6 0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "poissons-frais",
+   "period": "col3",
+   "value": 94.6,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Poissons frais 95 89,5 94,6 92,5 82,1 94,6 15,2 0,0 5,6 0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "poissons-frais",
+   "period": "col4",
+   "value": 92.5,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Poissons frais 95 89,5 94,6 92,5 82,1 94,6 15,2 0,0 5,6 0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "poissons-frais",
+   "period": "col5",
+   "value": 82.1,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Poissons frais 95 89,5 94,6 92,5 82,1 94,6 15,2 0,0 5,6 0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "poissons-frais",
+   "period": "col6",
+   "value": 94.6,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Poissons frais 95 89,5 94,6 92,5 82,1 94,6 15,2 0,0 5,6 0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "poissons-frais",
+   "period": "col7",
+   "value": 15.2,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Poissons frais 95 89,5 94,6 92,5 82,1 94,6 15,2 0,0 5,6 0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "poissons-frais",
+   "period": "col8",
+   "value": 0.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Poissons frais 95 89,5 94,6 92,5 82,1 94,6 15,2 0,0 5,6 0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "poissons-frais",
+   "period": "col9",
+   "value": 5.6,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Poissons frais 95 89,5 94,6 92,5 82,1 94,6 15,2 0,0 5,6 0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "poissons-frais",
+   "period": "col10",
+   "value": 0.1,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Poissons frais 95 89,5 94,6 92,5 82,1 94,6 15,2 0,0 5,6 0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "lait",
+   "period": "col1",
+   "value": 434110.7,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Lait 434 110,7 114,2 114,7 114,5 114,7 0,2 0,4 3,6 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "lait",
+   "period": "col2",
+   "value": 114.2,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Lait 434 110,7 114,2 114,7 114,5 114,7 0,2 0,4 3,6 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "lait",
+   "period": "col3",
+   "value": 114.7,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Lait 434 110,7 114,2 114,7 114,5 114,7 0,2 0,4 3,6 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "lait",
+   "period": "col4",
+   "value": 114.5,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Lait 434 110,7 114,2 114,7 114,5 114,7 0,2 0,4 3,6 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "lait",
+   "period": "col5",
+   "value": 114.7,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Lait 434 110,7 114,2 114,7 114,5 114,7 0,2 0,4 3,6 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "lait",
+   "period": "col6",
+   "value": 0.2,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Lait 434 110,7 114,2 114,7 114,5 114,7 0,2 0,4 3,6 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "lait",
+   "period": "col7",
+   "value": 0.4,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Lait 434 110,7 114,2 114,7 114,5 114,7 0,2 0,4 3,6 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "lait",
+   "period": "col8",
+   "value": 3.6,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Lait 434 110,7 114,2 114,7 114,5 114,7 0,2 0,4 3,6 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "lait",
+   "period": "col9",
+   "value": 0.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Lait 434 110,7 114,2 114,7 114,5 114,7 0,2 0,4 3,6 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "huiles",
+   "period": "col1",
+   "value": 227.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Huiles 227 82,2 89,1 93,4 110,8 111,0 0,3 24,7 35,1 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "huiles",
+   "period": "col2",
+   "value": 82.2,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Huiles 227 82,2 89,1 93,4 110,8 111,0 0,3 24,7 35,1 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "huiles",
+   "period": "col3",
+   "value": 89.1,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Huiles 227 82,2 89,1 93,4 110,8 111,0 0,3 24,7 35,1 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "huiles",
+   "period": "col4",
+   "value": 93.4,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Huiles 227 82,2 89,1 93,4 110,8 111,0 0,3 24,7 35,1 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "huiles",
+   "period": "col5",
+   "value": 110.8,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Huiles 227 82,2 89,1 93,4 110,8 111,0 0,3 24,7 35,1 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "huiles",
+   "period": "col6",
+   "value": 111.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Huiles 227 82,2 89,1 93,4 110,8 111,0 0,3 24,7 35,1 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "huiles",
+   "period": "col7",
+   "value": 0.3,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Huiles 227 82,2 89,1 93,4 110,8 111,0 0,3 24,7 35,1 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "huiles",
+   "period": "col8",
+   "value": 24.7,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Huiles 227 82,2 89,1 93,4 110,8 111,0 0,3 24,7 35,1 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "huiles",
+   "period": "col9",
+   "value": 35.1,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Huiles 227 82,2 89,1 93,4 110,8 111,0 0,3 24,7 35,1 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "huiles",
+   "period": "col10",
+   "value": 0.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Huiles 227 82,2 89,1 93,4 110,8 111,0 0,3 24,7 35,1 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "agrumes",
+   "period": "col1",
+   "value": 107115.3,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Agrumes 107 115,3 109,6 110,5 111,1 110,6 -0,5 0,9 -4,1 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "agrumes",
+   "period": "col2",
+   "value": 109.6,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Agrumes 107 115,3 109,6 110,5 111,1 110,6 -0,5 0,9 -4,1 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "agrumes",
+   "period": "col3",
+   "value": 110.5,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Agrumes 107 115,3 109,6 110,5 111,1 110,6 -0,5 0,9 -4,1 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "agrumes",
+   "period": "col4",
+   "value": 111.1,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Agrumes 107 115,3 109,6 110,5 111,1 110,6 -0,5 0,9 -4,1 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "agrumes",
+   "period": "col5",
+   "value": 110.6,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Agrumes 107 115,3 109,6 110,5 111,1 110,6 -0,5 0,9 -4,1 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "agrumes",
+   "period": "col6",
+   "value": -0.5,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Agrumes 107 115,3 109,6 110,5 111,1 110,6 -0,5 0,9 -4,1 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "agrumes",
+   "period": "col7",
+   "value": 0.9,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Agrumes 107 115,3 109,6 110,5 111,1 110,6 -0,5 0,9 -4,1 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "agrumes",
+   "period": "col8",
+   "value": -4.1,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Agrumes 107 115,3 109,6 110,5 111,1 110,6 -0,5 0,9 -4,1 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "agrumes",
+   "period": "col9",
+   "value": 0.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Agrumes 107 115,3 109,6 110,5 111,1 110,6 -0,5 0,9 -4,1 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "legumes-frais-en-fruits-ou-racine",
+   "period": "col1",
+   "value": 470.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Légumes frais en fruits ou racine 470 86,2 83,5 83,5 108,2 107,1 -1,0 28,2 24,1 -0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "legumes-frais-en-fruits-ou-racine",
+   "period": "col2",
+   "value": 86.2,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Légumes frais en fruits ou racine 470 86,2 83,5 83,5 108,2 107,1 -1,0 28,2 24,1 -0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "legumes-frais-en-fruits-ou-racine",
+   "period": "col3",
+   "value": 83.5,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Légumes frais en fruits ou racine 470 86,2 83,5 83,5 108,2 107,1 -1,0 28,2 24,1 -0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "legumes-frais-en-fruits-ou-racine",
+   "period": "col4",
+   "value": 83.5,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Légumes frais en fruits ou racine 470 86,2 83,5 83,5 108,2 107,1 -1,0 28,2 24,1 -0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "legumes-frais-en-fruits-ou-racine",
+   "period": "col5",
+   "value": 108.2,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Légumes frais en fruits ou racine 470 86,2 83,5 83,5 108,2 107,1 -1,0 28,2 24,1 -0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "legumes-frais-en-fruits-ou-racine",
+   "period": "col6",
+   "value": 107.1,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Légumes frais en fruits ou racine 470 86,2 83,5 83,5 108,2 107,1 -1,0 28,2 24,1 -0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "legumes-frais-en-fruits-ou-racine",
+   "period": "col7",
+   "value": -1.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Légumes frais en fruits ou racine 470 86,2 83,5 83,5 108,2 107,1 -1,0 28,2 24,1 -0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "legumes-frais-en-fruits-ou-racine",
+   "period": "col8",
+   "value": 28.2,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Légumes frais en fruits ou racine 470 86,2 83,5 83,5 108,2 107,1 -1,0 28,2 24,1 -0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "legumes-frais-en-fruits-ou-racine",
+   "period": "col9",
+   "value": 24.1,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Légumes frais en fruits ou racine 470 86,2 83,5 83,5 108,2 107,1 -1,0 28,2 24,1 -0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "legumes-frais-en-fruits-ou-racine",
+   "period": "col10",
+   "value": -0.1,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Légumes frais en fruits ou racine 470 86,2 83,5 83,5 108,2 107,1 -1,0 28,2 24,1 -0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "tubercules-et-plantain",
+   "period": "col1",
+   "value": 161.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Tubercules et plantain 161 89,5 101,3 94,9 94,1 91,8 -2,5 -9,3 2,6 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "tubercules-et-plantain",
+   "period": "col2",
+   "value": 89.5,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Tubercules et plantain 161 89,5 101,3 94,9 94,1 91,8 -2,5 -9,3 2,6 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "tubercules-et-plantain",
+   "period": "col3",
+   "value": 101.3,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Tubercules et plantain 161 89,5 101,3 94,9 94,1 91,8 -2,5 -9,3 2,6 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "tubercules-et-plantain",
+   "period": "col4",
+   "value": 94.9,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Tubercules et plantain 161 89,5 101,3 94,9 94,1 91,8 -2,5 -9,3 2,6 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "tubercules-et-plantain",
+   "period": "col5",
+   "value": 94.1,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Tubercules et plantain 161 89,5 101,3 94,9 94,1 91,8 -2,5 -9,3 2,6 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "tubercules-et-plantain",
+   "period": "col6",
+   "value": 91.8,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Tubercules et plantain 161 89,5 101,3 94,9 94,1 91,8 -2,5 -9,3 2,6 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "tubercules-et-plantain",
+   "period": "col7",
+   "value": -2.5,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Tubercules et plantain 161 89,5 101,3 94,9 94,1 91,8 -2,5 -9,3 2,6 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "tubercules-et-plantain",
+   "period": "col8",
+   "value": -9.3,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Tubercules et plantain 161 89,5 101,3 94,9 94,1 91,8 -2,5 -9,3 2,6 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "tubercules-et-plantain",
+   "period": "col9",
+   "value": 2.6,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Tubercules et plantain 161 89,5 101,3 94,9 94,1 91,8 -2,5 -9,3 2,6 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "tubercules-et-plantain",
+   "period": "col10",
+   "value": 0.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Tubercules et plantain 161 89,5 101,3 94,9 94,1 91,8 -2,5 -9,3 2,6 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "sucre",
+   "period": "col1",
+   "value": 213117.3,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Sucre 213 117,3 111,5 113,4 111,8 105,0 -6,1 -5,8 -10,5 -0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "sucre",
+   "period": "col2",
+   "value": 111.5,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Sucre 213 117,3 111,5 113,4 111,8 105,0 -6,1 -5,8 -10,5 -0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "sucre",
+   "period": "col3",
+   "value": 113.4,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Sucre 213 117,3 111,5 113,4 111,8 105,0 -6,1 -5,8 -10,5 -0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "sucre",
+   "period": "col4",
+   "value": 111.8,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Sucre 213 117,3 111,5 113,4 111,8 105,0 -6,1 -5,8 -10,5 -0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "sucre",
+   "period": "col5",
+   "value": 105.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Sucre 213 117,3 111,5 113,4 111,8 105,0 -6,1 -5,8 -10,5 -0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "sucre",
+   "period": "col6",
+   "value": -6.1,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Sucre 213 117,3 111,5 113,4 111,8 105,0 -6,1 -5,8 -10,5 -0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "sucre",
+   "period": "col7",
+   "value": -5.8,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Sucre 213 117,3 111,5 113,4 111,8 105,0 -6,1 -5,8 -10,5 -0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "sucre",
+   "period": "col8",
+   "value": -10.5,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Sucre 213 117,3 111,5 113,4 111,8 105,0 -6,1 -5,8 -10,5 -0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "sucre",
+   "period": "col9",
+   "value": -0.1,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Sucre 213 117,3 111,5 113,4 111,8 105,0 -6,1 -5,8 -10,5 -0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "sel-epices-sauces-et-produits-alimentaires-n-d-a",
+   "period": "col1",
+   "value": 321101.6,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Sel, épices, sauces et produits alimentaires n.d.a 321 101,6 100,1 102,2 102,2 97,8 -4,3 -2,3 -3,7 -0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "sel-epices-sauces-et-produits-alimentaires-n-d-a",
+   "period": "col2",
+   "value": 100.1,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Sel, épices, sauces et produits alimentaires n.d.a 321 101,6 100,1 102,2 102,2 97,8 -4,3 -2,3 -3,7 -0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "sel-epices-sauces-et-produits-alimentaires-n-d-a",
+   "period": "col3",
+   "value": 102.2,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Sel, épices, sauces et produits alimentaires n.d.a 321 101,6 100,1 102,2 102,2 97,8 -4,3 -2,3 -3,7 -0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "sel-epices-sauces-et-produits-alimentaires-n-d-a",
+   "period": "col4",
+   "value": 102.2,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Sel, épices, sauces et produits alimentaires n.d.a 321 101,6 100,1 102,2 102,2 97,8 -4,3 -2,3 -3,7 -0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "sel-epices-sauces-et-produits-alimentaires-n-d-a",
+   "period": "col5",
+   "value": 97.8,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Sel, épices, sauces et produits alimentaires n.d.a 321 101,6 100,1 102,2 102,2 97,8 -4,3 -2,3 -3,7 -0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "sel-epices-sauces-et-produits-alimentaires-n-d-a",
+   "period": "col6",
+   "value": -4.3,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Sel, épices, sauces et produits alimentaires n.d.a 321 101,6 100,1 102,2 102,2 97,8 -4,3 -2,3 -3,7 -0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "sel-epices-sauces-et-produits-alimentaires-n-d-a",
+   "period": "col7",
+   "value": -2.3,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Sel, épices, sauces et produits alimentaires n.d.a 321 101,6 100,1 102,2 102,2 97,8 -4,3 -2,3 -3,7 -0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "sel-epices-sauces-et-produits-alimentaires-n-d-a",
+   "period": "col8",
+   "value": -3.7,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Sel, épices, sauces et produits alimentaires n.d.a 321 101,6 100,1 102,2 102,2 97,8 -4,3 -2,3 -3,7 -0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "sel-epices-sauces-et-produits-alimentaires-n-d-a",
+   "period": "col9",
+   "value": -0.1,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Sel, épices, sauces et produits alimentaires n.d.a 321 101,6 100,1 102,2 102,2 97,8 -4,3 -2,3 -3,7 -0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "boissons-alcoolisees-tabac-et-stupefiant",
+   "period": "col1",
+   "value": 765.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "2 BOISSONS ALCOOLISÉES, TABAC ET STUPÉFIANT 765 96,1 100,2 105,2 104,7 104,2 -0,4 4,0 8,4 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "boissons-alcoolisees-tabac-et-stupefiant",
+   "period": "col2",
+   "value": 96.1,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "2 BOISSONS ALCOOLISÉES, TABAC ET STUPÉFIANT 765 96,1 100,2 105,2 104,7 104,2 -0,4 4,0 8,4 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "boissons-alcoolisees-tabac-et-stupefiant",
+   "period": "col3",
+   "value": 100.2,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "2 BOISSONS ALCOOLISÉES, TABAC ET STUPÉFIANT 765 96,1 100,2 105,2 104,7 104,2 -0,4 4,0 8,4 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "boissons-alcoolisees-tabac-et-stupefiant",
+   "period": "col4",
+   "value": 105.2,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "2 BOISSONS ALCOOLISÉES, TABAC ET STUPÉFIANT 765 96,1 100,2 105,2 104,7 104,2 -0,4 4,0 8,4 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "boissons-alcoolisees-tabac-et-stupefiant",
+   "period": "col5",
+   "value": 104.7,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "2 BOISSONS ALCOOLISÉES, TABAC ET STUPÉFIANT 765 96,1 100,2 105,2 104,7 104,2 -0,4 4,0 8,4 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "boissons-alcoolisees-tabac-et-stupefiant",
+   "period": "col6",
+   "value": 104.2,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "2 BOISSONS ALCOOLISÉES, TABAC ET STUPÉFIANT 765 96,1 100,2 105,2 104,7 104,2 -0,4 4,0 8,4 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "boissons-alcoolisees-tabac-et-stupefiant",
+   "period": "col7",
+   "value": -0.4,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "2 BOISSONS ALCOOLISÉES, TABAC ET STUPÉFIANT 765 96,1 100,2 105,2 104,7 104,2 -0,4 4,0 8,4 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "boissons-alcoolisees-tabac-et-stupefiant",
+   "period": "col8",
+   "value": 4.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "2 BOISSONS ALCOOLISÉES, TABAC ET STUPÉFIANT 765 96,1 100,2 105,2 104,7 104,2 -0,4 4,0 8,4 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "boissons-alcoolisees-tabac-et-stupefiant",
+   "period": "col9",
+   "value": 8.4,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "2 BOISSONS ALCOOLISÉES, TABAC ET STUPÉFIANT 765 96,1 100,2 105,2 104,7 104,2 -0,4 4,0 8,4 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "boissons-alcoolisees-tabac-et-stupefiant",
+   "period": "col10",
+   "value": 0.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "2 BOISSONS ALCOOLISÉES, TABAC ET STUPÉFIANT 765 96,1 100,2 105,2 104,7 104,2 -0,4 4,0 8,4 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "tabac-et-stupefiant",
+   "period": "col1",
+   "value": 755.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Tabac et stupéfiant 755 96,2 100,3 105,4 104,8 104,4 -0,4 4,0 8,6 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "tabac-et-stupefiant",
+   "period": "col2",
+   "value": 96.2,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Tabac et stupéfiant 755 96,2 100,3 105,4 104,8 104,4 -0,4 4,0 8,6 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "tabac-et-stupefiant",
+   "period": "col3",
+   "value": 100.3,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Tabac et stupéfiant 755 96,2 100,3 105,4 104,8 104,4 -0,4 4,0 8,6 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "tabac-et-stupefiant",
+   "period": "col4",
+   "value": 105.4,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Tabac et stupéfiant 755 96,2 100,3 105,4 104,8 104,4 -0,4 4,0 8,6 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "tabac-et-stupefiant",
+   "period": "col5",
+   "value": 104.8,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Tabac et stupéfiant 755 96,2 100,3 105,4 104,8 104,4 -0,4 4,0 8,6 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "tabac-et-stupefiant",
+   "period": "col6",
+   "value": 104.4,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Tabac et stupéfiant 755 96,2 100,3 105,4 104,8 104,4 -0,4 4,0 8,6 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "tabac-et-stupefiant",
+   "period": "col7",
+   "value": -0.4,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Tabac et stupéfiant 755 96,2 100,3 105,4 104,8 104,4 -0,4 4,0 8,6 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "tabac-et-stupefiant",
+   "period": "col8",
+   "value": 4.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Tabac et stupéfiant 755 96,2 100,3 105,4 104,8 104,4 -0,4 4,0 8,6 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "tabac-et-stupefiant",
+   "period": "col9",
+   "value": 8.6,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Tabac et stupéfiant 755 96,2 100,3 105,4 104,8 104,4 -0,4 4,0 8,6 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "tabac-et-stupefiant",
+   "period": "col10",
+   "value": 0.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Tabac et stupéfiant 755 96,2 100,3 105,4 104,8 104,4 -0,4 4,0 8,6 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "khat-petite-bote",
+   "period": "col1",
+   "value": 343105.6,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Khat Petite Bote 343 105,6 107,1 117,1 115,1 116,3 1,1 8,7 10,2 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "khat-petite-bote",
+   "period": "col2",
+   "value": 107.1,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Khat Petite Bote 343 105,6 107,1 117,1 115,1 116,3 1,1 8,7 10,2 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "khat-petite-bote",
+   "period": "col3",
+   "value": 117.1,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Khat Petite Bote 343 105,6 107,1 117,1 115,1 116,3 1,1 8,7 10,2 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "khat-petite-bote",
+   "period": "col4",
+   "value": 115.1,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Khat Petite Bote 343 105,6 107,1 117,1 115,1 116,3 1,1 8,7 10,2 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "khat-petite-bote",
+   "period": "col5",
+   "value": 116.3,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Khat Petite Bote 343 105,6 107,1 117,1 115,1 116,3 1,1 8,7 10,2 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "khat-petite-bote",
+   "period": "col6",
+   "value": 1.1,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Khat Petite Bote 343 105,6 107,1 117,1 115,1 116,3 1,1 8,7 10,2 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "khat-petite-bote",
+   "period": "col7",
+   "value": 8.7,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Khat Petite Bote 343 105,6 107,1 117,1 115,1 116,3 1,1 8,7 10,2 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "khat-petite-bote",
+   "period": "col8",
+   "value": 10.2,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Khat Petite Bote 343 105,6 107,1 117,1 115,1 116,3 1,1 8,7 10,2 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "khat-petite-bote",
+   "period": "col9",
+   "value": 0.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "Khat Petite Bote 343 105,6 107,1 117,1 115,1 116,3 1,1 8,7 10,2 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "articles-d-habillement-et-chaussures",
+   "period": "col1",
+   "value": 508100.9,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "3 ARTICLES D'HABILLEMENT ET CHAUSSURES 508 100,9 100,6 100,5 100,8 100,9 0,1 0,4 0,0 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "articles-d-habillement-et-chaussures",
+   "period": "col2",
+   "value": 100.6,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "3 ARTICLES D'HABILLEMENT ET CHAUSSURES 508 100,9 100,6 100,5 100,8 100,9 0,1 0,4 0,0 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "articles-d-habillement-et-chaussures",
+   "period": "col3",
+   "value": 100.5,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "3 ARTICLES D'HABILLEMENT ET CHAUSSURES 508 100,9 100,6 100,5 100,8 100,9 0,1 0,4 0,0 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "articles-d-habillement-et-chaussures",
+   "period": "col4",
+   "value": 100.8,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "3 ARTICLES D'HABILLEMENT ET CHAUSSURES 508 100,9 100,6 100,5 100,8 100,9 0,1 0,4 0,0 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "articles-d-habillement-et-chaussures",
+   "period": "col5",
+   "value": 100.9,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "3 ARTICLES D'HABILLEMENT ET CHAUSSURES 508 100,9 100,6 100,5 100,8 100,9 0,1 0,4 0,0 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "articles-d-habillement-et-chaussures",
+   "period": "col6",
+   "value": 0.1,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "3 ARTICLES D'HABILLEMENT ET CHAUSSURES 508 100,9 100,6 100,5 100,8 100,9 0,1 0,4 0,0 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "articles-d-habillement-et-chaussures",
+   "period": "col7",
+   "value": 0.4,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "3 ARTICLES D'HABILLEMENT ET CHAUSSURES 508 100,9 100,6 100,5 100,8 100,9 0,1 0,4 0,0 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "articles-d-habillement-et-chaussures",
+   "period": "col8",
+   "value": 0.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "3 ARTICLES D'HABILLEMENT ET CHAUSSURES 508 100,9 100,6 100,5 100,8 100,9 0,1 0,4 0,0 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "articles-d-habillement-et-chaussures",
+   "period": "col9",
+   "value": 0.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "3 ARTICLES D'HABILLEMENT ET CHAUSSURES 508 100,9 100,6 100,5 100,8 100,9 0,1 0,4 0,0 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "logement-eau-electricite-gaz-et-autres-combustibles",
+   "period": "col1",
+   "value": 2011103.3,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "4 LOGEMENT, EAU, ÉLECTRICITÉ, GAZ ET AUTRES COMBUSTIBLES 2 011 103,3 104,0 103,9 104,2 104,3 0,1 0,3 0,9 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "logement-eau-electricite-gaz-et-autres-combustibles",
+   "period": "col2",
+   "value": 104.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "4 LOGEMENT, EAU, ÉLECTRICITÉ, GAZ ET AUTRES COMBUSTIBLES 2 011 103,3 104,0 103,9 104,2 104,3 0,1 0,3 0,9 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "logement-eau-electricite-gaz-et-autres-combustibles",
+   "period": "col3",
+   "value": 103.9,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "4 LOGEMENT, EAU, ÉLECTRICITÉ, GAZ ET AUTRES COMBUSTIBLES 2 011 103,3 104,0 103,9 104,2 104,3 0,1 0,3 0,9 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "logement-eau-electricite-gaz-et-autres-combustibles",
+   "period": "col4",
+   "value": 104.2,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "4 LOGEMENT, EAU, ÉLECTRICITÉ, GAZ ET AUTRES COMBUSTIBLES 2 011 103,3 104,0 103,9 104,2 104,3 0,1 0,3 0,9 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "logement-eau-electricite-gaz-et-autres-combustibles",
+   "period": "col5",
+   "value": 104.3,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "4 LOGEMENT, EAU, ÉLECTRICITÉ, GAZ ET AUTRES COMBUSTIBLES 2 011 103,3 104,0 103,9 104,2 104,3 0,1 0,3 0,9 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "logement-eau-electricite-gaz-et-autres-combustibles",
+   "period": "col6",
+   "value": 0.1,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "4 LOGEMENT, EAU, ÉLECTRICITÉ, GAZ ET AUTRES COMBUSTIBLES 2 011 103,3 104,0 103,9 104,2 104,3 0,1 0,3 0,9 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "logement-eau-electricite-gaz-et-autres-combustibles",
+   "period": "col7",
+   "value": 0.3,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "4 LOGEMENT, EAU, ÉLECTRICITÉ, GAZ ET AUTRES COMBUSTIBLES 2 011 103,3 104,0 103,9 104,2 104,3 0,1 0,3 0,9 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "logement-eau-electricite-gaz-et-autres-combustibles",
+   "period": "col8",
+   "value": 0.9,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "4 LOGEMENT, EAU, ÉLECTRICITÉ, GAZ ET AUTRES COMBUSTIBLES 2 011 103,3 104,0 103,9 104,2 104,3 0,1 0,3 0,9 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "logement-eau-electricite-gaz-et-autres-combustibles",
+   "period": "col9",
+   "value": 0.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "4 LOGEMENT, EAU, ÉLECTRICITÉ, GAZ ET AUTRES COMBUSTIBLES 2 011 103,3 104,0 103,9 104,2 104,3 0,1 0,3 0,9 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "meubles-articles-de-menages-et-entretien-courant-du-foyer",
+   "period": "col1",
+   "value": 263102.6,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "5 MEUBLES, ARTICLES DE MÉNAGES ET ENTRETIEN COURANT DU FOYER 263 102,6 102,4 101,7 100,2 98,0 -2,2 -4,2 -4,5 -0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "meubles-articles-de-menages-et-entretien-courant-du-foyer",
+   "period": "col2",
+   "value": 102.4,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "5 MEUBLES, ARTICLES DE MÉNAGES ET ENTRETIEN COURANT DU FOYER 263 102,6 102,4 101,7 100,2 98,0 -2,2 -4,2 -4,5 -0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "meubles-articles-de-menages-et-entretien-courant-du-foyer",
+   "period": "col3",
+   "value": 101.7,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "5 MEUBLES, ARTICLES DE MÉNAGES ET ENTRETIEN COURANT DU FOYER 263 102,6 102,4 101,7 100,2 98,0 -2,2 -4,2 -4,5 -0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "meubles-articles-de-menages-et-entretien-courant-du-foyer",
+   "period": "col4",
+   "value": 100.2,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "5 MEUBLES, ARTICLES DE MÉNAGES ET ENTRETIEN COURANT DU FOYER 263 102,6 102,4 101,7 100,2 98,0 -2,2 -4,2 -4,5 -0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "meubles-articles-de-menages-et-entretien-courant-du-foyer",
+   "period": "col5",
+   "value": 98.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "5 MEUBLES, ARTICLES DE MÉNAGES ET ENTRETIEN COURANT DU FOYER 263 102,6 102,4 101,7 100,2 98,0 -2,2 -4,2 -4,5 -0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "meubles-articles-de-menages-et-entretien-courant-du-foyer",
+   "period": "col6",
+   "value": -2.2,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "5 MEUBLES, ARTICLES DE MÉNAGES ET ENTRETIEN COURANT DU FOYER 263 102,6 102,4 101,7 100,2 98,0 -2,2 -4,2 -4,5 -0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "meubles-articles-de-menages-et-entretien-courant-du-foyer",
+   "period": "col7",
+   "value": -4.2,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "5 MEUBLES, ARTICLES DE MÉNAGES ET ENTRETIEN COURANT DU FOYER 263 102,6 102,4 101,7 100,2 98,0 -2,2 -4,2 -4,5 -0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "meubles-articles-de-menages-et-entretien-courant-du-foyer",
+   "period": "col8",
+   "value": -4.5,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "5 MEUBLES, ARTICLES DE MÉNAGES ET ENTRETIEN COURANT DU FOYER 263 102,6 102,4 101,7 100,2 98,0 -2,2 -4,2 -4,5 -0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "meubles-articles-de-menages-et-entretien-courant-du-foyer",
+   "period": "col9",
+   "value": -0.1,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "5 MEUBLES, ARTICLES DE MÉNAGES ET ENTRETIEN COURANT DU FOYER 263 102,6 102,4 101,7 100,2 98,0 -2,2 -4,2 -4,5 -0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "sante",
+   "period": "col1",
+   "value": 145109.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "6 SANTE 145 109,0 111,3 109,8 109,6 109,7 0,1 -1,5 0,6 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "sante",
+   "period": "col2",
+   "value": 111.3,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "6 SANTE 145 109,0 111,3 109,8 109,6 109,7 0,1 -1,5 0,6 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "sante",
+   "period": "col3",
+   "value": 109.8,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "6 SANTE 145 109,0 111,3 109,8 109,6 109,7 0,1 -1,5 0,6 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "sante",
+   "period": "col4",
+   "value": 109.6,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "6 SANTE 145 109,0 111,3 109,8 109,6 109,7 0,1 -1,5 0,6 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "sante",
+   "period": "col5",
+   "value": 109.7,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "6 SANTE 145 109,0 111,3 109,8 109,6 109,7 0,1 -1,5 0,6 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "sante",
+   "period": "col6",
+   "value": 0.1,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "6 SANTE 145 109,0 111,3 109,8 109,6 109,7 0,1 -1,5 0,6 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "sante",
+   "period": "col7",
+   "value": -1.5,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "6 SANTE 145 109,0 111,3 109,8 109,6 109,7 0,1 -1,5 0,6 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "sante",
+   "period": "col8",
+   "value": 0.6,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "6 SANTE 145 109,0 111,3 109,8 109,6 109,7 0,1 -1,5 0,6 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "sante",
+   "period": "col9",
+   "value": 0.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "6 SANTE 145 109,0 111,3 109,8 109,6 109,7 0,1 -1,5 0,6 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "transports",
+   "period": "col1",
+   "value": 488121.4,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "7 TRANSPORTS 488 121,4 122,5 122,5 128,9 128,9 0,0 5,3 6,2 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "transports",
+   "period": "col2",
+   "value": 122.5,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "7 TRANSPORTS 488 121,4 122,5 122,5 128,9 128,9 0,0 5,3 6,2 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "transports",
+   "period": "col3",
+   "value": 122.5,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "7 TRANSPORTS 488 121,4 122,5 122,5 128,9 128,9 0,0 5,3 6,2 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "transports",
+   "period": "col4",
+   "value": 128.9,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "7 TRANSPORTS 488 121,4 122,5 122,5 128,9 128,9 0,0 5,3 6,2 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "transports",
+   "period": "col5",
+   "value": 128.9,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "7 TRANSPORTS 488 121,4 122,5 122,5 128,9 128,9 0,0 5,3 6,2 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "transports",
+   "period": "col6",
+   "value": 0.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "7 TRANSPORTS 488 121,4 122,5 122,5 128,9 128,9 0,0 5,3 6,2 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "transports",
+   "period": "col7",
+   "value": 5.3,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "7 TRANSPORTS 488 121,4 122,5 122,5 128,9 128,9 0,0 5,3 6,2 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "transports",
+   "period": "col8",
+   "value": 6.2,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "7 TRANSPORTS 488 121,4 122,5 122,5 128,9 128,9 0,0 5,3 6,2 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "transports",
+   "period": "col9",
+   "value": 0.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "7 TRANSPORTS 488 121,4 122,5 122,5 128,9 128,9 0,0 5,3 6,2 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "communication",
+   "period": "col1",
+   "value": 320.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "8 COMMUNICATION 320 90,7 95,9 96,7 96,7 99,4 2,8 3,6 9,7 0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "communication",
+   "period": "col2",
+   "value": 90.7,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "8 COMMUNICATION 320 90,7 95,9 96,7 96,7 99,4 2,8 3,6 9,7 0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "communication",
+   "period": "col3",
+   "value": 95.9,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "8 COMMUNICATION 320 90,7 95,9 96,7 96,7 99,4 2,8 3,6 9,7 0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "communication",
+   "period": "col4",
+   "value": 96.7,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "8 COMMUNICATION 320 90,7 95,9 96,7 96,7 99,4 2,8 3,6 9,7 0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "communication",
+   "period": "col5",
+   "value": 96.7,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "8 COMMUNICATION 320 90,7 95,9 96,7 96,7 99,4 2,8 3,6 9,7 0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "communication",
+   "period": "col6",
+   "value": 99.4,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "8 COMMUNICATION 320 90,7 95,9 96,7 96,7 99,4 2,8 3,6 9,7 0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "communication",
+   "period": "col7",
+   "value": 2.8,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "8 COMMUNICATION 320 90,7 95,9 96,7 96,7 99,4 2,8 3,6 9,7 0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "communication",
+   "period": "col8",
+   "value": 3.6,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "8 COMMUNICATION 320 90,7 95,9 96,7 96,7 99,4 2,8 3,6 9,7 0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "communication",
+   "period": "col9",
+   "value": 9.7,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "8 COMMUNICATION 320 90,7 95,9 96,7 96,7 99,4 2,8 3,6 9,7 0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "communication",
+   "period": "col10",
+   "value": 0.1,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "8 COMMUNICATION 320 90,7 95,9 96,7 96,7 99,4 2,8 3,6 9,7 0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "loisirs-et-cultures",
+   "period": "col1",
+   "value": 158101.5,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "9 LOISIRS ET CULTURES 158 101,5 102,4 102,5 102,3 102,3 -0,1 -0,1 0,7 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "loisirs-et-cultures",
+   "period": "col2",
+   "value": 102.4,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "9 LOISIRS ET CULTURES 158 101,5 102,4 102,5 102,3 102,3 -0,1 -0,1 0,7 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "loisirs-et-cultures",
+   "period": "col3",
+   "value": 102.5,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "9 LOISIRS ET CULTURES 158 101,5 102,4 102,5 102,3 102,3 -0,1 -0,1 0,7 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "loisirs-et-cultures",
+   "period": "col4",
+   "value": 102.3,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "9 LOISIRS ET CULTURES 158 101,5 102,4 102,5 102,3 102,3 -0,1 -0,1 0,7 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "loisirs-et-cultures",
+   "period": "col5",
+   "value": 102.3,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "9 LOISIRS ET CULTURES 158 101,5 102,4 102,5 102,3 102,3 -0,1 -0,1 0,7 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "loisirs-et-cultures",
+   "period": "col6",
+   "value": -0.1,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "9 LOISIRS ET CULTURES 158 101,5 102,4 102,5 102,3 102,3 -0,1 -0,1 0,7 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "loisirs-et-cultures",
+   "period": "col7",
+   "value": -0.1,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "9 LOISIRS ET CULTURES 158 101,5 102,4 102,5 102,3 102,3 -0,1 -0,1 0,7 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "loisirs-et-cultures",
+   "period": "col8",
+   "value": 0.7,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "9 LOISIRS ET CULTURES 158 101,5 102,4 102,5 102,3 102,3 -0,1 -0,1 0,7 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "loisirs-et-cultures",
+   "period": "col9",
+   "value": 0.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "9 LOISIRS ET CULTURES 158 101,5 102,4 102,5 102,3 102,3 -0,1 -0,1 0,7 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "enseignement",
+   "period": "col1",
+   "value": 128101.9,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "10 ENSEIGNEMENT 128 101,9 101,9 101,9 101,9 101,9 0,0 0,0 0,0 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "enseignement",
+   "period": "col2",
+   "value": 101.9,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "10 ENSEIGNEMENT 128 101,9 101,9 101,9 101,9 101,9 0,0 0,0 0,0 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "enseignement",
+   "period": "col3",
+   "value": 101.9,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "10 ENSEIGNEMENT 128 101,9 101,9 101,9 101,9 101,9 0,0 0,0 0,0 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "enseignement",
+   "period": "col4",
+   "value": 101.9,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "10 ENSEIGNEMENT 128 101,9 101,9 101,9 101,9 101,9 0,0 0,0 0,0 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "enseignement",
+   "period": "col5",
+   "value": 101.9,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "10 ENSEIGNEMENT 128 101,9 101,9 101,9 101,9 101,9 0,0 0,0 0,0 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "enseignement",
+   "period": "col6",
+   "value": 0.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "10 ENSEIGNEMENT 128 101,9 101,9 101,9 101,9 101,9 0,0 0,0 0,0 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "enseignement",
+   "period": "col7",
+   "value": 0.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "10 ENSEIGNEMENT 128 101,9 101,9 101,9 101,9 101,9 0,0 0,0 0,0 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "enseignement",
+   "period": "col8",
+   "value": 0.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "10 ENSEIGNEMENT 128 101,9 101,9 101,9 101,9 101,9 0,0 0,0 0,0 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "enseignement",
+   "period": "col9",
+   "value": 0.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "10 ENSEIGNEMENT 128 101,9 101,9 101,9 101,9 101,9 0,0 0,0 0,0 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "restaurants-et-hotels",
+   "period": "col1",
+   "value": 516101.3,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "11 RESTAURANTS ET HÔTELS 516 101,3 101,3 101,3 101,3 101,3 0,0 0,0 0,0 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "restaurants-et-hotels",
+   "period": "col2",
+   "value": 101.3,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "11 RESTAURANTS ET HÔTELS 516 101,3 101,3 101,3 101,3 101,3 0,0 0,0 0,0 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "restaurants-et-hotels",
+   "period": "col3",
+   "value": 101.3,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "11 RESTAURANTS ET HÔTELS 516 101,3 101,3 101,3 101,3 101,3 0,0 0,0 0,0 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "restaurants-et-hotels",
+   "period": "col4",
+   "value": 101.3,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "11 RESTAURANTS ET HÔTELS 516 101,3 101,3 101,3 101,3 101,3 0,0 0,0 0,0 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "restaurants-et-hotels",
+   "period": "col5",
+   "value": 101.3,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "11 RESTAURANTS ET HÔTELS 516 101,3 101,3 101,3 101,3 101,3 0,0 0,0 0,0 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "restaurants-et-hotels",
+   "period": "col6",
+   "value": 0.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "11 RESTAURANTS ET HÔTELS 516 101,3 101,3 101,3 101,3 101,3 0,0 0,0 0,0 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "restaurants-et-hotels",
+   "period": "col7",
+   "value": 0.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "11 RESTAURANTS ET HÔTELS 516 101,3 101,3 101,3 101,3 101,3 0,0 0,0 0,0 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "restaurants-et-hotels",
+   "period": "col8",
+   "value": 0.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "11 RESTAURANTS ET HÔTELS 516 101,3 101,3 101,3 101,3 101,3 0,0 0,0 0,0 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "restaurants-et-hotels",
+   "period": "col9",
+   "value": 0.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "11 RESTAURANTS ET HÔTELS 516 101,3 101,3 101,3 101,3 101,3 0,0 0,0 0,0 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "biens-et-services-divers",
+   "period": "col1",
+   "value": 79100.2,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "12 BIENS ET SERVICES DIVERS 79 100,2 101,9 101,8 101,6 100,9 -0,7 -1,0 0,7 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "biens-et-services-divers",
+   "period": "col2",
+   "value": 101.9,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "12 BIENS ET SERVICES DIVERS 79 100,2 101,9 101,8 101,6 100,9 -0,7 -1,0 0,7 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "biens-et-services-divers",
+   "period": "col3",
+   "value": 101.8,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "12 BIENS ET SERVICES DIVERS 79 100,2 101,9 101,8 101,6 100,9 -0,7 -1,0 0,7 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "biens-et-services-divers",
+   "period": "col4",
+   "value": 101.6,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "12 BIENS ET SERVICES DIVERS 79 100,2 101,9 101,8 101,6 100,9 -0,7 -1,0 0,7 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "biens-et-services-divers",
+   "period": "col5",
+   "value": 100.9,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "12 BIENS ET SERVICES DIVERS 79 100,2 101,9 101,8 101,6 100,9 -0,7 -1,0 0,7 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "biens-et-services-divers",
+   "period": "col6",
+   "value": -0.7,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "12 BIENS ET SERVICES DIVERS 79 100,2 101,9 101,8 101,6 100,9 -0,7 -1,0 0,7 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "biens-et-services-divers",
+   "period": "col7",
+   "value": -1.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "12 BIENS ET SERVICES DIVERS 79 100,2 101,9 101,8 101,6 100,9 -0,7 -1,0 0,7 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "biens-et-services-divers",
+   "period": "col8",
+   "value": 0.7,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "12 BIENS ET SERVICES DIVERS 79 100,2 101,9 101,8 101,6 100,9 -0,7 -1,0 0,7 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "biens-et-services-divers",
+   "period": "col9",
+   "value": 0.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "12 BIENS ET SERVICES DIVERS 79 100,2 101,9 101,8 101,6 100,9 -0,7 -1,0 0,7 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "global",
+   "period": "col1",
+   "value": 10000102.8,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "GLOBAL 10 000 102,8 104,5 105,6 106,9 106,7 -0,2 2,0 3,8 -0,2",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "global",
+   "period": "col2",
+   "value": 104.5,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "GLOBAL 10 000 102,8 104,5 105,6 106,9 106,7 -0,2 2,0 3,8 -0,2",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "global",
+   "period": "col3",
+   "value": 105.6,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "GLOBAL 10 000 102,8 104,5 105,6 106,9 106,7 -0,2 2,0 3,8 -0,2",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "global",
+   "period": "col4",
+   "value": 106.9,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "GLOBAL 10 000 102,8 104,5 105,6 106,9 106,7 -0,2 2,0 3,8 -0,2",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "global",
+   "period": "col5",
+   "value": 106.7,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "GLOBAL 10 000 102,8 104,5 105,6 106,9 106,7 -0,2 2,0 3,8 -0,2",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "global",
+   "period": "col6",
+   "value": -0.2,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "GLOBAL 10 000 102,8 104,5 105,6 106,9 106,7 -0,2 2,0 3,8 -0,2",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "global",
+   "period": "col7",
+   "value": 2.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "GLOBAL 10 000 102,8 104,5 105,6 106,9 106,7 -0,2 2,0 3,8 -0,2",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "global",
+   "period": "col8",
+   "value": 3.8,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "GLOBAL 10 000 102,8 104,5 105,6 106,9 106,7 -0,2 2,0 3,8 -0,2",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "global",
+   "period": "col9",
+   "value": -0.2,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 3,
+   "snippet": "GLOBAL 10 000 102,8 104,5 105,6 106,9 106,7 -0,2 2,0 3,8 -0,2",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "secondaires",
+   "period": "col1",
+   "value": 25.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "secondaires 25 26 26 26 26",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "secondaires",
+   "period": "col2",
+   "value": 26.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "secondaires 25 26 26 26 26",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "secondaires",
+   "period": "col3",
+   "value": 26.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "secondaires 25 26 26 26 26",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "secondaires",
+   "period": "col4",
+   "value": 26.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "secondaires 25 26 26 26 26",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "secondaires",
+   "period": "col5",
+   "value": 26.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "secondaires 25 26 26 26 26",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "produits-frais",
+   "period": "col1",
+   "value": 102.9,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Produits frais 102,9 101,9 106,5 109,5 108,9 -0,5 4,1 5,8 -0,2",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "produits-frais",
+   "period": "col2",
+   "value": 101.9,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Produits frais 102,9 101,9 106,5 109,5 108,9 -0,5 4,1 5,8 -0,2",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "produits-frais",
+   "period": "col3",
+   "value": 106.5,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Produits frais 102,9 101,9 106,5 109,5 108,9 -0,5 4,1 5,8 -0,2",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "produits-frais",
+   "period": "col4",
+   "value": 109.5,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Produits frais 102,9 101,9 106,5 109,5 108,9 -0,5 4,1 5,8 -0,2",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "produits-frais",
+   "period": "col5",
+   "value": 108.9,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Produits frais 102,9 101,9 106,5 109,5 108,9 -0,5 4,1 5,8 -0,2",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "produits-frais",
+   "period": "col6",
+   "value": -0.5,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Produits frais 102,9 101,9 106,5 109,5 108,9 -0,5 4,1 5,8 -0,2",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "produits-frais",
+   "period": "col7",
+   "value": 4.1,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Produits frais 102,9 101,9 106,5 109,5 108,9 -0,5 4,1 5,8 -0,2",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "produits-frais",
+   "period": "col8",
+   "value": 5.8,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Produits frais 102,9 101,9 106,5 109,5 108,9 -0,5 4,1 5,8 -0,2",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "produits-frais",
+   "period": "col9",
+   "value": -0.2,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Produits frais 102,9 101,9 106,5 109,5 108,9 -0,5 4,1 5,8 -0,2",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "energie",
+   "period": "col1",
+   "value": 100.1,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Energie 100,1 100,9 101,1 103,6 103,8 0,2 2,6 3,7 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "energie",
+   "period": "col2",
+   "value": 100.9,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Energie 100,1 100,9 101,1 103,6 103,8 0,2 2,6 3,7 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "energie",
+   "period": "col3",
+   "value": 101.1,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Energie 100,1 100,9 101,1 103,6 103,8 0,2 2,6 3,7 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "energie",
+   "period": "col4",
+   "value": 103.6,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Energie 100,1 100,9 101,1 103,6 103,8 0,2 2,6 3,7 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "energie",
+   "period": "col5",
+   "value": 103.8,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Energie 100,1 100,9 101,1 103,6 103,8 0,2 2,6 3,7 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "energie",
+   "period": "col6",
+   "value": 0.2,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Energie 100,1 100,9 101,1 103,6 103,8 0,2 2,6 3,7 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "energie",
+   "period": "col7",
+   "value": 2.6,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Energie 100,1 100,9 101,1 103,6 103,8 0,2 2,6 3,7 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "energie",
+   "period": "col8",
+   "value": 3.7,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Energie 100,1 100,9 101,1 103,6 103,8 0,2 2,6 3,7 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "energie",
+   "period": "col9",
+   "value": 0.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Energie 100,1 100,9 101,1 103,6 103,8 0,2 2,6 3,7 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "frais-et-energie",
+   "period": "col1",
+   "value": 103.4,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "frais et Energie 103,4 105,1 106,3 106,0 106,0 0,0 0,4 2,5 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "frais-et-energie",
+   "period": "col2",
+   "value": 105.1,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "frais et Energie 103,4 105,1 106,3 106,0 106,0 0,0 0,4 2,5 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "frais-et-energie",
+   "period": "col3",
+   "value": 106.3,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "frais et Energie 103,4 105,1 106,3 106,0 106,0 0,0 0,4 2,5 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "frais-et-energie",
+   "period": "col4",
+   "value": 106.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "frais et Energie 103,4 105,1 106,3 106,0 106,0 0,0 0,4 2,5 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "frais-et-energie",
+   "period": "col5",
+   "value": 106.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "frais et Energie 103,4 105,1 106,3 106,0 106,0 0,0 0,4 2,5 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "frais-et-energie",
+   "period": "col6",
+   "value": 0.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "frais et Energie 103,4 105,1 106,3 106,0 106,0 0,0 0,4 2,5 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "frais-et-energie",
+   "period": "col7",
+   "value": 0.4,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "frais et Energie 103,4 105,1 106,3 106,0 106,0 0,0 0,4 2,5 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "frais-et-energie",
+   "period": "col8",
+   "value": 2.5,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "frais et Energie 103,4 105,1 106,3 106,0 106,0 0,0 0,4 2,5 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "frais-et-energie",
+   "period": "col9",
+   "value": 0.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "frais et Energie 103,4 105,1 106,3 106,0 106,0 0,0 0,4 2,5 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "local",
+   "period": "col1",
+   "value": 102.3,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Local 102,3 103,3 105,7 107,4 107,3 -0,1 2,9 4,8 -0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "local",
+   "period": "col2",
+   "value": 103.3,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Local 102,3 103,3 105,7 107,4 107,3 -0,1 2,9 4,8 -0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "local",
+   "period": "col3",
+   "value": 105.7,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Local 102,3 103,3 105,7 107,4 107,3 -0,1 2,9 4,8 -0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "local",
+   "period": "col4",
+   "value": 107.4,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Local 102,3 103,3 105,7 107,4 107,3 -0,1 2,9 4,8 -0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "local",
+   "period": "col5",
+   "value": 107.3,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Local 102,3 103,3 105,7 107,4 107,3 -0,1 2,9 4,8 -0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "local",
+   "period": "col6",
+   "value": -0.1,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Local 102,3 103,3 105,7 107,4 107,3 -0,1 2,9 4,8 -0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "local",
+   "period": "col7",
+   "value": 2.9,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Local 102,3 103,3 105,7 107,4 107,3 -0,1 2,9 4,8 -0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "local",
+   "period": "col8",
+   "value": 4.8,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Local 102,3 103,3 105,7 107,4 107,3 -0,1 2,9 4,8 -0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "local",
+   "period": "col9",
+   "value": -0.1,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Local 102,3 103,3 105,7 107,4 107,3 -0,1 2,9 4,8 -0,1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "importe",
+   "period": "col1",
+   "value": 100.6,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Importé 100,6 101,0 103,9 106,6 106,3 -0,3 3,8 5,6 -0,2",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "importe",
+   "period": "col2",
+   "value": 101.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Importé 100,6 101,0 103,9 106,6 106,3 -0,3 3,8 5,6 -0,2",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "importe",
+   "period": "col3",
+   "value": 103.9,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Importé 100,6 101,0 103,9 106,6 106,3 -0,3 3,8 5,6 -0,2",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "importe",
+   "period": "col4",
+   "value": 106.6,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Importé 100,6 101,0 103,9 106,6 106,3 -0,3 3,8 5,6 -0,2",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "importe",
+   "period": "col5",
+   "value": 106.3,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Importé 100,6 101,0 103,9 106,6 106,3 -0,3 3,8 5,6 -0,2",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "importe",
+   "period": "col6",
+   "value": -0.3,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Importé 100,6 101,0 103,9 106,6 106,3 -0,3 3,8 5,6 -0,2",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "importe",
+   "period": "col7",
+   "value": 3.8,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Importé 100,6 101,0 103,9 106,6 106,3 -0,3 3,8 5,6 -0,2",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "importe",
+   "period": "col8",
+   "value": 5.6,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Importé 100,6 101,0 103,9 106,6 106,3 -0,3 3,8 5,6 -0,2",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "importe",
+   "period": "col9",
+   "value": -0.2,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Importé 100,6 101,0 103,9 106,6 106,3 -0,3 3,8 5,6 -0,2",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "durable",
+   "period": "col1",
+   "value": 94.6,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Durable 94,6 101,0 103,9 106,6 106,3 -0,3 3,8 12,4 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "durable",
+   "period": "col2",
+   "value": 101.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Durable 94,6 101,0 103,9 106,6 106,3 -0,3 3,8 12,4 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "durable",
+   "period": "col3",
+   "value": 103.9,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Durable 94,6 101,0 103,9 106,6 106,3 -0,3 3,8 12,4 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "durable",
+   "period": "col4",
+   "value": 106.6,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Durable 94,6 101,0 103,9 106,6 106,3 -0,3 3,8 12,4 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "durable",
+   "period": "col5",
+   "value": 106.3,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Durable 94,6 101,0 103,9 106,6 106,3 -0,3 3,8 12,4 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "durable",
+   "period": "col6",
+   "value": -0.3,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Durable 94,6 101,0 103,9 106,6 106,3 -0,3 3,8 12,4 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "durable",
+   "period": "col7",
+   "value": 3.8,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Durable 94,6 101,0 103,9 106,6 106,3 -0,3 3,8 12,4 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "durable",
+   "period": "col8",
+   "value": 12.4,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Durable 94,6 101,0 103,9 106,6 106,3 -0,3 3,8 12,4 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "durable",
+   "period": "col9",
+   "value": 0.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Durable 94,6 101,0 103,9 106,6 106,3 -0,3 3,8 12,4 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "non-durable",
+   "period": "col1",
+   "value": 101.9,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Non-Durable 101,9 102,5 106,2 108,4 107,9 -0,4 3,3 5,9 -0,3",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "non-durable",
+   "period": "col2",
+   "value": 102.5,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Non-Durable 101,9 102,5 106,2 108,4 107,9 -0,4 3,3 5,9 -0,3",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "non-durable",
+   "period": "col3",
+   "value": 106.2,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Non-Durable 101,9 102,5 106,2 108,4 107,9 -0,4 3,3 5,9 -0,3",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "non-durable",
+   "period": "col4",
+   "value": 108.4,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Non-Durable 101,9 102,5 106,2 108,4 107,9 -0,4 3,3 5,9 -0,3",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "non-durable",
+   "period": "col5",
+   "value": 107.9,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Non-Durable 101,9 102,5 106,2 108,4 107,9 -0,4 3,3 5,9 -0,3",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "non-durable",
+   "period": "col6",
+   "value": -0.4,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Non-Durable 101,9 102,5 106,2 108,4 107,9 -0,4 3,3 5,9 -0,3",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "non-durable",
+   "period": "col7",
+   "value": 3.3,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Non-Durable 101,9 102,5 106,2 108,4 107,9 -0,4 3,3 5,9 -0,3",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "non-durable",
+   "period": "col8",
+   "value": 5.9,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Non-Durable 101,9 102,5 106,2 108,4 107,9 -0,4 3,3 5,9 -0,3",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "non-durable",
+   "period": "col9",
+   "value": -0.3,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Non-Durable 101,9 102,5 106,2 108,4 107,9 -0,4 3,3 5,9 -0,3",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "semi-durable",
+   "period": "col1",
+   "value": 101.9,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Semi-Durable 101,9 101,5 101,3 101,7 101,5 -0,2 -0,1 -0,4 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "semi-durable",
+   "period": "col2",
+   "value": 101.5,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Semi-Durable 101,9 101,5 101,3 101,7 101,5 -0,2 -0,1 -0,4 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "semi-durable",
+   "period": "col3",
+   "value": 101.3,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Semi-Durable 101,9 101,5 101,3 101,7 101,5 -0,2 -0,1 -0,4 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "semi-durable",
+   "period": "col4",
+   "value": 101.7,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Semi-Durable 101,9 101,5 101,3 101,7 101,5 -0,2 -0,1 -0,4 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "semi-durable",
+   "period": "col5",
+   "value": 101.5,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Semi-Durable 101,9 101,5 101,3 101,7 101,5 -0,2 -0,1 -0,4 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "semi-durable",
+   "period": "col6",
+   "value": -0.2,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Semi-Durable 101,9 101,5 101,3 101,7 101,5 -0,2 -0,1 -0,4 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "semi-durable",
+   "period": "col7",
+   "value": -0.1,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Semi-Durable 101,9 101,5 101,3 101,7 101,5 -0,2 -0,1 -0,4 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "semi-durable",
+   "period": "col8",
+   "value": -0.4,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Semi-Durable 101,9 101,5 101,3 101,7 101,5 -0,2 -0,1 -0,4 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "semi-durable",
+   "period": "col9",
+   "value": 0.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Semi-Durable 101,9 101,5 101,3 101,7 101,5 -0,2 -0,1 -0,4 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "service",
+   "period": "col1",
+   "value": 106.2,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Service 106,2 106,2 106,2 106,3 106,3 0,0 0,1 0,2 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "service",
+   "period": "col2",
+   "value": 106.2,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Service 106,2 106,2 106,2 106,3 106,3 0,0 0,1 0,2 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "service",
+   "period": "col3",
+   "value": 106.2,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Service 106,2 106,2 106,2 106,3 106,3 0,0 0,1 0,2 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "service",
+   "period": "col4",
+   "value": 106.3,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Service 106,2 106,2 106,2 106,3 106,3 0,0 0,1 0,2 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "service",
+   "period": "col5",
+   "value": 106.3,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Service 106,2 106,2 106,2 106,3 106,3 0,0 0,1 0,2 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "service",
+   "period": "col6",
+   "value": 0.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Service 106,2 106,2 106,2 106,3 106,3 0,0 0,1 0,2 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "service",
+   "period": "col7",
+   "value": 0.1,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Service 106,2 106,2 106,2 106,3 106,3 0,0 0,1 0,2 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "service",
+   "period": "col8",
+   "value": 0.2,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Service 106,2 106,2 106,2 106,3 106,3 0,0 0,1 0,2 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "service",
+   "period": "col9",
+   "value": 0.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Service 106,2 106,2 106,2 106,3 106,3 0,0 0,1 0,2 0,0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "global",
+   "period": "col1",
+   "value": 102.8,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Global 102,8 103,2 105,56 106,9 106,7 -0,2 2,0 3,8 -0,2",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "global",
+   "period": "col2",
+   "value": 103.2,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Global 102,8 103,2 105,56 106,9 106,7 -0,2 2,0 3,8 -0,2",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "global",
+   "period": "col3",
+   "value": 105.56,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Global 102,8 103,2 105,56 106,9 106,7 -0,2 2,0 3,8 -0,2",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "global",
+   "period": "col4",
+   "value": 106.9,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Global 102,8 103,2 105,56 106,9 106,7 -0,2 2,0 3,8 -0,2",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "global",
+   "period": "col5",
+   "value": 106.7,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Global 102,8 103,2 105,56 106,9 106,7 -0,2 2,0 3,8 -0,2",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "global",
+   "period": "col6",
+   "value": -0.2,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Global 102,8 103,2 105,56 106,9 106,7 -0,2 2,0 3,8 -0,2",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "global",
+   "period": "col7",
+   "value": 2.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Global 102,8 103,2 105,56 106,9 106,7 -0,2 2,0 3,8 -0,2",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "global",
+   "period": "col8",
+   "value": 3.8,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Global 102,8 103,2 105,56 106,9 106,7 -0,2 2,0 3,8 -0,2",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "indice_des_prix_à_la_consomm",
+   "area": "global",
+   "period": "col9",
+   "value": -0.2,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 7,
+   "snippet": "Global 102,8 103,2 105,56 106,9 106,7 -0,2 2,0 3,8 -0,2",
+   "status": "ok",
+   "note": null
+  }
+ ],
+ "indicators": {
+  "indice_des_prix_à_la_consomm": {
+   "fr": "Indice des Prix à la Consommation base 100 en 2022 des Nomenclatures secondaires",
+   "en": "Indice des Prix à la Consommation base 100 en 2022 des Nomenclatures secondaires"
+  }
+ },
+ "i18n": {
+  "en": {
+   "sourceDoc": "Source publication",
+   "tabOverview": "Overview",
+   "tabData": "Data & sources",
+   "filterLabel": "Areas",
+   "reset": "Reset",
+   "searchPh": "Search an indicator, an area, a year…",
+   "btnCsv": "Download CSV",
+   "btnJson": "Download JSON",
+   "thIndicator": "Indicator",
+   "thArea": "Area",
+   "thPeriod": "Period",
+   "thValue": "Value",
+   "thUnit": "Unit",
+   "thPage": "Page",
+   "thStatus": "Check",
+   "noRows": "No figure matches this search.",
+   "statusOk": "Verified",
+   "statusWarn": "To review",
+   "provLabel": "Read from the source document, page",
+   "calloutTitle": "Read this before reusing the figures",
+   "calloutBody": "These figures were extracted from a PDF by a language model and then checked automatically against the source text. Rows marked “To review” failed at least one check and have not been confirmed by a statistician. Always cite the original publication, not this dashboard.",
+   "dataTitle": "Data & sources",
+   "dataLede": "Every figure on this dashboard, with the page it came from and the line of text it was read from. Search, sort, open a row to see the source, export.",
+   "limTitle": "Limitations",
+   "methTitle": "How this dashboard was built",
+   "methBody": "Text was extracted from the PDF page by page. A rules-based reader and a language model each transcribed the tables independently, and every cell was checked for page provenance, quoted evidence, unit and range, reconciliation with published totals, and agreement between the two readings. The notebook, the prompts and the verification report are in the repository.",
+   "fSource": "Source",
+   "fLicence": "Licence",
+   "fBuilt": "Built with",
+   "fContact": "Contact",
+   "fBuiltBody": "Python, an LLM extraction pipeline, Chart.js. No tracking, no cookies, no server — a single HTML file.",
+   "stamp": "Dashboard generated on {date}. Figures are the responsibility of the source institution; the presentation is the responsibility of the team that built this page.",
+   "syntheticWarn": "Demonstration data — fictional country, for training purposes only.",
+   "kicker": "STATISTIQUE DE DJIBOUTI",
+   "title": "Statistics dashboard",
+   "subtitle": "",
+   "ovTitle": "Overview",
+   "ovLede": "",
+   "limBody": "",
+   "publisher": "National Institute of Statistics",
+   "period": ""
+  },
+  "fr": {
+   "sourceDoc": "Publication source",
+   "tabOverview": "Vue d'ensemble",
+   "tabData": "Données et sources",
+   "filterLabel": "Zones",
+   "reset": "Réinitialiser",
+   "searchPh": "Chercher un indicateur, une zone, une année…",
+   "btnCsv": "Télécharger le CSV",
+   "btnJson": "Télécharger le JSON",
+   "thIndicator": "Indicateur",
+   "thArea": "Zone",
+   "thPeriod": "Période",
+   "thValue": "Valeur",
+   "thUnit": "Unité",
+   "thPage": "Page",
+   "thStatus": "Contrôle",
+   "noRows": "Aucun chiffre ne correspond à cette recherche.",
+   "statusOk": "Vérifié",
+   "statusWarn": "À revoir",
+   "provLabel": "Lu dans le document source, page",
+   "calloutTitle": "À lire avant de réutiliser les chiffres",
+   "calloutBody": "Ces chiffres ont été extraits d'un PDF par un modèle de langage, puis contrôlés automatiquement contre le texte source. Les lignes marquées « À revoir » ont échoué à au moins un contrôle et n'ont pas été confirmées par un statisticien. Citez toujours la publication d'origine, pas ce tableau de bord.",
+   "dataTitle": "Données et sources",
+   "dataLede": "Tous les chiffres de ce tableau de bord, avec la page dont ils proviennent et la ligne de texte dont ils ont été lus. Cherchez, triez, ouvrez une ligne pour voir la source, exportez.",
+   "limTitle": "Limites",
+   "methTitle": "Comment ce tableau de bord a été construit",
+   "methBody": "Le texte a été extrait du PDF page par page. Un lecteur à base de règles et un modèle de langage ont transcrit les tableaux indépendamment, et chaque cellule a été contrôlée : provenance de page, citation vérifiée, unité et plage, réconciliation avec les totaux publiés, et accord entre les deux lectures. Le notebook, les prompts et le rapport de vérification sont dans le dépôt.",
+   "fSource": "Source",
+   "fLicence": "Licence",
+   "fBuilt": "Réalisé avec",
+   "fContact": "Contact",
+   "fBuiltBody": "Python, une chaîne d'extraction par LLM, Chart.js. Aucun traceur, aucun cookie, aucun serveur — un seul fichier HTML.",
+   "stamp": "Tableau de bord généré le {date}. Les chiffres relèvent de la responsabilité de l'institution source ; la présentation relève de la responsabilité de l'équipe qui a construit cette page.",
+   "syntheticWarn": "Données de démonstration — pays fictif, à usage pédagogique uniquement.",
+   "kicker": "STATISTIQUE DE DJIBOUTI",
+   "title": "Tableau de bord statistique",
+   "subtitle": "",
+   "ovTitle": "Vue d'ensemble",
+   "ovLede": "",
+   "limBody": "",
+   "publisher": "Institut National de la Statistique",
+   "period": ""
+  }
+ }
+}/*__ENDDATA__*/;
+
+/* ==========================================================================
+   Runtime. Everything on the page is built from DATA — no view is hard-coded,
+   so the same file works for three indicators or for thirty.
+   ========================================================================== */
+const RAMP  = ["#00553A","#00704A","#00A86A","#0E7C86","#D49A00","#C4621D","#9ED9C0","#B83B2E"];
+const GREEN = "#00A86A", PALE = "#9ED9C0";
+const scheme = window.matchMedia?.("(prefers-color-scheme: dark)");
+const dark = () => !!scheme?.matches;
+const SLATE = () => dark() ? "#9FADA7" : "#5E6964";
+const SAGE  = () => dark() ? "#2B3A34" : "#D5DED9";
+const GRID  = () => dark() ? "#22302A" : "#EDF2EF";
+scheme?.addEventListener?.("change", () => drawAll());
+
+let LANG = (DATA.meta.defaultLang) ||
+           ((navigator.language || "en").toLowerCase().startsWith("fr") ? "fr" : "en");
+let TAB = "overview";
+let SELECTED = new Set(DATA.areas.map(a => a.id));
+let SORT = {key:null, dir:1};
+const charts = {};
+
+const T   = k => (DATA.i18n[LANG] && DATA.i18n[LANG][k]) ?? (DATA.i18n.en?.[k] ?? k);
+const loc = v => (v && typeof v === "object" && !Array.isArray(v)) ? (v[LANG] ?? v.en ?? "") : (v ?? "");
+const areaOf = id => { const a = DATA.areas.find(x => x.id === id); return a ? loc(a) : id; };
+const indOf  = id => loc(DATA.indicators?.[id]) || id;
+const views  = () => DATA.views || [];
+const nf = (v, d) => new Intl.NumberFormat(LANG === "fr" ? "fr-FR" : "en-GB",
+  {minimumFractionDigits:d, maximumFractionDigits:d}).format(v);
+const fmt = v => (Number.isInteger(v) && Math.abs(v) >= 1000) ? nf(v,0) : nf(v,1);
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+function colorFor(aid){
+  const a = DATA.areas.find(x => x.id === aid);
+  if (a && a.national) return dark() ? "#E8EFEB" : "#231F20";
+  const i = DATA.areas.filter(x => !x.national).findIndex(x => x.id === aid);
+  return RAMP[i % RAMP.length];
+}
+
+/* ---------- facts: derive from series if the pipeline supplied none ---------- */
+const FACTS = (DATA.facts && DATA.facts.length) ? DATA.facts : (() => {
+  const out = [];
+  for (const [key, s] of Object.entries(DATA.series || {}))
+    s.periods.forEach((p, i) => {
+      for (const [aid, arr] of Object.entries(s.values))
+        if (arr[i] != null) out.push({indicator:key, area:aid, period:p, value:arr[i],
+                                      unit:s.unit, page:null, snippet:null, status:"ok"});
+    });
+  return out;
+})();
+
+/* =========================== chrome =========================== */
+function renderTabs(){
+  const tabs = [["overview", T("tabOverview")],
+                ...views().map(v => [v.id, loc(v.tab) || indOf(v.id)]),
+                ["data", T("tabData")]];
+  const short = t => t.length > 30 ? t.slice(0, 28).trimEnd() + "…" : t;
+  document.getElementById("tabs").innerHTML = tabs.map(([id, label]) =>
+    `<button role="tab" data-tab="${id}" aria-selected="${id === TAB}" title="${esc(label)}">${esc(short(label))}</button>`
+  ).join("");
+  document.querySelectorAll("#tabs button").forEach(b => b.onclick = () => {
+    TAB = b.dataset.tab; renderTabs(); renderPanels();
+    window.scrollTo({top:0, behavior:"instant"});
+  });
+}
+
+function chartCard(v, idSuffix = ""){
+  return `<div class="card">
+    <h3>${esc(loc(v.title) || indOf(v.id))}</h3>
+    <p class="sub">${esc(loc(v.sub) || "")}</p>
+    <div class="chartbox${idSuffix ? "" : " tall"}"><canvas id="ch-${v.id}${idSuffix}"></canvas></div>
+    <p class="src">${esc(loc(v.src) || "")}</p></div>`;
+}
+
+function renderPanels(){
+  const host = document.getElementById("panels");
+  if (TAB === "overview"){
+    const first = views()[0], second = views()[1];
+    host.innerHTML = `
+      <h2>${esc(T("ovTitle"))}</h2><p class="lede">${esc(T("ovLede"))}</p>
+      <div class="kpis" id="kpis"></div>
+      <div class="grid two">
+        ${first ? chartCard(first, "-ov") : ""}
+        ${DATA.overviewScatter ? scatterCard() : (second ? chartCard(second, "-ov2") : "")}
+      </div>`;
+    renderKpis();
+  } else if (TAB === "data"){
+    host.innerHTML = dataPanel();
+    wireTable();
+  } else {
+    const v = views().find(x => x.id === TAB);
+    host.innerHTML = `
+      <h2>${esc(loc(v.title) || indOf(v.id))}</h2>
+      <p class="lede">${esc(loc(v.lede) || "")}</p>
+      <div class="filters" id="filters"></div>
+      ${chartCard(v)}`;
+    renderFilters();
+  }
+  drawAll();
+}
+
+function scatterCard(){
+  const s = DATA.overviewScatter;
+  return `<div class="card">
+    <h3>${esc(loc(s.title))}</h3><p class="sub">${esc(loc(s.sub))}</p>
+    <div class="chartbox"><canvas id="ch-scatter"></canvas></div>
+    <p class="src">${esc(loc(s.src) || "")}</p></div>`;
+}
+
+function dataPanel(){
+  return `
+    <h2>${esc(T("dataTitle"))}</h2><p class="lede">${esc(T("dataLede"))}</p>
+    <div class="callout"><h3>${esc(T("calloutTitle"))}</h3><p>${esc(T("calloutBody"))}</p></div>
+    <div class="tablebar">
+      <input type="search" id="q" placeholder="${esc(T("searchPh"))}" aria-label="${esc(T("searchPh"))}">
+      <button class="btn ghost" id="csv">${esc(T("btnCsv"))}</button>
+      <button class="btn ghost" id="json">${esc(T("btnJson"))}</button>
+    </div>
+    <div class="tscroll"><table id="tbl"><thead><tr>
+      <th data-key="indicator">${esc(T("thIndicator"))}</th>
+      <th data-key="area">${esc(T("thArea"))}</th>
+      <th data-key="period">${esc(T("thPeriod"))}</th>
+      <th data-key="value" class="num">${esc(T("thValue"))}</th>
+      <th data-key="unit">${esc(T("thUnit"))}</th>
+      <th data-key="page">${esc(T("thPage"))}</th>
+      <th data-key="status">${esc(T("thStatus"))}</th>
+    </tr></thead><tbody></tbody></table>
+    <div class="empty" id="noRows" hidden>${esc(T("noRows"))}</div></div>
+    <div style="height:22px"></div>
+    <div class="notes">
+      <h3>${esc(T("limTitle"))}</h3><p>${esc(T("limBody"))}</p>
+      <h3>${esc(T("methTitle"))}</h3><p>${esc(T("methBody"))}</p>
+    </div>`;
+}
+
+/* =========================== KPIs & filters =========================== */
+function renderKpis(){
+  const host = document.getElementById("kpis");
+  if (!host) return;
+  host.innerHTML = (DATA.kpis || []).map(k => {
+    let delta = "";
+    if (k.delta != null){
+      const good = k.good === (k.delta > 0 ? "up" : "down");
+      const cls = k.delta === 0 ? "flat" : (good ? "down" : "up");
+      const arrow = k.delta === 0 ? "=" : (k.delta > 0 ? "▲" : "▼");
+      const sign = k.delta > 0 ? "+" : "−";
+      delta = `<div class="delta ${cls}">${arrow} ${sign}${nf(Math.abs(k.delta),1)} ${esc(loc(k.deltaLabel))}</div>`;
+    }
+    return `<div class="kpi${k.highlight ? " hi" : ""}">
+      <p class="lbl">${esc(loc(k.labels))}</p>
+      <div class="val">${fmt(k.value)}<small>${esc(loc(k.unit))}</small></div>${delta}</div>`;
+  }).join("");
+}
+
+function renderFilters(){
+  const box = document.getElementById("filters");
+  if (!box) return;
+  box.innerHTML = `<span class="flabel">${esc(T("filterLabel"))}</span>` +
+    DATA.areas.map(a => `<button class="chip" data-area="${a.id}" aria-pressed="${SELECTED.has(a.id)}">${esc(loc(a))}</button>`).join("") +
+    `<button class="chip reset" id="chipReset">${esc(T("reset"))}</button>`;
+  box.querySelectorAll("[data-area]").forEach(b => b.onclick = () => {
+    SELECTED.has(b.dataset.area) ? SELECTED.delete(b.dataset.area) : SELECTED.add(b.dataset.area);
+    if (!SELECTED.size) SELECTED = new Set(DATA.areas.map(a => a.id));
+    renderFilters(); drawAll();
+  });
+  box.querySelector("#chipReset").onclick = () => {
+    SELECTED = new Set(DATA.areas.map(a => a.id)); renderFilters(); drawAll();
+  };
+}
+
+/* =========================== charts =========================== */
+const baseOpts = () => ({
+  responsive:true, maintainAspectRatio:false,
+  interaction:{mode:"nearest", intersect:false},
+  plugins:{
+    legend:{position:"bottom", labels:{boxWidth:11, boxHeight:11, usePointStyle:true,
+      pointStyle:"circle", color:SLATE(), font:{size:12, family:"Calibri, Carlito, sans-serif"}}},
+    tooltip:{backgroundColor:"#231F20", padding:10, cornerRadius:6,
+      titleFont:{size:12.5}, bodyFont:{size:12.5}}
+  },
+  scales:{
+    x:{grid:{display:false}, border:{color:SAGE()}, ticks:{color:SLATE(), font:{size:11.5}}},
+    y:{grid:{color:GRID()}, border:{display:false}, ticks:{color:SLATE(), font:{size:11.5}}}
+  }
+});
+
+function unitLabel(s){ return loc(s.unit) || ""; }
+
+function drawView(v, suffix = ""){
+  const cv = document.getElementById(`ch-${v.id}${suffix}`);
+  const s = DATA.series[v.id];
+  if (!cv || !s) return;
+  const key = `ch-${v.id}${suffix}`;
+  const areas = DATA.areas.filter(a => s.values[a.id] && (suffix ? true : SELECTED.has(a.id)));
+  const o = baseOpts();
+  const u = unitLabel(s);
+  o.plugins.tooltip.callbacks = {label: c => {
+    const val = c.parsed.y ?? c.parsed.x;
+    return `${c.dataset.label ? c.dataset.label + ": " : ""}${fmt(val)} ${u}`;
+  }};
+  if (u) o.scales.y.title = {display:true, text:u, color:SLATE(), font:{size:11.5}};
+  charts[key]?.destroy();
+
+  if (v.chart === "line" || (!v.chart && s.periods.length > 2)){
+    charts[key] = new Chart(cv, {type:"line", data:{labels:s.periods,
+      datasets: areas.map(a => ({
+        label: loc(a), data: s.values[a.id],
+        borderColor: colorFor(a.id), backgroundColor: colorFor(a.id),
+        borderWidth: a.national ? 3 : 2, borderDash: a.national ? [6,3] : [],
+        pointRadius:3, pointHoverRadius:6, tension:.28, spanGaps:true
+      }))}, options:o});
+    return;
+  }
+  if (v.chart === "grouped" || (!v.chart && s.periods.length === 2)){
+    charts[key] = new Chart(cv, {type:"bar", data:{
+      labels: areas.map(a => loc(a)),
+      datasets: s.periods.map((p, i) => ({
+        label: p, data: areas.map(a => s.values[a.id][i]),
+        backgroundColor: i === s.periods.length - 1 ? GREEN : PALE,
+        borderRadius:4, barPercentage:.82}))}, options:o});
+    return;
+  }
+  // single column → ranked horizontal bars
+  const idx = s.periods.length - 1;
+  const rows = areas.filter(a => !a.national)
+    .map(a => ({label: loc(a), v: s.values[a.id][idx], id: a.id}))
+    .filter(r => r.v != null).sort((x, y) => y.v - x.v);
+  o.indexAxis = "y";
+  o.plugins.legend.display = false;
+  o.scales.x.grid = {color:GRID()};
+  o.scales.y.grid = {display:false};
+  delete o.scales.y.title;
+  charts[key] = new Chart(cv, {type:"bar", data:{labels: rows.map(r => r.label),
+    datasets:[{data: rows.map(r => r.v), backgroundColor: rows.map(r => colorFor(r.id)),
+               borderRadius:4, barPercentage:.72}]}, options:o});
+}
+
+function drawScatter(){
+  const cfg = DATA.overviewScatter, cv = document.getElementById("ch-scatter");
+  if (!cfg || !cv) return;
+  const sx = DATA.series[cfg.x], sy = DATA.series[cfg.y];
+  if (!sx || !sy) return;
+  const xi = sx.periods.length - 1, yi = sy.periods.length - 1;
+  const pts = DATA.areas.filter(a => !a.national && sx.values[a.id] && sy.values[a.id])
+    .map(a => ({x:sx.values[a.id][xi], y:sy.values[a.id][yi], label:loc(a), id:a.id}))
+    .filter(p => p.x != null && p.y != null);
+  const o = baseOpts();
+  o.plugins.legend.display = false;
+  o.scales.x.grid = {color:GRID()};
+  o.scales.x.title = {display:true, text:indOf(cfg.x), color:SLATE(), font:{size:11}};
+  o.scales.y.title = {display:true, text:indOf(cfg.y), color:SLATE(), font:{size:11}};
+  o.plugins.tooltip.callbacks = {label: c => `${c.raw.label} — ${fmt(c.parsed.x)} / ${fmt(c.parsed.y)}`};
+  charts["ch-scatter"]?.destroy();
+  charts["ch-scatter"] = new Chart(cv, {type:"scatter", data:{datasets:[{
+    data: pts, pointRadius:8, pointHoverRadius:11,
+    backgroundColor: pts.map(p => colorFor(p.id))}]}, options:o});
+}
+
+function drawAll(){
+  views().forEach(v => { drawView(v); drawView(v, "-ov"); drawView(v, "-ov2"); });
+  drawScatter();
+}
+
+/* =========================== table =========================== */
+function visibleRows(){
+  const q = (document.getElementById("q")?.value || "").trim().toLowerCase();
+  let rows = FACTS.map(f => ({...f, indicatorLabel: indOf(f.indicator),
+                              areaLabel: areaOf(f.area), unitLabel: loc(f.unit)}));
+  if (q) rows = rows.filter(r => [r.indicatorLabel, r.areaLabel, r.period, String(r.value),
+                                  r.unitLabel].join(" ").toLowerCase().includes(q));
+  if (SORT.key){
+    const pick = (r, k) => k === "value" ? r.value
+      : k === "indicator" ? r.indicatorLabel : k === "area" ? r.areaLabel
+      : k === "unit" ? r.unitLabel : (r[k] ?? "");
+    rows.sort((a, b) => {
+      const va = pick(a, SORT.key), vb = pick(b, SORT.key);
+      return (va > vb ? 1 : va < vb ? -1 : 0) * SORT.dir;
+    });
+  }
+  return rows;
+}
+
+function renderTable(){
+  const tb = document.querySelector("#tbl tbody");
+  if (!tb) return;
+  const rows = visibleRows();
+  document.getElementById("noRows").hidden = rows.length > 0;
+  tb.innerHTML = rows.map((r, i) => {
+    const ok = r.status !== "warn";
+    const badge = `<span class="badge ${ok ? "ok" : "warn"}">${esc(ok ? T("statusOk") : T("statusWarn"))}</span>`;
+    const head = (r.snippet || r.note)
+      ? `<button class="rowbtn" data-row="${i}" aria-expanded="false">${esc(r.indicatorLabel)}</button>`
+      : esc(r.indicatorLabel);
+    return `<tr><td>${head}</td><td>${esc(r.areaLabel)}</td><td>${esc(r.period)}</td>
+      <td class="num">${fmt(r.value)}</td><td>${esc(r.unitLabel)}</td>
+      <td>${r.page ?? "—"}</td><td>${badge}</td></tr>`;
+  }).join("");
+  tb.querySelectorAll(".rowbtn").forEach(b => b.onclick = () => toggleProv(b, rows));
+  document.querySelectorAll("#tbl thead th").forEach(th => {
+    th.setAttribute("aria-sort", SORT.key === th.dataset.key
+      ? (SORT.dir === 1 ? "ascending" : "descending") : "none");
+    th.onclick = () => { SORT = {key:th.dataset.key,
+      dir: SORT.key === th.dataset.key ? -SORT.dir : 1}; renderTable(); };
+  });
+}
+
+function toggleProv(btn, rows){
+  const tr = btn.closest("tr");
+  const open = btn.getAttribute("aria-expanded") === "true";
+  if (tr.nextElementSibling?.classList.contains("prov")) tr.nextElementSibling.remove();
+  tr.classList.toggle("open", !open);
+  btn.setAttribute("aria-expanded", String(!open));
+  if (open) return;
+  const r = rows[Number(btn.dataset.row)];
+  const el = document.createElement("tr");
+  el.className = "prov";
+  const note = r.note ? `<p style="margin:10px 0 0;color:#8A6400"><strong>⚑</strong> ${esc(loc(r.note))}</p>` : "";
+  const quote = r.snippet ? `<q>${esc(r.snippet)}</q>` : "";
+  el.innerHTML = `<td colspan="7"><strong>${esc(T("provLabel"))} ${r.page ?? "—"}</strong>${quote}${note}</td>`;
+  tr.after(el);
+}
+
+function download(name, text, mime){
+  const url = URL.createObjectURL(new Blob(["\ufeff" + text], {type:mime}));
+  const a = Object.assign(document.createElement("a"), {href:url, download:name});
+  document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+}
+
+function wireTable(){
+  renderTable();
+  document.getElementById("q").addEventListener("input", renderTable);
+  document.getElementById("csv").onclick = () => {
+    const head = ["indicator","area","period","value","unit","page","status","source_line"];
+    const body = visibleRows().map(r => [r.indicatorLabel, r.areaLabel, r.period, r.value,
+      r.unitLabel, r.page ?? "", r.status ?? "", (r.snippet ?? "").replace(/\s+/g," ")]);
+    download(`dashboard_data_${LANG}.csv`,
+      [head, ...body].map(r => r.map(c => `"${String(c).replace(/"/g,'""')}"`).join(",")).join("\n"),
+      "text/csv;charset=utf-8");
+  };
+  document.getElementById("json").onclick = () =>
+    download("dashboard_data.json", JSON.stringify(DATA, null, 2), "application/json");
+}
+
+/* =========================== language =========================== */
+function applyLang(){
+  document.documentElement.lang = LANG;
+  document.querySelectorAll("[data-i18n]").forEach(el =>
+    el.textContent = T(el.dataset.i18n).replace("{date}", DATA.meta.generated || ""));
+  document.querySelectorAll(".lang button").forEach(b =>
+    b.setAttribute("aria-pressed", String(b.dataset.lang === LANG)));
+  document.title = `${T("title")} · ${loc(DATA.meta.country)}`;
+  const link = document.getElementById("srcLink");
+  link.href = DATA.meta.sourceUrl || "#";
+  if (!DATA.meta.sourceUrl || DATA.meta.sourceUrl === "#") link.removeAttribute("target");
+  document.getElementById("fSourceBody").textContent =
+    [loc(DATA.meta.publisher), loc(DATA.meta.docTitle), loc(DATA.meta.period)]
+      .filter(Boolean).join(" — ");
+  document.getElementById("fLicenceBody").textContent = loc(DATA.meta.licence);
+  document.getElementById("fContactBody").textContent = loc(DATA.meta.contact);
+  const sb = document.getElementById("synthBar");
+  sb.hidden = !DATA.meta.synthetic;
+  sb.textContent = T("syntheticWarn");
+  renderTabs(); renderPanels();
+}
+
+document.querySelectorAll(".lang button").forEach(b =>
+  b.onclick = () => { LANG = b.dataset.lang; applyLang(); });
+
+applyLang();
+</script>
+</body>
+</html>
