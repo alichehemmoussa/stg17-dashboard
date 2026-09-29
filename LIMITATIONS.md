@@ -8,7 +8,7 @@
 
 ## Contrôles automatiques de cette exécution
 
-- 0 cellules ont été écartées faute de preuve sur la page dont
+- 4 cellules ont été écartées faute de preuve sur la page dont
   elles se réclamaient.
 - 0 cellules sont publiées avec une mention visible et n'ont
   **pas** été confirmées par un statisticien.
