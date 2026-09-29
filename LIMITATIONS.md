@@ -12,7 +12,7 @@
   elles se réclamaient.
 - 0 cellules sont publiées avec une mention visible et n'ont
   **pas** été confirmées par un statisticien.
-- Seules les pages 3, 6, 7 de la publication source ont été traitées. Tout le reste de
+- Seules les pages 3, 4, 5 de la publication source ont été traitées. Tout le reste de
   son contenu est absent de ce tableau de bord, et son absence ici ne signifie pas son
   absence là-bas.
 - Les contrôles automatiques établissent qu'un chiffre est *cohérent avec la source*. Ils
