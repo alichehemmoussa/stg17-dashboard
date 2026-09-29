@@ -1,4 +1,4 @@
-# Tableau de bord statistique
+# Inflation
 
 Tableau de bord bilingue (EN/FR) construit à partir de **STATISTICS OF RWANDA**, pages 3, 4, 5.
 
@@ -20,7 +20,7 @@ to a public dashboard.
 
 1. Text extracted page by page with `pdfplumber`.
 2. Each table read **twice and independently**: once by a rules-only reader, once by
-   `rules-only`
+   `openai/gpt-oss-120b`
    via Groq. Le modèle ayant lu chaque cellule est consigné
    dans `data/verification_report.csv`.
 3. Every cell passed through five checks — page provenance, quoted evidence, unit and
@@ -35,7 +35,7 @@ Results of the run that produced this page:
 |---|---|
 | verified | 78 |
 | published but flagged | 0 |
-| discarded | 0 |
+| discarded | 4 |
 
 ## Reproducing this
 
