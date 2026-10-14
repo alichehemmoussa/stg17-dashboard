@@ -1,12 +1,6 @@
-**Tableau de bord en ligne : <https://alichehemmoussa.github.io/stg17-dashboard/>**
+# Bulletin statistique trimestriel
 
-Reconstruit en exécutant le notebook de ce dépôt sur la publication source. Dernière publication le 2026-10-14.
-
----
-
-# Indice des prix à la consommation – Urbain
-
-Tableau de bord bilingue (EN/FR) construit à partir de **STATISTICS OF RWANDA**, pages 10, 11, 12.
+Tableau de bord bilingue (EN/FR) construit à partir de **Bulletin statistique trimestriel**, pages 1, 2.
 
 Built during the STG17 technical workshop *Emerging Issues, Emerging Practice*
 (African Development Bank / AU STATAFRIC), lab 02 — from a statistical document
@@ -39,9 +33,9 @@ Results of the run that produced this page:
 
 | Outcome | Cells |
 |---|---|
-| verified | 54 |
-| published but flagged | 90 |
-| discarded | 0 |
+| verified | 76 |
+| published but flagged | 0 |
+| discarded | 1 |
 
 ## Reproducing this
 
