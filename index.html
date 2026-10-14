@@ -248,7 +248,7 @@ const DATA = /*__DATA__*/{
    "en": "",
    "fr": ""
   },
-  "sourceUrl": "https://statistics.gov.rw/sites/default/files/documents/2026-09/INDICE%20DES%20PRIX%20A%20LA%20CONSOMMATION%20%28IPC%29%20Ao%C3%BBt%202026.pdf",
+  "sourceUrl": "https://statistics.gov.rw/sites/default/files/documents/2026-09/CONSUMER%20PRICE%20INDEX%20%20%28CPI%29%20AUGUST%202026.pdf",
   "licence": {
    "en": "Source data: as published by the institute. Dashboard code: MIT.",
    "fr": "Données source : telles que publiées par l'institut. Code : MIT."
@@ -259,32 +259,108 @@ const DATA = /*__DATA__*/{
   },
   "defaultLang": "fr",
   "synthetic": false,
-  "generated": "2026-09-29"
+  "generated": "2026-10-14"
  },
  "areas": [
   {
-   "id": "mu-rwanda",
-   "fr": "Mu Rwanda",
-   "en": "In Rwanda"
+   "id": "alcoholic-beverages-tobacco-and-narcotics",
+   "fr": "Alcoholic beverages tobacco and narcotics",
+   "en": "Alcoholic beverages, tobacco and narcotics"
   },
   {
-   "id": "mu-byaro",
-   "fr": "Mu byaro",
-   "en": "In villages"
+   "id": "bread-and-cereals",
+   "fr": "Bread and cereals",
+   "en": "Bread and cereals"
   },
   {
-   "id": "mu-mijyi",
-   "fr": "Mu mijyi",
-   "en": "In cities"
+   "id": "clothing-and-footwear",
+   "fr": "Clothing and footwear",
+   "en": "Clothing and footwear"
+  },
+  {
+   "id": "communication",
+   "fr": "Communication",
+   "en": "Communication"
+  },
+  {
+   "id": "education",
+   "fr": "Education",
+   "en": "Education"
+  },
+  {
+   "id": "food-and-non-alcoholic-beverages",
+   "fr": "Food and non-alcoholic beverages",
+   "en": "Food and non-alcoholic beverages"
+  },
+  {
+   "id": "furnishings-household-equipment-and-routine-household-maintenance",
+   "fr": "Furnishings household equipment and routine household maintenance",
+   "en": "Furnishings, household equipment and routine household maintenance"
+  },
+  {
+   "id": "nat",
+   "fr": "GENERAL INDEX",
+   "en": "General index",
+   "national": true
+  },
+  {
+   "id": "health",
+   "fr": "Health",
+   "en": "Health"
+  },
+  {
+   "id": "housing-water-electricity-gas-and-other-fuels",
+   "fr": "Housing water, electricity, gas and other fuels",
+   "en": "Housing, water, electricity, gas and other fuels"
+  },
+  {
+   "id": "meat",
+   "fr": "Meat",
+   "en": "Meat"
+  },
+  {
+   "id": "milk-cheese-and-eggs",
+   "fr": "Milk cheese and eggs",
+   "en": "Milk, cheese and eggs"
+  },
+  {
+   "id": "miscellaneous-goods-and-services",
+   "fr": "Miscellaneous goods and services",
+   "en": "Miscellaneous goods and services"
+  },
+  {
+   "id": "non-alcoholic-beverages",
+   "fr": "Non-alcoholic beverages",
+   "en": "Non-alcoholic beverages"
+  },
+  {
+   "id": "recreation-and-culture",
+   "fr": "Recreation and culture",
+   "en": "Recreation and culture"
+  },
+  {
+   "id": "restaurants-and-hotels",
+   "fr": "Restaurants and hotels",
+   "en": "Restaurants and hotels"
+  },
+  {
+   "id": "transport",
+   "fr": "Transport",
+   "en": "Transport"
+  },
+  {
+   "id": "vegetables",
+   "fr": "Vegetables",
+   "en": "Vegetables"
   }
  ],
  "kpis": [
   {
    "labels": {
-    "en": "Annual inflation – Rwanda – January",
-    "fr": "Inflation annuelle – Rwanda – Janvier"
+    "en": "Urban CPI – General Index (12 months)",
+    "fr": "Indice des prix à la consommation urbain – Indice général (12 mois)"
    },
-   "value": 7.5,
+   "value": 15.7,
    "unit": {
     "en": "%",
     "fr": "%"
@@ -299,13 +375,13 @@ const DATA = /*__DATA__*/{
   },
   {
    "labels": {
-    "en": "Annual inflation – Rural – June",
-    "fr": "Inflation annuelle – Rural – Juin"
+    "en": "Urban CPI – Food & non‑alcoholic beverages (12 months)",
+    "fr": "Indice des prix à la consommation urbain – Alimentation et boissons non alcoolisées (12 mois)"
    },
-   "value": 12.1,
+   "value": 5.7,
    "unit": {
-    "en": "%",
-    "fr": "%"
+    "en": "",
+    "fr": ""
    },
    "delta": null,
    "deltaLabel": {
@@ -317,13 +393,13 @@ const DATA = /*__DATA__*/{
   },
   {
    "labels": {
-    "en": "Monthly inflation – Urban – December",
-    "fr": "Inflation mensuelle – Urbain – Décembre"
+    "en": "Urban CPI – Transport (12 months)",
+    "fr": "Indice des prix à la consommation urbain – Transport (12 mois)"
    },
-   "value": 0.0,
+   "value": 3.2,
    "unit": {
-    "en": "%",
-    "fr": "%"
+    "en": "",
+    "fr": ""
    },
    "delta": null,
    "deltaLabel": {
@@ -335,13 +411,13 @@ const DATA = /*__DATA__*/{
   },
   {
    "labels": {
-    "en": "Monthly inflation – Rwanda – July",
-    "fr": "Inflation mensuelle – Rwanda – Juillet"
+    "en": "Urban CPI – Education (12 months)",
+    "fr": "Indice des prix à la consommation urbain – Éducation (12 mois)"
    },
    "value": 0.3,
    "unit": {
-    "en": "%",
-    "fr": "%"
+    "en": "",
+    "fr": ""
    },
    "delta": null,
    "deltaLabel": {
@@ -353,1287 +429,2523 @@ const DATA = /*__DATA__*/{
   }
  ],
  "series": {
-  "inflation_annual": {
+  "cpi_urban": {
    "unit": {
     "en": "%",
     "fr": "%"
    },
    "periods": [
-    "01",
-    "02",
-    "03",
-    "04",
-    "05",
-    "06",
-    "07",
-    "08",
-    "09",
-    "10",
-    "11",
-    "12"
+    "1 month",
+    "12 months",
+    "Aug-25",
+    "Aug-26",
+    "Jul-26",
+    "Weights",
+    "on Aug. 2025",
+    "on Jul. 2026"
    ],
    "values": {
-    "mu-rwanda": [
-     7.5,
-     7.9,
-     7.7,
-     11.5,
-     12.3,
-     12.7,
-     13.8,
-     6.4,
-     6.2,
-     5.1,
-     4.1,
-     5.2
-    ],
-    "mu-byaro": [
-     6.5,
-     7.0,
-     6.7,
-     10.6,
-     11.8,
-     12.1,
-     13.3,
-     5.9,
-     5.5,
-     3.8,
-     2.0,
-     3.3
-    ],
-    "mu-mijyi": [
-     8.9,
-     9.2,
-     9.2,
-     13.0,
-     12.9,
-     13.6,
-     14.5,
-     7.1,
-     7.3,
-     7.1,
-     7.2,
-     8.0
-    ]
-   }
-  },
-  "inflation_monthly": {
-   "unit": {
-    "en": "%",
-    "fr": "%"
-   },
-   "periods": [
-    "01",
-    "02",
-    "03",
-    "04",
-    "05",
-    "06",
-    "07",
-    "08",
-    "09",
-    "10",
-    "11",
-    "12"
-   ],
-   "values": {
-    "mu-rwanda": [
-     0.6,
-     1.2,
-     1.7,
-     5.9,
-     0.6,
-     0.4,
-     0.3,
-     0.7,
-     1.3,
-     1.0,
-     -0.1,
-     -0.6
-    ],
-    "mu-byaro": [
+    "alcoholic-beverages-tobacco-and-narcotics": [
      0.1,
-     1.4,
-     1.9,
-     6.8,
      0.7,
-     0.4,
-     -0.2,
-     0.7,
-     1.2,
-     0.8,
-     -0.3,
-     -0.9
+     261.6,
+     286.9,
+     283.4,
+     5,
+     9.7,
+     1.2
     ],
-    "mu-mijyi": [
-     1.3,
-     0.9,
-     1.3,
-     4.7,
-     0.5,
+    "bread-and-cereals": [
+     0.0,
      0.4,
-     0.9,
-     0.7,
-     1.4,
-     1.3,
+     197.4,
+     211.3,
+     210.0,
+     5,
+     7.1,
+     0.6
+    ],
+    "clothing-and-footwear": [
+     0.0,
      0.2,
+     168.4,
+     177.2,
+     176.9,
+     5,
+     5.2,
+     0.2
+    ],
+    "communication": [
+     0.0,
+     0.1,
+     114.3,
+     117.9,
+     118.2,
+     3,
+     3.2,
+     -0.3
+    ],
+    "education": [
+     0.0,
+     0.3,
+     155.5,
+     176.2,
+     176.2,
+     3,
+     13.3,
      0.0
+    ],
+    "food-and-non-alcoholic-beverages": [
+     1.3,
+     5.7,
+     241.4,
+     280.7,
+     270.7,
+     27,
+     16.3,
+     3.7
+    ],
+    "furnishings-household-equipment-and-routine-household-maintenance": [
+     0.0,
+     0.2,
+     173.4,
+     184.3,
+     183.2,
+     4,
+     6.3,
+     0.6
+    ],
+    "nat": [
+     1.8,
+     15.7,
+     188.3,
+     217.8,
+     214.0,
+     100,
+     15.7,
+     1.8
+    ],
+    "health": [
+     0.0,
+     0.0,
+     193.4,
+     195.6,
+     195.5,
+     1,
+     1.2,
+     0.0
+    ],
+    "housing-water-electricity-gas-and-other-fuels": [
+     0.0,
+     3.3,
+     144.3,
+     173.8,
+     173.5,
+     21,
+     20.4,
+     0.2
+    ],
+    "meat": [
+     0.1,
+     1.1,
+     297.5,
+     406.6,
+     398.4,
+     2,
+     36.7,
+     2.1
+    ],
+    "milk-cheese-and-eggs": [
+     0.0,
+     0.1,
+     216.8,
+     228.2,
+     227.9,
+     1,
+     5.3,
+     0.1
+    ],
+    "miscellaneous-goods-and-services": [
+     0.2,
+     0.7,
+     147.1,
+     166.7,
+     160.5,
+     6,
+     13.3,
+     3.9
+    ],
+    "non-alcoholic-beverages": [
+     0.0,
+     0.1,
+     208.2,
+     225.6,
+     223.9,
+     1,
+     8.4,
+     0.8
+    ],
+    "recreation-and-culture": [
+     0.0,
+     0.1,
+     154.0,
+     162.6,
+     162.2,
+     3,
+     5.6,
+     0.2
+    ],
+    "restaurants-and-hotels": [
+     0.2,
+     1.3,
+     172.1,
+     199.0,
+     195.0,
+     9,
+     15.6,
+     2.0
+    ],
+    "transport": [
+     0.0,
+     3.2,
+     201.0,
+     249.6,
+     249.2,
+     12,
+     24.2,
+     0.2
+    ],
+    "vegetables": [
+     0.9,
+     3.1,
+     269.4,
+     336.0,
+     313.6,
+     9,
+     24.7,
+     7.1
     ]
    }
   }
  },
  "views": [
   {
-   "id": "inflation_annual",
-   "chart": "line",
+   "id": "cpi_urban",
+   "chart": "grouped",
    "tab": {
-    "en": "Annual Inflation",
-    "fr": "Inflation annuelle"
+    "en": "CPI – Urban",
+    "fr": "IPC – Urbain"
    },
    "title": {
-    "en": "Annual inflation rate (%)",
-    "fr": "Taux d’inflation annuel (%)"
+    "en": "Consumer Price Index – Urban Index by sector",
+    "fr": "Indice des prix à la consommation – Index urbain par secteur"
    },
    "sub": {
-    "en": "Annual inflation by area",
-    "fr": "Inflation annuelle par zone"
+    "en": "",
+    "fr": ""
    },
    "lede": {
-    "en": "All areas show a peak in the middle of the year.",
-    "fr": "Toutes les zones affichent un pic au milieu de l’année."
+    "en": "Shows the CPI for each sector for the selected period.",
+    "fr": "Présente l’IPC pour chaque secteur pour la période sélectionnée."
    },
    "src": {
-    "en": "National Institute of Statistics, Rwanda",
-    "fr": "Institut National de la Statistique, Rwanda"
-   }
-  },
-  {
-   "id": "inflation_monthly",
-   "chart": "line",
-   "tab": {
-    "en": "Monthly Inflation",
-    "fr": "Inflation mensuelle"
-   },
-   "title": {
-    "en": "Monthly inflation rate (%)",
-    "fr": "Taux d’inflation mensuel (%)"
-   },
-   "sub": {
-    "en": "Monthly inflation by area",
-    "fr": "Inflation mensuelle par zone"
-   },
-   "lede": {
-    "en": "All areas display seasonal variation throughout the year.",
-    "fr": "Toutes les zones présentent une variation saisonnière tout au long de l’année."
-   },
-   "src": {
-    "en": "National Institute of Statistics, Rwanda",
-    "fr": "Institut National de la Statistique, Rwanda"
+    "en": "National Institute of Statistics",
+    "fr": "Institut national de la statistique"
    }
   }
  ],
  "facts": [
   {
-   "indicator": "inflation_annual",
-   "area": "mu-mijyi",
-   "period": "08",
-   "value": 7.1,
+   "indicator": "cpi_urban",
+   "area": "nat",
+   "period": "Weights",
+   "value": 100,
    "unit": {
     "en": "%",
     "fr": "%"
    },
-   "page": 4,
-   "snippet": "Mu mijyi 7,1 7,3 7,1 7,2 8,0 8,9 9,2 9,2 13,0 12,9 13,6 14,5 15,7",
+   "page": 10,
+   "snippet": "00 GENERAL INDEX 100% 188.3 214.0 217.8 1.8% 15.7% 1.8% 15.7%",
    "status": "ok",
    "note": null
   },
   {
-   "indicator": "inflation_annual",
-   "area": "mu-mijyi",
-   "period": "09",
-   "value": 7.3,
+   "indicator": "cpi_urban",
+   "area": "nat",
+   "period": "Aug-25",
+   "value": 188.3,
    "unit": {
-    "en": "%",
-    "fr": "%"
+    "en": "",
+    "fr": ""
    },
-   "page": 4,
-   "snippet": "Mu mijyi 7,1 7,3 7,1 7,2 8,0 8,9 9,2 9,2 13,0 12,9 13,6 14,5 15,7",
-   "status": "ok",
-   "note": null
+   "page": 10,
+   "snippet": "00 GENERAL INDEX 100% 188.3 214.0 217.8 1.8% 15.7% 1.8% 15.7%",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban; 188.3 est hors de la plage plausible pour cpi_urban",
+    "fr": "unité « None » non autorisée pour cpi_urban; 188.3 est hors de la plage plausible pour cpi_urban"
+   }
   },
   {
-   "indicator": "inflation_annual",
-   "area": "mu-mijyi",
-   "period": "10",
-   "value": 7.1,
+   "indicator": "cpi_urban",
+   "area": "nat",
+   "period": "Jul-26",
+   "value": 214.0,
    "unit": {
-    "en": "%",
-    "fr": "%"
+    "en": "",
+    "fr": ""
    },
-   "page": 4,
-   "snippet": "Mu mijyi 7,1 7,3 7,1 7,2 8,0 8,9 9,2 9,2 13,0 12,9 13,6 14,5 15,7",
-   "status": "ok",
-   "note": null
+   "page": 10,
+   "snippet": "00 GENERAL INDEX 100% 188.3 214.0 217.8 1.8% 15.7% 1.8% 15.7%",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban; 214.0 est hors de la plage plausible pour cpi_urban",
+    "fr": "unité « None » non autorisée pour cpi_urban; 214.0 est hors de la plage plausible pour cpi_urban"
+   }
   },
   {
-   "indicator": "inflation_annual",
-   "area": "mu-mijyi",
-   "period": "11",
-   "value": 7.2,
+   "indicator": "cpi_urban",
+   "area": "nat",
+   "period": "Aug-26",
+   "value": 217.8,
    "unit": {
-    "en": "%",
-    "fr": "%"
+    "en": "",
+    "fr": ""
    },
-   "page": 4,
-   "snippet": "Mu mijyi 7,1 7,3 7,1 7,2 8,0 8,9 9,2 9,2 13,0 12,9 13,6 14,5 15,7",
-   "status": "ok",
-   "note": null
+   "page": 10,
+   "snippet": "00 GENERAL INDEX 100% 188.3 214.0 217.8 1.8% 15.7% 1.8% 15.7%",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban; 217.8 est hors de la plage plausible pour cpi_urban",
+    "fr": "unité « None » non autorisée pour cpi_urban; 217.8 est hors de la plage plausible pour cpi_urban"
+   }
   },
   {
-   "indicator": "inflation_annual",
-   "area": "mu-mijyi",
-   "period": "12",
-   "value": 8.0,
-   "unit": {
-    "en": "%",
-    "fr": "%"
-   },
-   "page": 4,
-   "snippet": "Mu mijyi 7,1 7,3 7,1 7,2 8,0 8,9 9,2 9,2 13,0 12,9 13,6 14,5 15,7",
-   "status": "ok",
-   "note": null
-  },
-  {
-   "indicator": "inflation_annual",
-   "area": "mu-mijyi",
-   "period": "01",
-   "value": 8.9,
-   "unit": {
-    "en": "%",
-    "fr": "%"
-   },
-   "page": 4,
-   "snippet": "Mu mijyi 7,1 7,3 7,1 7,2 8,0 8,9 9,2 9,2 13,0 12,9 13,6 14,5 15,7",
-   "status": "ok",
-   "note": null
-  },
-  {
-   "indicator": "inflation_annual",
-   "area": "mu-mijyi",
-   "period": "02",
-   "value": 9.2,
-   "unit": {
-    "en": "%",
-    "fr": "%"
-   },
-   "page": 4,
-   "snippet": "Mu mijyi 7,1 7,3 7,1 7,2 8,0 8,9 9,2 9,2 13,0 12,9 13,6 14,5 15,7",
-   "status": "ok",
-   "note": null
-  },
-  {
-   "indicator": "inflation_annual",
-   "area": "mu-mijyi",
-   "period": "03",
-   "value": 9.2,
-   "unit": {
-    "en": "%",
-    "fr": "%"
-   },
-   "page": 4,
-   "snippet": "Mu mijyi 7,1 7,3 7,1 7,2 8,0 8,9 9,2 9,2 13,0 12,9 13,6 14,5 15,7",
-   "status": "ok",
-   "note": null
-  },
-  {
-   "indicator": "inflation_annual",
-   "area": "mu-mijyi",
-   "period": "04",
-   "value": 13.0,
-   "unit": {
-    "en": "%",
-    "fr": "%"
-   },
-   "page": 4,
-   "snippet": "Mu mijyi 7,1 7,3 7,1 7,2 8,0 8,9 9,2 9,2 13,0 12,9 13,6 14,5 15,7",
-   "status": "ok",
-   "note": null
-  },
-  {
-   "indicator": "inflation_annual",
-   "area": "mu-mijyi",
-   "period": "05",
-   "value": 12.9,
-   "unit": {
-    "en": "%",
-    "fr": "%"
-   },
-   "page": 4,
-   "snippet": "Mu mijyi 7,1 7,3 7,1 7,2 8,0 8,9 9,2 9,2 13,0 12,9 13,6 14,5 15,7",
-   "status": "ok",
-   "note": null
-  },
-  {
-   "indicator": "inflation_annual",
-   "area": "mu-mijyi",
-   "period": "06",
-   "value": 13.6,
-   "unit": {
-    "en": "%",
-    "fr": "%"
-   },
-   "page": 4,
-   "snippet": "Mu mijyi 7,1 7,3 7,1 7,2 8,0 8,9 9,2 9,2 13,0 12,9 13,6 14,5 15,7",
-   "status": "ok",
-   "note": null
-  },
-  {
-   "indicator": "inflation_annual",
-   "area": "mu-mijyi",
-   "period": "07",
-   "value": 14.5,
-   "unit": {
-    "en": "%",
-    "fr": "%"
-   },
-   "page": 4,
-   "snippet": "Mu mijyi 7,1 7,3 7,1 7,2 8,0 8,9 9,2 9,2 13,0 12,9 13,6 14,5 15,7",
-   "status": "ok",
-   "note": null
-  },
-  {
-   "indicator": "inflation_annual",
-   "area": "mu-mijyi",
-   "period": "08",
-   "value": 15.7,
-   "unit": {
-    "en": "%",
-    "fr": "%"
-   },
-   "page": 4,
-   "snippet": "Mu mijyi 7,1 7,3 7,1 7,2 8,0 8,9 9,2 9,2 13,0 12,9 13,6 14,5 15,7",
-   "status": "ok",
-   "note": null
-  },
-  {
-   "indicator": "inflation_annual",
-   "area": "mu-byaro",
-   "period": "08",
-   "value": 5.9,
-   "unit": {
-    "en": "%",
-    "fr": "%"
-   },
-   "page": 4,
-   "snippet": "Mu byaro 5,9 5,5 3,8 2,0 3,3 6,5 7,0 6,7 10,6 11,8 12,1 13,3 16,0",
-   "status": "ok",
-   "note": null
-  },
-  {
-   "indicator": "inflation_annual",
-   "area": "mu-byaro",
-   "period": "09",
-   "value": 5.5,
-   "unit": {
-    "en": "%",
-    "fr": "%"
-   },
-   "page": 4,
-   "snippet": "Mu byaro 5,9 5,5 3,8 2,0 3,3 6,5 7,0 6,7 10,6 11,8 12,1 13,3 16,0",
-   "status": "ok",
-   "note": null
-  },
-  {
-   "indicator": "inflation_annual",
-   "area": "mu-byaro",
-   "period": "10",
-   "value": 3.8,
-   "unit": {
-    "en": "%",
-    "fr": "%"
-   },
-   "page": 4,
-   "snippet": "Mu byaro 5,9 5,5 3,8 2,0 3,3 6,5 7,0 6,7 10,6 11,8 12,1 13,3 16,0",
-   "status": "ok",
-   "note": null
-  },
-  {
-   "indicator": "inflation_annual",
-   "area": "mu-byaro",
-   "period": "11",
-   "value": 2.0,
-   "unit": {
-    "en": "%",
-    "fr": "%"
-   },
-   "page": 4,
-   "snippet": "Mu byaro 5,9 5,5 3,8 2,0 3,3 6,5 7,0 6,7 10,6 11,8 12,1 13,3 16,0",
-   "status": "ok",
-   "note": null
-  },
-  {
-   "indicator": "inflation_annual",
-   "area": "mu-byaro",
-   "period": "12",
-   "value": 3.3,
-   "unit": {
-    "en": "%",
-    "fr": "%"
-   },
-   "page": 4,
-   "snippet": "Mu byaro 5,9 5,5 3,8 2,0 3,3 6,5 7,0 6,7 10,6 11,8 12,1 13,3 16,0",
-   "status": "ok",
-   "note": null
-  },
-  {
-   "indicator": "inflation_annual",
-   "area": "mu-byaro",
-   "period": "01",
-   "value": 6.5,
-   "unit": {
-    "en": "%",
-    "fr": "%"
-   },
-   "page": 4,
-   "snippet": "Mu byaro 5,9 5,5 3,8 2,0 3,3 6,5 7,0 6,7 10,6 11,8 12,1 13,3 16,0",
-   "status": "ok",
-   "note": null
-  },
-  {
-   "indicator": "inflation_annual",
-   "area": "mu-byaro",
-   "period": "02",
-   "value": 7.0,
-   "unit": {
-    "en": "%",
-    "fr": "%"
-   },
-   "page": 4,
-   "snippet": "Mu byaro 5,9 5,5 3,8 2,0 3,3 6,5 7,0 6,7 10,6 11,8 12,1 13,3 16,0",
-   "status": "ok",
-   "note": null
-  },
-  {
-   "indicator": "inflation_annual",
-   "area": "mu-byaro",
-   "period": "03",
-   "value": 6.7,
-   "unit": {
-    "en": "%",
-    "fr": "%"
-   },
-   "page": 4,
-   "snippet": "Mu byaro 5,9 5,5 3,8 2,0 3,3 6,5 7,0 6,7 10,6 11,8 12,1 13,3 16,0",
-   "status": "ok",
-   "note": null
-  },
-  {
-   "indicator": "inflation_annual",
-   "area": "mu-byaro",
-   "period": "04",
-   "value": 10.6,
-   "unit": {
-    "en": "%",
-    "fr": "%"
-   },
-   "page": 4,
-   "snippet": "Mu byaro 5,9 5,5 3,8 2,0 3,3 6,5 7,0 6,7 10,6 11,8 12,1 13,3 16,0",
-   "status": "ok",
-   "note": null
-  },
-  {
-   "indicator": "inflation_annual",
-   "area": "mu-byaro",
-   "period": "05",
-   "value": 11.8,
-   "unit": {
-    "en": "%",
-    "fr": "%"
-   },
-   "page": 4,
-   "snippet": "Mu byaro 5,9 5,5 3,8 2,0 3,3 6,5 7,0 6,7 10,6 11,8 12,1 13,3 16,0",
-   "status": "ok",
-   "note": null
-  },
-  {
-   "indicator": "inflation_annual",
-   "area": "mu-byaro",
-   "period": "06",
-   "value": 12.1,
-   "unit": {
-    "en": "%",
-    "fr": "%"
-   },
-   "page": 4,
-   "snippet": "Mu byaro 5,9 5,5 3,8 2,0 3,3 6,5 7,0 6,7 10,6 11,8 12,1 13,3 16,0",
-   "status": "ok",
-   "note": null
-  },
-  {
-   "indicator": "inflation_annual",
-   "area": "mu-byaro",
-   "period": "07",
-   "value": 13.3,
-   "unit": {
-    "en": "%",
-    "fr": "%"
-   },
-   "page": 4,
-   "snippet": "Mu byaro 5,9 5,5 3,8 2,0 3,3 6,5 7,0 6,7 10,6 11,8 12,1 13,3 16,0",
-   "status": "ok",
-   "note": null
-  },
-  {
-   "indicator": "inflation_annual",
-   "area": "mu-byaro",
-   "period": "08",
-   "value": 16.0,
-   "unit": {
-    "en": "%",
-    "fr": "%"
-   },
-   "page": 4,
-   "snippet": "Mu byaro 5,9 5,5 3,8 2,0 3,3 6,5 7,0 6,7 10,6 11,8 12,1 13,3 16,0",
-   "status": "ok",
-   "note": null
-  },
-  {
-   "indicator": "inflation_annual",
-   "area": "mu-rwanda",
-   "period": "08",
-   "value": 6.4,
-   "unit": {
-    "en": "%",
-    "fr": "%"
-   },
-   "page": 4,
-   "snippet": "Mu Rwanda 6,4 6,2 5,1 4,1 5,2 7,5 7,9 7,7 11,5 12,3 12,7 13,8 15,9",
-   "status": "ok",
-   "note": null
-  },
-  {
-   "indicator": "inflation_annual",
-   "area": "mu-rwanda",
-   "period": "09",
-   "value": 6.2,
-   "unit": {
-    "en": "%",
-    "fr": "%"
-   },
-   "page": 4,
-   "snippet": "Mu Rwanda 6,4 6,2 5,1 4,1 5,2 7,5 7,9 7,7 11,5 12,3 12,7 13,8 15,9",
-   "status": "ok",
-   "note": null
-  },
-  {
-   "indicator": "inflation_annual",
-   "area": "mu-rwanda",
-   "period": "10",
-   "value": 5.1,
-   "unit": {
-    "en": "%",
-    "fr": "%"
-   },
-   "page": 4,
-   "snippet": "Mu Rwanda 6,4 6,2 5,1 4,1 5,2 7,5 7,9 7,7 11,5 12,3 12,7 13,8 15,9",
-   "status": "ok",
-   "note": null
-  },
-  {
-   "indicator": "inflation_annual",
-   "area": "mu-rwanda",
-   "period": "11",
-   "value": 4.1,
-   "unit": {
-    "en": "%",
-    "fr": "%"
-   },
-   "page": 4,
-   "snippet": "Mu Rwanda 6,4 6,2 5,1 4,1 5,2 7,5 7,9 7,7 11,5 12,3 12,7 13,8 15,9",
-   "status": "ok",
-   "note": null
-  },
-  {
-   "indicator": "inflation_annual",
-   "area": "mu-rwanda",
-   "period": "12",
-   "value": 5.2,
-   "unit": {
-    "en": "%",
-    "fr": "%"
-   },
-   "page": 4,
-   "snippet": "Mu Rwanda 6,4 6,2 5,1 4,1 5,2 7,5 7,9 7,7 11,5 12,3 12,7 13,8 15,9",
-   "status": "ok",
-   "note": null
-  },
-  {
-   "indicator": "inflation_annual",
-   "area": "mu-rwanda",
-   "period": "01",
-   "value": 7.5,
-   "unit": {
-    "en": "%",
-    "fr": "%"
-   },
-   "page": 4,
-   "snippet": "Mu Rwanda 6,4 6,2 5,1 4,1 5,2 7,5 7,9 7,7 11,5 12,3 12,7 13,8 15,9",
-   "status": "ok",
-   "note": null
-  },
-  {
-   "indicator": "inflation_annual",
-   "area": "mu-rwanda",
-   "period": "02",
-   "value": 7.9,
-   "unit": {
-    "en": "%",
-    "fr": "%"
-   },
-   "page": 4,
-   "snippet": "Mu Rwanda 6,4 6,2 5,1 4,1 5,2 7,5 7,9 7,7 11,5 12,3 12,7 13,8 15,9",
-   "status": "ok",
-   "note": null
-  },
-  {
-   "indicator": "inflation_annual",
-   "area": "mu-rwanda",
-   "period": "03",
-   "value": 7.7,
-   "unit": {
-    "en": "%",
-    "fr": "%"
-   },
-   "page": 4,
-   "snippet": "Mu Rwanda 6,4 6,2 5,1 4,1 5,2 7,5 7,9 7,7 11,5 12,3 12,7 13,8 15,9",
-   "status": "ok",
-   "note": null
-  },
-  {
-   "indicator": "inflation_annual",
-   "area": "mu-rwanda",
-   "period": "04",
-   "value": 11.5,
-   "unit": {
-    "en": "%",
-    "fr": "%"
-   },
-   "page": 4,
-   "snippet": "Mu Rwanda 6,4 6,2 5,1 4,1 5,2 7,5 7,9 7,7 11,5 12,3 12,7 13,8 15,9",
-   "status": "ok",
-   "note": null
-  },
-  {
-   "indicator": "inflation_annual",
-   "area": "mu-rwanda",
-   "period": "05",
-   "value": 12.3,
-   "unit": {
-    "en": "%",
-    "fr": "%"
-   },
-   "page": 4,
-   "snippet": "Mu Rwanda 6,4 6,2 5,1 4,1 5,2 7,5 7,9 7,7 11,5 12,3 12,7 13,8 15,9",
-   "status": "ok",
-   "note": null
-  },
-  {
-   "indicator": "inflation_annual",
-   "area": "mu-rwanda",
-   "period": "06",
-   "value": 12.7,
-   "unit": {
-    "en": "%",
-    "fr": "%"
-   },
-   "page": 4,
-   "snippet": "Mu Rwanda 6,4 6,2 5,1 4,1 5,2 7,5 7,9 7,7 11,5 12,3 12,7 13,8 15,9",
-   "status": "ok",
-   "note": null
-  },
-  {
-   "indicator": "inflation_annual",
-   "area": "mu-rwanda",
-   "period": "07",
-   "value": 13.8,
-   "unit": {
-    "en": "%",
-    "fr": "%"
-   },
-   "page": 4,
-   "snippet": "Mu Rwanda 6,4 6,2 5,1 4,1 5,2 7,5 7,9 7,7 11,5 12,3 12,7 13,8 15,9",
-   "status": "ok",
-   "note": null
-  },
-  {
-   "indicator": "inflation_annual",
-   "area": "mu-rwanda",
-   "period": "08",
-   "value": 15.9,
-   "unit": {
-    "en": "%",
-    "fr": "%"
-   },
-   "page": 4,
-   "snippet": "Mu Rwanda 6,4 6,2 5,1 4,1 5,2 7,5 7,9 7,7 11,5 12,3 12,7 13,8 15,9",
-   "status": "ok",
-   "note": null
-  },
-  {
-   "indicator": "inflation_monthly",
-   "area": "mu-mijyi",
-   "period": "08",
-   "value": 0.7,
-   "unit": {
-    "en": "%",
-    "fr": "%"
-   },
-   "page": 4,
-   "snippet": "Mu mijyi 0,7 1,4 1,3 0,2 0,0 1,3 0,9 1,3 4,7 0,5 0,4 0,9 1,8",
-   "status": "ok",
-   "note": null
-  },
-  {
-   "indicator": "inflation_monthly",
-   "area": "mu-mijyi",
-   "period": "09",
-   "value": 1.4,
-   "unit": {
-    "en": "%",
-    "fr": "%"
-   },
-   "page": 4,
-   "snippet": "Mu mijyi 0,7 1,4 1,3 0,2 0,0 1,3 0,9 1,3 4,7 0,5 0,4 0,9 1,8",
-   "status": "ok",
-   "note": null
-  },
-  {
-   "indicator": "inflation_monthly",
-   "area": "mu-mijyi",
-   "period": "10",
-   "value": 1.3,
-   "unit": {
-    "en": "%",
-    "fr": "%"
-   },
-   "page": 4,
-   "snippet": "Mu mijyi 0,7 1,4 1,3 0,2 0,0 1,3 0,9 1,3 4,7 0,5 0,4 0,9 1,8",
-   "status": "ok",
-   "note": null
-  },
-  {
-   "indicator": "inflation_monthly",
-   "area": "mu-mijyi",
-   "period": "11",
-   "value": 0.2,
-   "unit": {
-    "en": "%",
-    "fr": "%"
-   },
-   "page": 4,
-   "snippet": "Mu mijyi 0,7 1,4 1,3 0,2 0,0 1,3 0,9 1,3 4,7 0,5 0,4 0,9 1,8",
-   "status": "ok",
-   "note": null
-  },
-  {
-   "indicator": "inflation_monthly",
-   "area": "mu-mijyi",
-   "period": "12",
-   "value": 0.0,
-   "unit": {
-    "en": "%",
-    "fr": "%"
-   },
-   "page": 4,
-   "snippet": "Mu mijyi 0,7 1,4 1,3 0,2 0,0 1,3 0,9 1,3 4,7 0,5 0,4 0,9 1,8",
-   "status": "ok",
-   "note": null
-  },
-  {
-   "indicator": "inflation_monthly",
-   "area": "mu-mijyi",
-   "period": "01",
-   "value": 1.3,
-   "unit": {
-    "en": "%",
-    "fr": "%"
-   },
-   "page": 4,
-   "snippet": "Mu mijyi 0,7 1,4 1,3 0,2 0,0 1,3 0,9 1,3 4,7 0,5 0,4 0,9 1,8",
-   "status": "ok",
-   "note": null
-  },
-  {
-   "indicator": "inflation_monthly",
-   "area": "mu-mijyi",
-   "period": "02",
-   "value": 0.9,
-   "unit": {
-    "en": "%",
-    "fr": "%"
-   },
-   "page": 4,
-   "snippet": "Mu mijyi 0,7 1,4 1,3 0,2 0,0 1,3 0,9 1,3 4,7 0,5 0,4 0,9 1,8",
-   "status": "ok",
-   "note": null
-  },
-  {
-   "indicator": "inflation_monthly",
-   "area": "mu-mijyi",
-   "period": "03",
-   "value": 1.3,
-   "unit": {
-    "en": "%",
-    "fr": "%"
-   },
-   "page": 4,
-   "snippet": "Mu mijyi 0,7 1,4 1,3 0,2 0,0 1,3 0,9 1,3 4,7 0,5 0,4 0,9 1,8",
-   "status": "ok",
-   "note": null
-  },
-  {
-   "indicator": "inflation_monthly",
-   "area": "mu-mijyi",
-   "period": "04",
-   "value": 4.7,
-   "unit": {
-    "en": "%",
-    "fr": "%"
-   },
-   "page": 4,
-   "snippet": "Mu mijyi 0,7 1,4 1,3 0,2 0,0 1,3 0,9 1,3 4,7 0,5 0,4 0,9 1,8",
-   "status": "ok",
-   "note": null
-  },
-  {
-   "indicator": "inflation_monthly",
-   "area": "mu-mijyi",
-   "period": "05",
-   "value": 0.5,
-   "unit": {
-    "en": "%",
-    "fr": "%"
-   },
-   "page": 4,
-   "snippet": "Mu mijyi 0,7 1,4 1,3 0,2 0,0 1,3 0,9 1,3 4,7 0,5 0,4 0,9 1,8",
-   "status": "ok",
-   "note": null
-  },
-  {
-   "indicator": "inflation_monthly",
-   "area": "mu-mijyi",
-   "period": "06",
-   "value": 0.4,
-   "unit": {
-    "en": "%",
-    "fr": "%"
-   },
-   "page": 4,
-   "snippet": "Mu mijyi 0,7 1,4 1,3 0,2 0,0 1,3 0,9 1,3 4,7 0,5 0,4 0,9 1,8",
-   "status": "ok",
-   "note": null
-  },
-  {
-   "indicator": "inflation_monthly",
-   "area": "mu-mijyi",
-   "period": "07",
-   "value": 0.9,
-   "unit": {
-    "en": "%",
-    "fr": "%"
-   },
-   "page": 4,
-   "snippet": "Mu mijyi 0,7 1,4 1,3 0,2 0,0 1,3 0,9 1,3 4,7 0,5 0,4 0,9 1,8",
-   "status": "ok",
-   "note": null
-  },
-  {
-   "indicator": "inflation_monthly",
-   "area": "mu-mijyi",
-   "period": "08",
+   "indicator": "cpi_urban",
+   "area": "nat",
+   "period": "on Jul. 2026",
    "value": 1.8,
    "unit": {
     "en": "%",
     "fr": "%"
    },
-   "page": 4,
-   "snippet": "Mu mijyi 0,7 1,4 1,3 0,2 0,0 1,3 0,9 1,3 4,7 0,5 0,4 0,9 1,8",
+   "page": 10,
+   "snippet": "00 GENERAL INDEX 100% 188.3 214.0 217.8 1.8% 15.7% 1.8% 15.7%",
    "status": "ok",
    "note": null
   },
   {
-   "indicator": "inflation_monthly",
-   "area": "mu-byaro",
-   "period": "08",
-   "value": 0.7,
+   "indicator": "cpi_urban",
+   "area": "nat",
+   "period": "on Aug. 2025",
+   "value": 15.7,
    "unit": {
     "en": "%",
     "fr": "%"
    },
-   "page": 4,
-   "snippet": "Mu byaro 0,7 1,2 0,8 -0,3 -0,9 0,1 1,4 1,9 6,8 0,7 0,4 -0,2 3,1",
+   "page": 10,
+   "snippet": "00 GENERAL INDEX 100% 188.3 214.0 217.8 1.8% 15.7% 1.8% 15.7%",
    "status": "ok",
    "note": null
   },
   {
-   "indicator": "inflation_monthly",
-   "area": "mu-byaro",
-   "period": "09",
-   "value": 1.2,
+   "indicator": "cpi_urban",
+   "area": "nat",
+   "period": "1 month",
+   "value": 1.8,
    "unit": {
     "en": "%",
     "fr": "%"
    },
-   "page": 4,
-   "snippet": "Mu byaro 0,7 1,2 0,8 -0,3 -0,9 0,1 1,4 1,9 6,8 0,7 0,4 -0,2 3,1",
-   "status": "ok",
-   "note": null
+   "page": 10,
+   "snippet": "00 GENERAL INDEX 100% 188.3 214.0 217.8 1.8% 15.7% 1.8% 15.7%",
+   "status": "warn",
+   "note": {
+    "en": "les parties somment à 2.8 mais le document publie 1.8",
+    "fr": "les parties somment à 2.8 mais le document publie 1.8"
+   }
   },
   {
-   "indicator": "inflation_monthly",
-   "area": "mu-byaro",
-   "period": "10",
-   "value": 0.8,
+   "indicator": "cpi_urban",
+   "area": "nat",
+   "period": "12 months",
+   "value": 15.7,
    "unit": {
     "en": "%",
     "fr": "%"
    },
-   "page": 4,
-   "snippet": "Mu byaro 0,7 1,2 0,8 -0,3 -0,9 0,1 1,4 1,9 6,8 0,7 0,4 -0,2 3,1",
-   "status": "ok",
-   "note": null
+   "page": 10,
+   "snippet": "00 GENERAL INDEX 100% 188.3 214.0 217.8 1.8% 15.7% 1.8% 15.7%",
+   "status": "warn",
+   "note": {
+    "en": "les parties somment à 20.6 mais le document publie 15.7",
+    "fr": "les parties somment à 20.6 mais le document publie 15.7"
+   }
   },
   {
-   "indicator": "inflation_monthly",
-   "area": "mu-byaro",
-   "period": "11",
-   "value": -0.3,
+   "indicator": "cpi_urban",
+   "area": "food-and-non-alcoholic-beverages",
+   "period": "Weights",
+   "value": 27,
    "unit": {
     "en": "%",
     "fr": "%"
    },
-   "page": 4,
-   "snippet": "Mu byaro 0,7 1,2 0,8 -0,3 -0,9 0,1 1,4 1,9 6,8 0,7 0,4 -0,2 3,1",
+   "page": 10,
+   "snippet": "01 Food and non-alcoholic beverages 27% 241.4 270.7 280.7 3.7% 16.3% 1.3 5.7",
    "status": "ok",
    "note": null
   },
   {
-   "indicator": "inflation_monthly",
-   "area": "mu-byaro",
-   "period": "12",
-   "value": -0.9,
+   "indicator": "cpi_urban",
+   "area": "food-and-non-alcoholic-beverages",
+   "period": "Aug-25",
+   "value": 241.4,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "01 Food and non-alcoholic beverages 27% 241.4 270.7 280.7 3.7% 16.3% 1.3 5.7",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban; 241.4 est hors de la plage plausible pour cpi_urban",
+    "fr": "unité « None » non autorisée pour cpi_urban; 241.4 est hors de la plage plausible pour cpi_urban"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "food-and-non-alcoholic-beverages",
+   "period": "Jul-26",
+   "value": 270.7,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "01 Food and non-alcoholic beverages 27% 241.4 270.7 280.7 3.7% 16.3% 1.3 5.7",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban; 270.7 est hors de la plage plausible pour cpi_urban",
+    "fr": "unité « None » non autorisée pour cpi_urban; 270.7 est hors de la plage plausible pour cpi_urban"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "food-and-non-alcoholic-beverages",
+   "period": "Aug-26",
+   "value": 280.7,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "01 Food and non-alcoholic beverages 27% 241.4 270.7 280.7 3.7% 16.3% 1.3 5.7",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban; 280.7 est hors de la plage plausible pour cpi_urban",
+    "fr": "unité « None » non autorisée pour cpi_urban; 280.7 est hors de la plage plausible pour cpi_urban"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "food-and-non-alcoholic-beverages",
+   "period": "on Jul. 2026",
+   "value": 3.7,
    "unit": {
     "en": "%",
     "fr": "%"
    },
-   "page": 4,
-   "snippet": "Mu byaro 0,7 1,2 0,8 -0,3 -0,9 0,1 1,4 1,9 6,8 0,7 0,4 -0,2 3,1",
+   "page": 10,
+   "snippet": "01 Food and non-alcoholic beverages 27% 241.4 270.7 280.7 3.7% 16.3% 1.3 5.7",
    "status": "ok",
    "note": null
   },
   {
-   "indicator": "inflation_monthly",
-   "area": "mu-byaro",
-   "period": "01",
+   "indicator": "cpi_urban",
+   "area": "food-and-non-alcoholic-beverages",
+   "period": "on Aug. 2025",
+   "value": 16.3,
+   "unit": {
+    "en": "%",
+    "fr": "%"
+   },
+   "page": 10,
+   "snippet": "01 Food and non-alcoholic beverages 27% 241.4 270.7 280.7 3.7% 16.3% 1.3 5.7",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "food-and-non-alcoholic-beverages",
+   "period": "1 month",
+   "value": 1.3,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "01 Food and non-alcoholic beverages 27% 241.4 270.7 280.7 3.7% 16.3% 1.3 5.7",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban · les parties somment à 2.8 mais le document publie 1.8 · cellule à relire : 0.3 est imprimé page 10 et comblerait l'écart",
+    "fr": "unité « None » non autorisée pour cpi_urban · les parties somment à 2.8 mais le document publie 1.8 · cellule à relire : 0.3 est imprimé page 10 et comblerait l'écart"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "food-and-non-alcoholic-beverages",
+   "period": "12 months",
+   "value": 5.7,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "01 Food and non-alcoholic beverages 27% 241.4 270.7 280.7 3.7% 16.3% 1.3 5.7",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban · les parties somment à 20.6 mais le document publie 15.7 · cellule à relire : 0.8 est imprimé page 10 et comblerait l'écart",
+    "fr": "unité « None » non autorisée pour cpi_urban · les parties somment à 20.6 mais le document publie 15.7 · cellule à relire : 0.8 est imprimé page 10 et comblerait l'écart"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "bread-and-cereals",
+   "period": "Weights",
+   "value": 5,
+   "unit": {
+    "en": "%",
+    "fr": "%"
+   },
+   "page": 10,
+   "snippet": "01.1.1 Bread and cereals 5% 197.4 210.0 211.3 0.6% 7.1% 0.0 0.4",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "bread-and-cereals",
+   "period": "Aug-25",
+   "value": 197.4,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "01.1.1 Bread and cereals 5% 197.4 210.0 211.3 0.6% 7.1% 0.0 0.4",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban; 197.4 est hors de la plage plausible pour cpi_urban",
+    "fr": "unité « None » non autorisée pour cpi_urban; 197.4 est hors de la plage plausible pour cpi_urban"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "bread-and-cereals",
+   "period": "Jul-26",
+   "value": 210.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "01.1.1 Bread and cereals 5% 197.4 210.0 211.3 0.6% 7.1% 0.0 0.4",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban; 210.0 est hors de la plage plausible pour cpi_urban",
+    "fr": "unité « None » non autorisée pour cpi_urban; 210.0 est hors de la plage plausible pour cpi_urban"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "bread-and-cereals",
+   "period": "Aug-26",
+   "value": 211.3,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "01.1.1 Bread and cereals 5% 197.4 210.0 211.3 0.6% 7.1% 0.0 0.4",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban; 211.3 est hors de la plage plausible pour cpi_urban",
+    "fr": "unité « None » non autorisée pour cpi_urban; 211.3 est hors de la plage plausible pour cpi_urban"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "bread-and-cereals",
+   "period": "on Jul. 2026",
+   "value": 0.6,
+   "unit": {
+    "en": "%",
+    "fr": "%"
+   },
+   "page": 10,
+   "snippet": "01.1.1 Bread and cereals 5% 197.4 210.0 211.3 0.6% 7.1% 0.0 0.4",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "bread-and-cereals",
+   "period": "on Aug. 2025",
+   "value": 7.1,
+   "unit": {
+    "en": "%",
+    "fr": "%"
+   },
+   "page": 10,
+   "snippet": "01.1.1 Bread and cereals 5% 197.4 210.0 211.3 0.6% 7.1% 0.0 0.4",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "bread-and-cereals",
+   "period": "1 month",
+   "value": 0.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "01.1.1 Bread and cereals 5% 197.4 210.0 211.3 0.6% 7.1% 0.0 0.4",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban · les parties somment à 2.8 mais le document publie 1.8 · cellule à relire : -1.0 est imprimé page 10 et comblerait l'écart",
+    "fr": "unité « None » non autorisée pour cpi_urban · les parties somment à 2.8 mais le document publie 1.8 · cellule à relire : -1.0 est imprimé page 10 et comblerait l'écart"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "bread-and-cereals",
+   "period": "12 months",
+   "value": 0.4,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "01.1.1 Bread and cereals 5% 197.4 210.0 211.3 0.6% 7.1% 0.0 0.4",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban · les parties somment à 20.6 mais le document publie 15.7",
+    "fr": "unité « None » non autorisée pour cpi_urban · les parties somment à 20.6 mais le document publie 15.7"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "meat",
+   "period": "Weights",
+   "value": 2,
+   "unit": {
+    "en": "%",
+    "fr": "%"
+   },
+   "page": 10,
+   "snippet": "01.1.2 Meat 2% 297.5 398.4 406.6 2.1% 36.7% 0.1 1.1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "meat",
+   "period": "Aug-25",
+   "value": 297.5,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "01.1.2 Meat 2% 297.5 398.4 406.6 2.1% 36.7% 0.1 1.1",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban; 297.5 est hors de la plage plausible pour cpi_urban",
+    "fr": "unité « None » non autorisée pour cpi_urban; 297.5 est hors de la plage plausible pour cpi_urban"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "meat",
+   "period": "Jul-26",
+   "value": 398.4,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "01.1.2 Meat 2% 297.5 398.4 406.6 2.1% 36.7% 0.1 1.1",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban; 398.4 est hors de la plage plausible pour cpi_urban",
+    "fr": "unité « None » non autorisée pour cpi_urban; 398.4 est hors de la plage plausible pour cpi_urban"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "meat",
+   "period": "Aug-26",
+   "value": 406.6,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "01.1.2 Meat 2% 297.5 398.4 406.6 2.1% 36.7% 0.1 1.1",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban; 406.6 est hors de la plage plausible pour cpi_urban",
+    "fr": "unité « None » non autorisée pour cpi_urban; 406.6 est hors de la plage plausible pour cpi_urban"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "meat",
+   "period": "on Jul. 2026",
+   "value": 2.1,
+   "unit": {
+    "en": "%",
+    "fr": "%"
+   },
+   "page": 10,
+   "snippet": "01.1.2 Meat 2% 297.5 398.4 406.6 2.1% 36.7% 0.1 1.1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "meat",
+   "period": "on Aug. 2025",
+   "value": 36.7,
+   "unit": {
+    "en": "%",
+    "fr": "%"
+   },
+   "page": 10,
+   "snippet": "01.1.2 Meat 2% 297.5 398.4 406.6 2.1% 36.7% 0.1 1.1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "meat",
+   "period": "1 month",
+   "value": 0.1,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "01.1.2 Meat 2% 297.5 398.4 406.6 2.1% 36.7% 0.1 1.1",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban · les parties somment à 2.8 mais le document publie 1.8 · cellule à relire : -0.9 est imprimé page 10 et comblerait l'écart",
+    "fr": "unité « None » non autorisée pour cpi_urban · les parties somment à 2.8 mais le document publie 1.8 · cellule à relire : -0.9 est imprimé page 10 et comblerait l'écart"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "meat",
+   "period": "12 months",
+   "value": 1.1,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "01.1.2 Meat 2% 297.5 398.4 406.6 2.1% 36.7% 0.1 1.1",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban · les parties somment à 20.6 mais le document publie 15.7",
+    "fr": "unité « None » non autorisée pour cpi_urban · les parties somment à 20.6 mais le document publie 15.7"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "milk-cheese-and-eggs",
+   "period": "Weights",
+   "value": 1,
+   "unit": {
+    "en": "%",
+    "fr": "%"
+   },
+   "page": 10,
+   "snippet": "01.1.4 Milk cheese and eggs 1% 216.8 227.9 228.2 0.1% 5.3% 0.0 0.1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "milk-cheese-and-eggs",
+   "period": "Aug-25",
+   "value": 216.8,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "01.1.4 Milk cheese and eggs 1% 216.8 227.9 228.2 0.1% 5.3% 0.0 0.1",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban; 216.8 est hors de la plage plausible pour cpi_urban",
+    "fr": "unité « None » non autorisée pour cpi_urban; 216.8 est hors de la plage plausible pour cpi_urban"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "milk-cheese-and-eggs",
+   "period": "Jul-26",
+   "value": 227.9,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "01.1.4 Milk cheese and eggs 1% 216.8 227.9 228.2 0.1% 5.3% 0.0 0.1",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban; 227.9 est hors de la plage plausible pour cpi_urban",
+    "fr": "unité « None » non autorisée pour cpi_urban; 227.9 est hors de la plage plausible pour cpi_urban"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "milk-cheese-and-eggs",
+   "period": "Aug-26",
+   "value": 228.2,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "01.1.4 Milk cheese and eggs 1% 216.8 227.9 228.2 0.1% 5.3% 0.0 0.1",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban; 228.2 est hors de la plage plausible pour cpi_urban",
+    "fr": "unité « None » non autorisée pour cpi_urban; 228.2 est hors de la plage plausible pour cpi_urban"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "milk-cheese-and-eggs",
+   "period": "on Jul. 2026",
    "value": 0.1,
    "unit": {
     "en": "%",
     "fr": "%"
    },
-   "page": 4,
-   "snippet": "Mu byaro 0,7 1,2 0,8 -0,3 -0,9 0,1 1,4 1,9 6,8 0,7 0,4 -0,2 3,1",
+   "page": 10,
+   "snippet": "01.1.4 Milk cheese and eggs 1% 216.8 227.9 228.2 0.1% 5.3% 0.0 0.1",
    "status": "ok",
    "note": null
   },
   {
-   "indicator": "inflation_monthly",
-   "area": "mu-byaro",
-   "period": "02",
-   "value": 1.4,
+   "indicator": "cpi_urban",
+   "area": "milk-cheese-and-eggs",
+   "period": "on Aug. 2025",
+   "value": 5.3,
    "unit": {
     "en": "%",
     "fr": "%"
    },
-   "page": 4,
-   "snippet": "Mu byaro 0,7 1,2 0,8 -0,3 -0,9 0,1 1,4 1,9 6,8 0,7 0,4 -0,2 3,1",
+   "page": 10,
+   "snippet": "01.1.4 Milk cheese and eggs 1% 216.8 227.9 228.2 0.1% 5.3% 0.0 0.1",
    "status": "ok",
    "note": null
   },
   {
-   "indicator": "inflation_monthly",
-   "area": "mu-byaro",
-   "period": "03",
-   "value": 1.9,
+   "indicator": "cpi_urban",
+   "area": "milk-cheese-and-eggs",
+   "period": "1 month",
+   "value": 0.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "01.1.4 Milk cheese and eggs 1% 216.8 227.9 228.2 0.1% 5.3% 0.0 0.1",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban · les parties somment à 2.8 mais le document publie 1.8",
+    "fr": "unité « None » non autorisée pour cpi_urban · les parties somment à 2.8 mais le document publie 1.8"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "milk-cheese-and-eggs",
+   "period": "12 months",
+   "value": 0.1,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "01.1.4 Milk cheese and eggs 1% 216.8 227.9 228.2 0.1% 5.3% 0.0 0.1",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban · les parties somment à 20.6 mais le document publie 15.7",
+    "fr": "unité « None » non autorisée pour cpi_urban · les parties somment à 20.6 mais le document publie 15.7"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "vegetables",
+   "period": "Weights",
+   "value": 9,
    "unit": {
     "en": "%",
     "fr": "%"
    },
-   "page": 4,
-   "snippet": "Mu byaro 0,7 1,2 0,8 -0,3 -0,9 0,1 1,4 1,9 6,8 0,7 0,4 -0,2 3,1",
+   "page": 10,
+   "snippet": "01.1.7 Vegetables 9% 269.4 313.6 336.0 7.1% 24.7% 0.9 3.1",
    "status": "ok",
    "note": null
   },
   {
-   "indicator": "inflation_monthly",
-   "area": "mu-byaro",
-   "period": "04",
-   "value": 6.8,
+   "indicator": "cpi_urban",
+   "area": "vegetables",
+   "period": "Aug-25",
+   "value": 269.4,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "01.1.7 Vegetables 9% 269.4 313.6 336.0 7.1% 24.7% 0.9 3.1",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban; 269.4 est hors de la plage plausible pour cpi_urban",
+    "fr": "unité « None » non autorisée pour cpi_urban; 269.4 est hors de la plage plausible pour cpi_urban"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "vegetables",
+   "period": "Jul-26",
+   "value": 313.6,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "01.1.7 Vegetables 9% 269.4 313.6 336.0 7.1% 24.7% 0.9 3.1",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban; 313.6 est hors de la plage plausible pour cpi_urban",
+    "fr": "unité « None » non autorisée pour cpi_urban; 313.6 est hors de la plage plausible pour cpi_urban"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "vegetables",
+   "period": "Aug-26",
+   "value": 336.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "01.1.7 Vegetables 9% 269.4 313.6 336.0 7.1% 24.7% 0.9 3.1",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban; 336.0 est hors de la plage plausible pour cpi_urban",
+    "fr": "unité « None » non autorisée pour cpi_urban; 336.0 est hors de la plage plausible pour cpi_urban"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "vegetables",
+   "period": "on Jul. 2026",
+   "value": 7.1,
    "unit": {
     "en": "%",
     "fr": "%"
    },
-   "page": 4,
-   "snippet": "Mu byaro 0,7 1,2 0,8 -0,3 -0,9 0,1 1,4 1,9 6,8 0,7 0,4 -0,2 3,1",
+   "page": 10,
+   "snippet": "01.1.7 Vegetables 9% 269.4 313.6 336.0 7.1% 24.7% 0.9 3.1",
    "status": "ok",
    "note": null
   },
   {
-   "indicator": "inflation_monthly",
-   "area": "mu-byaro",
-   "period": "05",
-   "value": 0.7,
+   "indicator": "cpi_urban",
+   "area": "vegetables",
+   "period": "on Aug. 2025",
+   "value": 24.7,
    "unit": {
     "en": "%",
     "fr": "%"
    },
-   "page": 4,
-   "snippet": "Mu byaro 0,7 1,2 0,8 -0,3 -0,9 0,1 1,4 1,9 6,8 0,7 0,4 -0,2 3,1",
+   "page": 10,
+   "snippet": "01.1.7 Vegetables 9% 269.4 313.6 336.0 7.1% 24.7% 0.9 3.1",
    "status": "ok",
    "note": null
   },
   {
-   "indicator": "inflation_monthly",
-   "area": "mu-byaro",
-   "period": "06",
-   "value": 0.4,
+   "indicator": "cpi_urban",
+   "area": "vegetables",
+   "period": "1 month",
+   "value": 0.9,
    "unit": {
-    "en": "%",
-    "fr": "%"
+    "en": "",
+    "fr": ""
    },
-   "page": 4,
-   "snippet": "Mu byaro 0,7 1,2 0,8 -0,3 -0,9 0,1 1,4 1,9 6,8 0,7 0,4 -0,2 3,1",
-   "status": "ok",
-   "note": null
+   "page": 10,
+   "snippet": "01.1.7 Vegetables 9% 269.4 313.6 336.0 7.1% 24.7% 0.9 3.1",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban · les parties somment à 2.8 mais le document publie 1.8",
+    "fr": "unité « None » non autorisée pour cpi_urban · les parties somment à 2.8 mais le document publie 1.8"
+   }
   },
   {
-   "indicator": "inflation_monthly",
-   "area": "mu-byaro",
-   "period": "07",
-   "value": -0.2,
-   "unit": {
-    "en": "%",
-    "fr": "%"
-   },
-   "page": 4,
-   "snippet": "Mu byaro 0,7 1,2 0,8 -0,3 -0,9 0,1 1,4 1,9 6,8 0,7 0,4 -0,2 3,1",
-   "status": "ok",
-   "note": null
-  },
-  {
-   "indicator": "inflation_monthly",
-   "area": "mu-byaro",
-   "period": "08",
+   "indicator": "cpi_urban",
+   "area": "vegetables",
+   "period": "12 months",
    "value": 3.1,
    "unit": {
-    "en": "%",
-    "fr": "%"
+    "en": "",
+    "fr": ""
    },
-   "page": 4,
-   "snippet": "Mu byaro 0,7 1,2 0,8 -0,3 -0,9 0,1 1,4 1,9 6,8 0,7 0,4 -0,2 3,1",
-   "status": "ok",
-   "note": null
+   "page": 10,
+   "snippet": "01.1.7 Vegetables 9% 269.4 313.6 336.0 7.1% 24.7% 0.9 3.1",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban · les parties somment à 20.6 mais le document publie 15.7 · cellule à relire : -1.8 est imprimé page 10 et comblerait l'écart",
+    "fr": "unité « None » non autorisée pour cpi_urban · les parties somment à 20.6 mais le document publie 15.7 · cellule à relire : -1.8 est imprimé page 10 et comblerait l'écart"
+   }
   },
   {
-   "indicator": "inflation_monthly",
-   "area": "mu-rwanda",
-   "period": "08",
-   "value": 0.7,
+   "indicator": "cpi_urban",
+   "area": "non-alcoholic-beverages",
+   "period": "Weights",
+   "value": 1,
    "unit": {
     "en": "%",
     "fr": "%"
    },
-   "page": 4,
-   "snippet": "Mu Rwanda 0,7 1,3 1,0 -0,1 -0,6 0,6 1,2 1,7 5,9 0,6 0,4 0,3 2,6",
+   "page": 10,
+   "snippet": "01.2 Non-alcoholic beverages 1% 208.2 223.9 225.6 0.8% 8.4% 0.0 0.1",
    "status": "ok",
    "note": null
   },
   {
-   "indicator": "inflation_monthly",
-   "area": "mu-rwanda",
-   "period": "09",
-   "value": 1.3,
+   "indicator": "cpi_urban",
+   "area": "non-alcoholic-beverages",
+   "period": "Aug-25",
+   "value": 208.2,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "01.2 Non-alcoholic beverages 1% 208.2 223.9 225.6 0.8% 8.4% 0.0 0.1",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban; 208.2 est hors de la plage plausible pour cpi_urban",
+    "fr": "unité « None » non autorisée pour cpi_urban; 208.2 est hors de la plage plausible pour cpi_urban"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "non-alcoholic-beverages",
+   "period": "Jul-26",
+   "value": 223.9,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "01.2 Non-alcoholic beverages 1% 208.2 223.9 225.6 0.8% 8.4% 0.0 0.1",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban; 223.9 est hors de la plage plausible pour cpi_urban",
+    "fr": "unité « None » non autorisée pour cpi_urban; 223.9 est hors de la plage plausible pour cpi_urban"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "non-alcoholic-beverages",
+   "period": "Aug-26",
+   "value": 225.6,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "01.2 Non-alcoholic beverages 1% 208.2 223.9 225.6 0.8% 8.4% 0.0 0.1",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban; 225.6 est hors de la plage plausible pour cpi_urban",
+    "fr": "unité « None » non autorisée pour cpi_urban; 225.6 est hors de la plage plausible pour cpi_urban"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "non-alcoholic-beverages",
+   "period": "on Jul. 2026",
+   "value": 0.8,
    "unit": {
     "en": "%",
     "fr": "%"
    },
-   "page": 4,
-   "snippet": "Mu Rwanda 0,7 1,3 1,0 -0,1 -0,6 0,6 1,2 1,7 5,9 0,6 0,4 0,3 2,6",
+   "page": 10,
+   "snippet": "01.2 Non-alcoholic beverages 1% 208.2 223.9 225.6 0.8% 8.4% 0.0 0.1",
    "status": "ok",
    "note": null
   },
   {
-   "indicator": "inflation_monthly",
-   "area": "mu-rwanda",
-   "period": "10",
-   "value": 1.0,
+   "indicator": "cpi_urban",
+   "area": "non-alcoholic-beverages",
+   "period": "on Aug. 2025",
+   "value": 8.4,
    "unit": {
     "en": "%",
     "fr": "%"
    },
-   "page": 4,
-   "snippet": "Mu Rwanda 0,7 1,3 1,0 -0,1 -0,6 0,6 1,2 1,7 5,9 0,6 0,4 0,3 2,6",
+   "page": 10,
+   "snippet": "01.2 Non-alcoholic beverages 1% 208.2 223.9 225.6 0.8% 8.4% 0.0 0.1",
    "status": "ok",
    "note": null
   },
   {
-   "indicator": "inflation_monthly",
-   "area": "mu-rwanda",
-   "period": "11",
-   "value": -0.1,
+   "indicator": "cpi_urban",
+   "area": "non-alcoholic-beverages",
+   "period": "1 month",
+   "value": 0.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "01.2 Non-alcoholic beverages 1% 208.2 223.9 225.6 0.8% 8.4% 0.0 0.1",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban · les parties somment à 2.8 mais le document publie 1.8",
+    "fr": "unité « None » non autorisée pour cpi_urban · les parties somment à 2.8 mais le document publie 1.8"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "non-alcoholic-beverages",
+   "period": "12 months",
+   "value": 0.1,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "01.2 Non-alcoholic beverages 1% 208.2 223.9 225.6 0.8% 8.4% 0.0 0.1",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban · les parties somment à 20.6 mais le document publie 15.7",
+    "fr": "unité « None » non autorisée pour cpi_urban · les parties somment à 20.6 mais le document publie 15.7"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "alcoholic-beverages-tobacco-and-narcotics",
+   "period": "Weights",
+   "value": 5,
    "unit": {
     "en": "%",
     "fr": "%"
    },
-   "page": 4,
-   "snippet": "Mu Rwanda 0,7 1,3 1,0 -0,1 -0,6 0,6 1,2 1,7 5,9 0,6 0,4 0,3 2,6",
+   "page": 10,
+   "snippet": "02 Alcoholic beverages tobacco and narcotics 5% 261.6 283.4 286.9 1.2% 9.7% 0.1 0.7",
    "status": "ok",
    "note": null
   },
   {
-   "indicator": "inflation_monthly",
-   "area": "mu-rwanda",
-   "period": "12",
-   "value": -0.6,
+   "indicator": "cpi_urban",
+   "area": "alcoholic-beverages-tobacco-and-narcotics",
+   "period": "Aug-25",
+   "value": 261.6,
    "unit": {
-    "en": "%",
-    "fr": "%"
+    "en": "",
+    "fr": ""
    },
-   "page": 4,
-   "snippet": "Mu Rwanda 0,7 1,3 1,0 -0,1 -0,6 0,6 1,2 1,7 5,9 0,6 0,4 0,3 2,6",
-   "status": "ok",
-   "note": null
+   "page": 10,
+   "snippet": "02 Alcoholic beverages tobacco and narcotics 5% 261.6 283.4 286.9 1.2% 9.7% 0.1 0.7",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban; 261.6 est hors de la plage plausible pour cpi_urban",
+    "fr": "unité « None » non autorisée pour cpi_urban; 261.6 est hors de la plage plausible pour cpi_urban"
+   }
   },
   {
-   "indicator": "inflation_monthly",
-   "area": "mu-rwanda",
-   "period": "01",
-   "value": 0.6,
+   "indicator": "cpi_urban",
+   "area": "alcoholic-beverages-tobacco-and-narcotics",
+   "period": "Jul-26",
+   "value": 283.4,
    "unit": {
-    "en": "%",
-    "fr": "%"
+    "en": "",
+    "fr": ""
    },
-   "page": 4,
-   "snippet": "Mu Rwanda 0,7 1,3 1,0 -0,1 -0,6 0,6 1,2 1,7 5,9 0,6 0,4 0,3 2,6",
-   "status": "ok",
-   "note": null
+   "page": 10,
+   "snippet": "02 Alcoholic beverages tobacco and narcotics 5% 261.6 283.4 286.9 1.2% 9.7% 0.1 0.7",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban; 283.4 est hors de la plage plausible pour cpi_urban",
+    "fr": "unité « None » non autorisée pour cpi_urban; 283.4 est hors de la plage plausible pour cpi_urban"
+   }
   },
   {
-   "indicator": "inflation_monthly",
-   "area": "mu-rwanda",
-   "period": "02",
+   "indicator": "cpi_urban",
+   "area": "alcoholic-beverages-tobacco-and-narcotics",
+   "period": "Aug-26",
+   "value": 286.9,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "02 Alcoholic beverages tobacco and narcotics 5% 261.6 283.4 286.9 1.2% 9.7% 0.1 0.7",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban; 286.9 est hors de la plage plausible pour cpi_urban",
+    "fr": "unité « None » non autorisée pour cpi_urban; 286.9 est hors de la plage plausible pour cpi_urban"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "alcoholic-beverages-tobacco-and-narcotics",
+   "period": "on Jul. 2026",
    "value": 1.2,
    "unit": {
     "en": "%",
     "fr": "%"
    },
-   "page": 4,
-   "snippet": "Mu Rwanda 0,7 1,3 1,0 -0,1 -0,6 0,6 1,2 1,7 5,9 0,6 0,4 0,3 2,6",
+   "page": 10,
+   "snippet": "02 Alcoholic beverages tobacco and narcotics 5% 261.6 283.4 286.9 1.2% 9.7% 0.1 0.7",
    "status": "ok",
    "note": null
   },
   {
-   "indicator": "inflation_monthly",
-   "area": "mu-rwanda",
-   "period": "03",
-   "value": 1.7,
+   "indicator": "cpi_urban",
+   "area": "alcoholic-beverages-tobacco-and-narcotics",
+   "period": "on Aug. 2025",
+   "value": 9.7,
    "unit": {
     "en": "%",
     "fr": "%"
    },
-   "page": 4,
-   "snippet": "Mu Rwanda 0,7 1,3 1,0 -0,1 -0,6 0,6 1,2 1,7 5,9 0,6 0,4 0,3 2,6",
+   "page": 10,
+   "snippet": "02 Alcoholic beverages tobacco and narcotics 5% 261.6 283.4 286.9 1.2% 9.7% 0.1 0.7",
    "status": "ok",
    "note": null
   },
   {
-   "indicator": "inflation_monthly",
-   "area": "mu-rwanda",
-   "period": "04",
-   "value": 5.9,
+   "indicator": "cpi_urban",
+   "area": "alcoholic-beverages-tobacco-and-narcotics",
+   "period": "1 month",
+   "value": 0.1,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "02 Alcoholic beverages tobacco and narcotics 5% 261.6 283.4 286.9 1.2% 9.7% 0.1 0.7",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban · les parties somment à 2.8 mais le document publie 1.8",
+    "fr": "unité « None » non autorisée pour cpi_urban · les parties somment à 2.8 mais le document publie 1.8"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "alcoholic-beverages-tobacco-and-narcotics",
+   "period": "12 months",
+   "value": 0.7,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "02 Alcoholic beverages tobacco and narcotics 5% 261.6 283.4 286.9 1.2% 9.7% 0.1 0.7",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban · les parties somment à 20.6 mais le document publie 15.7",
+    "fr": "unité « None » non autorisée pour cpi_urban · les parties somment à 20.6 mais le document publie 15.7"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "clothing-and-footwear",
+   "period": "Weights",
+   "value": 5,
    "unit": {
     "en": "%",
     "fr": "%"
    },
-   "page": 4,
-   "snippet": "Mu Rwanda 0,7 1,3 1,0 -0,1 -0,6 0,6 1,2 1,7 5,9 0,6 0,4 0,3 2,6",
+   "page": 10,
+   "snippet": "03 Clothing and footwear 5% 168.4 176.9 177.2 0.2% 5.2% 0.0 0.2",
    "status": "ok",
    "note": null
   },
   {
-   "indicator": "inflation_monthly",
-   "area": "mu-rwanda",
-   "period": "05",
+   "indicator": "cpi_urban",
+   "area": "clothing-and-footwear",
+   "period": "Aug-25",
+   "value": 168.4,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "03 Clothing and footwear 5% 168.4 176.9 177.2 0.2% 5.2% 0.0 0.2",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban; 168.4 est hors de la plage plausible pour cpi_urban",
+    "fr": "unité « None » non autorisée pour cpi_urban; 168.4 est hors de la plage plausible pour cpi_urban"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "clothing-and-footwear",
+   "period": "Jul-26",
+   "value": 176.9,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "03 Clothing and footwear 5% 168.4 176.9 177.2 0.2% 5.2% 0.0 0.2",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban; 176.9 est hors de la plage plausible pour cpi_urban",
+    "fr": "unité « None » non autorisée pour cpi_urban; 176.9 est hors de la plage plausible pour cpi_urban"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "clothing-and-footwear",
+   "period": "Aug-26",
+   "value": 177.2,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "03 Clothing and footwear 5% 168.4 176.9 177.2 0.2% 5.2% 0.0 0.2",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban; 177.2 est hors de la plage plausible pour cpi_urban",
+    "fr": "unité « None » non autorisée pour cpi_urban; 177.2 est hors de la plage plausible pour cpi_urban"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "clothing-and-footwear",
+   "period": "on Jul. 2026",
+   "value": 0.2,
+   "unit": {
+    "en": "%",
+    "fr": "%"
+   },
+   "page": 10,
+   "snippet": "03 Clothing and footwear 5% 168.4 176.9 177.2 0.2% 5.2% 0.0 0.2",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "clothing-and-footwear",
+   "period": "on Aug. 2025",
+   "value": 5.2,
+   "unit": {
+    "en": "%",
+    "fr": "%"
+   },
+   "page": 10,
+   "snippet": "03 Clothing and footwear 5% 168.4 176.9 177.2 0.2% 5.2% 0.0 0.2",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "clothing-and-footwear",
+   "period": "1 month",
+   "value": 0.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "03 Clothing and footwear 5% 168.4 176.9 177.2 0.2% 5.2% 0.0 0.2",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban · les parties somment à 2.8 mais le document publie 1.8",
+    "fr": "unité « None » non autorisée pour cpi_urban · les parties somment à 2.8 mais le document publie 1.8"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "clothing-and-footwear",
+   "period": "12 months",
+   "value": 0.2,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "03 Clothing and footwear 5% 168.4 176.9 177.2 0.2% 5.2% 0.0 0.2",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban · les parties somment à 20.6 mais le document publie 15.7",
+    "fr": "unité « None » non autorisée pour cpi_urban · les parties somment à 20.6 mais le document publie 15.7"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "housing-water-electricity-gas-and-other-fuels",
+   "period": "Weights",
+   "value": 21,
+   "unit": {
+    "en": "%",
+    "fr": "%"
+   },
+   "page": 10,
+   "snippet": "04 Housing water, electricity, gas and other fuels 21% 144.3 173.5 173.8 0.2% 20.4% 0.0 3.3",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "housing-water-electricity-gas-and-other-fuels",
+   "period": "Aug-25",
+   "value": 144.3,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "04 Housing water, electricity, gas and other fuels 21% 144.3 173.5 173.8 0.2% 20.4% 0.0 3.3",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban; 144.3 est hors de la plage plausible pour cpi_urban",
+    "fr": "unité « None » non autorisée pour cpi_urban; 144.3 est hors de la plage plausible pour cpi_urban"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "housing-water-electricity-gas-and-other-fuels",
+   "period": "Jul-26",
+   "value": 173.5,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "04 Housing water, electricity, gas and other fuels 21% 144.3 173.5 173.8 0.2% 20.4% 0.0 3.3",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban; 173.5 est hors de la plage plausible pour cpi_urban",
+    "fr": "unité « None » non autorisée pour cpi_urban; 173.5 est hors de la plage plausible pour cpi_urban"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "housing-water-electricity-gas-and-other-fuels",
+   "period": "Aug-26",
+   "value": 173.8,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "04 Housing water, electricity, gas and other fuels 21% 144.3 173.5 173.8 0.2% 20.4% 0.0 3.3",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban; 173.8 est hors de la plage plausible pour cpi_urban",
+    "fr": "unité « None » non autorisée pour cpi_urban; 173.8 est hors de la plage plausible pour cpi_urban"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "housing-water-electricity-gas-and-other-fuels",
+   "period": "on Jul. 2026",
+   "value": 0.2,
+   "unit": {
+    "en": "%",
+    "fr": "%"
+   },
+   "page": 10,
+   "snippet": "04 Housing water, electricity, gas and other fuels 21% 144.3 173.5 173.8 0.2% 20.4% 0.0 3.3",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "housing-water-electricity-gas-and-other-fuels",
+   "period": "on Aug. 2025",
+   "value": 20.4,
+   "unit": {
+    "en": "%",
+    "fr": "%"
+   },
+   "page": 10,
+   "snippet": "04 Housing water, electricity, gas and other fuels 21% 144.3 173.5 173.8 0.2% 20.4% 0.0 3.3",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "housing-water-electricity-gas-and-other-fuels",
+   "period": "1 month",
+   "value": 0.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "04 Housing water, electricity, gas and other fuels 21% 144.3 173.5 173.8 0.2% 20.4% 0.0 3.3",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban · les parties somment à 2.8 mais le document publie 1.8",
+    "fr": "unité « None » non autorisée pour cpi_urban · les parties somment à 2.8 mais le document publie 1.8"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "housing-water-electricity-gas-and-other-fuels",
+   "period": "12 months",
+   "value": 3.3,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "04 Housing water, electricity, gas and other fuels 21% 144.3 173.5 173.8 0.2% 20.4% 0.0 3.3",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban · les parties somment à 20.6 mais le document publie 15.7",
+    "fr": "unité « None » non autorisée pour cpi_urban · les parties somment à 20.6 mais le document publie 15.7"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "furnishings-household-equipment-and-routine-household-maintenance",
+   "period": "Weights",
+   "value": 4,
+   "unit": {
+    "en": "%",
+    "fr": "%"
+   },
+   "page": 10,
+   "snippet": "05 Furnishings household equipment and routine household maintenance 4% 173.4 183.2 184.3 0.6% 6.3% 0.0 0.2",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "furnishings-household-equipment-and-routine-household-maintenance",
+   "period": "Aug-25",
+   "value": 173.4,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "05 Furnishings household equipment and routine household maintenance 4% 173.4 183.2 184.3 0.6% 6.3% 0.0 0.2",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban; 173.4 est hors de la plage plausible pour cpi_urban",
+    "fr": "unité « None » non autorisée pour cpi_urban; 173.4 est hors de la plage plausible pour cpi_urban"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "furnishings-household-equipment-and-routine-household-maintenance",
+   "period": "Jul-26",
+   "value": 183.2,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "05 Furnishings household equipment and routine household maintenance 4% 173.4 183.2 184.3 0.6% 6.3% 0.0 0.2",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban; 183.2 est hors de la plage plausible pour cpi_urban",
+    "fr": "unité « None » non autorisée pour cpi_urban; 183.2 est hors de la plage plausible pour cpi_urban"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "furnishings-household-equipment-and-routine-household-maintenance",
+   "period": "Aug-26",
+   "value": 184.3,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "05 Furnishings household equipment and routine household maintenance 4% 173.4 183.2 184.3 0.6% 6.3% 0.0 0.2",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban; 184.3 est hors de la plage plausible pour cpi_urban",
+    "fr": "unité « None » non autorisée pour cpi_urban; 184.3 est hors de la plage plausible pour cpi_urban"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "furnishings-household-equipment-and-routine-household-maintenance",
+   "period": "on Jul. 2026",
    "value": 0.6,
    "unit": {
     "en": "%",
     "fr": "%"
    },
-   "page": 4,
-   "snippet": "Mu Rwanda 0,7 1,3 1,0 -0,1 -0,6 0,6 1,2 1,7 5,9 0,6 0,4 0,3 2,6",
+   "page": 10,
+   "snippet": "05 Furnishings household equipment and routine household maintenance 4% 173.4 183.2 184.3 0.6% 6.3% 0.0 0.2",
    "status": "ok",
    "note": null
   },
   {
-   "indicator": "inflation_monthly",
-   "area": "mu-rwanda",
-   "period": "06",
-   "value": 0.4,
+   "indicator": "cpi_urban",
+   "area": "furnishings-household-equipment-and-routine-household-maintenance",
+   "period": "on Aug. 2025",
+   "value": 6.3,
    "unit": {
     "en": "%",
     "fr": "%"
    },
-   "page": 4,
-   "snippet": "Mu Rwanda 0,7 1,3 1,0 -0,1 -0,6 0,6 1,2 1,7 5,9 0,6 0,4 0,3 2,6",
+   "page": 10,
+   "snippet": "05 Furnishings household equipment and routine household maintenance 4% 173.4 183.2 184.3 0.6% 6.3% 0.0 0.2",
    "status": "ok",
    "note": null
   },
   {
-   "indicator": "inflation_monthly",
-   "area": "mu-rwanda",
-   "period": "07",
+   "indicator": "cpi_urban",
+   "area": "furnishings-household-equipment-and-routine-household-maintenance",
+   "period": "1 month",
+   "value": 0.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "05 Furnishings household equipment and routine household maintenance 4% 173.4 183.2 184.3 0.6% 6.3% 0.0 0.2",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban · les parties somment à 2.8 mais le document publie 1.8",
+    "fr": "unité « None » non autorisée pour cpi_urban · les parties somment à 2.8 mais le document publie 1.8"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "furnishings-household-equipment-and-routine-household-maintenance",
+   "period": "12 months",
+   "value": 0.2,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "05 Furnishings household equipment and routine household maintenance 4% 173.4 183.2 184.3 0.6% 6.3% 0.0 0.2",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban · les parties somment à 20.6 mais le document publie 15.7",
+    "fr": "unité « None » non autorisée pour cpi_urban · les parties somment à 20.6 mais le document publie 15.7"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "health",
+   "period": "Weights",
+   "value": 1,
+   "unit": {
+    "en": "%",
+    "fr": "%"
+   },
+   "page": 10,
+   "snippet": "06 Health 1% 193.4 195.5 195.6 0.0% 1.2% 0.0 0.0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "health",
+   "period": "Aug-25",
+   "value": 193.4,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "06 Health 1% 193.4 195.5 195.6 0.0% 1.2% 0.0 0.0",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban; 193.4 est hors de la plage plausible pour cpi_urban",
+    "fr": "unité « None » non autorisée pour cpi_urban; 193.4 est hors de la plage plausible pour cpi_urban"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "health",
+   "period": "Jul-26",
+   "value": 195.5,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "06 Health 1% 193.4 195.5 195.6 0.0% 1.2% 0.0 0.0",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban; 195.5 est hors de la plage plausible pour cpi_urban",
+    "fr": "unité « None » non autorisée pour cpi_urban; 195.5 est hors de la plage plausible pour cpi_urban"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "health",
+   "period": "Aug-26",
+   "value": 195.6,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "06 Health 1% 193.4 195.5 195.6 0.0% 1.2% 0.0 0.0",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban; 195.6 est hors de la plage plausible pour cpi_urban",
+    "fr": "unité « None » non autorisée pour cpi_urban; 195.6 est hors de la plage plausible pour cpi_urban"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "health",
+   "period": "on Jul. 2026",
+   "value": 0.0,
+   "unit": {
+    "en": "%",
+    "fr": "%"
+   },
+   "page": 10,
+   "snippet": "06 Health 1% 193.4 195.5 195.6 0.0% 1.2% 0.0 0.0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "health",
+   "period": "on Aug. 2025",
+   "value": 1.2,
+   "unit": {
+    "en": "%",
+    "fr": "%"
+   },
+   "page": 10,
+   "snippet": "06 Health 1% 193.4 195.5 195.6 0.0% 1.2% 0.0 0.0",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "health",
+   "period": "1 month",
+   "value": 0.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "06 Health 1% 193.4 195.5 195.6 0.0% 1.2% 0.0 0.0",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban · les parties somment à 2.8 mais le document publie 1.8",
+    "fr": "unité « None » non autorisée pour cpi_urban · les parties somment à 2.8 mais le document publie 1.8"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "health",
+   "period": "12 months",
+   "value": 0.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "06 Health 1% 193.4 195.5 195.6 0.0% 1.2% 0.0 0.0",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban · les parties somment à 20.6 mais le document publie 15.7",
+    "fr": "unité « None » non autorisée pour cpi_urban · les parties somment à 20.6 mais le document publie 15.7"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "transport",
+   "period": "Weights",
+   "value": 12,
+   "unit": {
+    "en": "%",
+    "fr": "%"
+   },
+   "page": 10,
+   "snippet": "07 Transport 12% 201.0 249.2 249.6 0.2% 24.2% 0.0 3.2",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "transport",
+   "period": "Aug-25",
+   "value": 201.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "07 Transport 12% 201.0 249.2 249.6 0.2% 24.2% 0.0 3.2",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban; 201.0 est hors de la plage plausible pour cpi_urban",
+    "fr": "unité « None » non autorisée pour cpi_urban; 201.0 est hors de la plage plausible pour cpi_urban"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "transport",
+   "period": "Jul-26",
+   "value": 249.2,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "07 Transport 12% 201.0 249.2 249.6 0.2% 24.2% 0.0 3.2",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban; 249.2 est hors de la plage plausible pour cpi_urban",
+    "fr": "unité « None » non autorisée pour cpi_urban; 249.2 est hors de la plage plausible pour cpi_urban"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "transport",
+   "period": "Aug-26",
+   "value": 249.6,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "07 Transport 12% 201.0 249.2 249.6 0.2% 24.2% 0.0 3.2",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban; 249.6 est hors de la plage plausible pour cpi_urban",
+    "fr": "unité « None » non autorisée pour cpi_urban; 249.6 est hors de la plage plausible pour cpi_urban"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "transport",
+   "period": "on Jul. 2026",
+   "value": 0.2,
+   "unit": {
+    "en": "%",
+    "fr": "%"
+   },
+   "page": 10,
+   "snippet": "07 Transport 12% 201.0 249.2 249.6 0.2% 24.2% 0.0 3.2",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "transport",
+   "period": "on Aug. 2025",
+   "value": 24.2,
+   "unit": {
+    "en": "%",
+    "fr": "%"
+   },
+   "page": 10,
+   "snippet": "07 Transport 12% 201.0 249.2 249.6 0.2% 24.2% 0.0 3.2",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "transport",
+   "period": "1 month",
+   "value": 0.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "07 Transport 12% 201.0 249.2 249.6 0.2% 24.2% 0.0 3.2",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban · les parties somment à 2.8 mais le document publie 1.8",
+    "fr": "unité « None » non autorisée pour cpi_urban · les parties somment à 2.8 mais le document publie 1.8"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "transport",
+   "period": "12 months",
+   "value": 3.2,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "07 Transport 12% 201.0 249.2 249.6 0.2% 24.2% 0.0 3.2",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban · les parties somment à 20.6 mais le document publie 15.7",
+    "fr": "unité « None » non autorisée pour cpi_urban · les parties somment à 20.6 mais le document publie 15.7"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "communication",
+   "period": "Weights",
+   "value": 3,
+   "unit": {
+    "en": "%",
+    "fr": "%"
+   },
+   "page": 10,
+   "snippet": "08 Communication 3% 114.3 118.2 117.9 -0.3% 3.2% 0.0 0.1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "communication",
+   "period": "Aug-25",
+   "value": 114.3,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "08 Communication 3% 114.3 118.2 117.9 -0.3% 3.2% 0.0 0.1",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban; 114.3 est hors de la plage plausible pour cpi_urban",
+    "fr": "unité « None » non autorisée pour cpi_urban; 114.3 est hors de la plage plausible pour cpi_urban"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "communication",
+   "period": "Jul-26",
+   "value": 118.2,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "08 Communication 3% 114.3 118.2 117.9 -0.3% 3.2% 0.0 0.1",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban; 118.2 est hors de la plage plausible pour cpi_urban",
+    "fr": "unité « None » non autorisée pour cpi_urban; 118.2 est hors de la plage plausible pour cpi_urban"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "communication",
+   "period": "Aug-26",
+   "value": 117.9,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "08 Communication 3% 114.3 118.2 117.9 -0.3% 3.2% 0.0 0.1",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban; 117.9 est hors de la plage plausible pour cpi_urban",
+    "fr": "unité « None » non autorisée pour cpi_urban; 117.9 est hors de la plage plausible pour cpi_urban"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "communication",
+   "period": "on Jul. 2026",
+   "value": -0.3,
+   "unit": {
+    "en": "%",
+    "fr": "%"
+   },
+   "page": 10,
+   "snippet": "08 Communication 3% 114.3 118.2 117.9 -0.3% 3.2% 0.0 0.1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "communication",
+   "period": "on Aug. 2025",
+   "value": 3.2,
+   "unit": {
+    "en": "%",
+    "fr": "%"
+   },
+   "page": 10,
+   "snippet": "08 Communication 3% 114.3 118.2 117.9 -0.3% 3.2% 0.0 0.1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "communication",
+   "period": "1 month",
+   "value": 0.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "08 Communication 3% 114.3 118.2 117.9 -0.3% 3.2% 0.0 0.1",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban · les parties somment à 2.8 mais le document publie 1.8",
+    "fr": "unité « None » non autorisée pour cpi_urban · les parties somment à 2.8 mais le document publie 1.8"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "communication",
+   "period": "12 months",
+   "value": 0.1,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "08 Communication 3% 114.3 118.2 117.9 -0.3% 3.2% 0.0 0.1",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban · les parties somment à 20.6 mais le document publie 15.7",
+    "fr": "unité « None » non autorisée pour cpi_urban · les parties somment à 20.6 mais le document publie 15.7"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "recreation-and-culture",
+   "period": "Weights",
+   "value": 3,
+   "unit": {
+    "en": "%",
+    "fr": "%"
+   },
+   "page": 10,
+   "snippet": "09 Recreation and culture 3% 154.0 162.2 162.6 0.2% 5.6% 0.0 0.1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "recreation-and-culture",
+   "period": "Aug-25",
+   "value": 154.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "09 Recreation and culture 3% 154.0 162.2 162.6 0.2% 5.6% 0.0 0.1",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban; 154.0 est hors de la plage plausible pour cpi_urban",
+    "fr": "unité « None » non autorisée pour cpi_urban; 154.0 est hors de la plage plausible pour cpi_urban"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "recreation-and-culture",
+   "period": "Jul-26",
+   "value": 162.2,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "09 Recreation and culture 3% 154.0 162.2 162.6 0.2% 5.6% 0.0 0.1",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban; 162.2 est hors de la plage plausible pour cpi_urban",
+    "fr": "unité « None » non autorisée pour cpi_urban; 162.2 est hors de la plage plausible pour cpi_urban"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "recreation-and-culture",
+   "period": "Aug-26",
+   "value": 162.6,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "09 Recreation and culture 3% 154.0 162.2 162.6 0.2% 5.6% 0.0 0.1",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban; 162.6 est hors de la plage plausible pour cpi_urban",
+    "fr": "unité « None » non autorisée pour cpi_urban; 162.6 est hors de la plage plausible pour cpi_urban"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "recreation-and-culture",
+   "period": "on Jul. 2026",
+   "value": 0.2,
+   "unit": {
+    "en": "%",
+    "fr": "%"
+   },
+   "page": 10,
+   "snippet": "09 Recreation and culture 3% 154.0 162.2 162.6 0.2% 5.6% 0.0 0.1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "recreation-and-culture",
+   "period": "on Aug. 2025",
+   "value": 5.6,
+   "unit": {
+    "en": "%",
+    "fr": "%"
+   },
+   "page": 10,
+   "snippet": "09 Recreation and culture 3% 154.0 162.2 162.6 0.2% 5.6% 0.0 0.1",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "recreation-and-culture",
+   "period": "1 month",
+   "value": 0.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "09 Recreation and culture 3% 154.0 162.2 162.6 0.2% 5.6% 0.0 0.1",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban · les parties somment à 2.8 mais le document publie 1.8",
+    "fr": "unité « None » non autorisée pour cpi_urban · les parties somment à 2.8 mais le document publie 1.8"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "recreation-and-culture",
+   "period": "12 months",
+   "value": 0.1,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "09 Recreation and culture 3% 154.0 162.2 162.6 0.2% 5.6% 0.0 0.1",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban · les parties somment à 20.6 mais le document publie 15.7",
+    "fr": "unité « None » non autorisée pour cpi_urban · les parties somment à 20.6 mais le document publie 15.7"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "education",
+   "period": "Weights",
+   "value": 3,
+   "unit": {
+    "en": "%",
+    "fr": "%"
+   },
+   "page": 10,
+   "snippet": "10 Education 3% 155.5 176.2 176.2 0.0% 13.3% 0.0 0.3",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "education",
+   "period": "Aug-25",
+   "value": 155.5,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "10 Education 3% 155.5 176.2 176.2 0.0% 13.3% 0.0 0.3",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban; 155.5 est hors de la plage plausible pour cpi_urban",
+    "fr": "unité « None » non autorisée pour cpi_urban; 155.5 est hors de la plage plausible pour cpi_urban"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "education",
+   "period": "Jul-26",
+   "value": 176.2,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "10 Education 3% 155.5 176.2 176.2 0.0% 13.3% 0.0 0.3",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban; 176.2 est hors de la plage plausible pour cpi_urban",
+    "fr": "unité « None » non autorisée pour cpi_urban; 176.2 est hors de la plage plausible pour cpi_urban"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "education",
+   "period": "Aug-26",
+   "value": 176.2,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "10 Education 3% 155.5 176.2 176.2 0.0% 13.3% 0.0 0.3",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban; 176.2 est hors de la plage plausible pour cpi_urban",
+    "fr": "unité « None » non autorisée pour cpi_urban; 176.2 est hors de la plage plausible pour cpi_urban"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "education",
+   "period": "on Jul. 2026",
+   "value": 0.0,
+   "unit": {
+    "en": "%",
+    "fr": "%"
+   },
+   "page": 10,
+   "snippet": "10 Education 3% 155.5 176.2 176.2 0.0% 13.3% 0.0 0.3",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "education",
+   "period": "on Aug. 2025",
+   "value": 13.3,
+   "unit": {
+    "en": "%",
+    "fr": "%"
+   },
+   "page": 10,
+   "snippet": "10 Education 3% 155.5 176.2 176.2 0.0% 13.3% 0.0 0.3",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "education",
+   "period": "1 month",
+   "value": 0.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "10 Education 3% 155.5 176.2 176.2 0.0% 13.3% 0.0 0.3",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban · les parties somment à 2.8 mais le document publie 1.8",
+    "fr": "unité « None » non autorisée pour cpi_urban · les parties somment à 2.8 mais le document publie 1.8"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "education",
+   "period": "12 months",
    "value": 0.3,
    "unit": {
-    "en": "%",
-    "fr": "%"
+    "en": "",
+    "fr": ""
    },
-   "page": 4,
-   "snippet": "Mu Rwanda 0,7 1,3 1,0 -0,1 -0,6 0,6 1,2 1,7 5,9 0,6 0,4 0,3 2,6",
-   "status": "ok",
-   "note": null
+   "page": 10,
+   "snippet": "10 Education 3% 155.5 176.2 176.2 0.0% 13.3% 0.0 0.3",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban · les parties somment à 20.6 mais le document publie 15.7",
+    "fr": "unité « None » non autorisée pour cpi_urban · les parties somment à 20.6 mais le document publie 15.7"
+   }
   },
   {
-   "indicator": "inflation_monthly",
-   "area": "mu-rwanda",
-   "period": "08",
-   "value": 2.6,
+   "indicator": "cpi_urban",
+   "area": "restaurants-and-hotels",
+   "period": "Weights",
+   "value": 9,
    "unit": {
     "en": "%",
     "fr": "%"
    },
-   "page": 4,
-   "snippet": "Mu Rwanda 0,7 1,3 1,0 -0,1 -0,6 0,6 1,2 1,7 5,9 0,6 0,4 0,3 2,6",
+   "page": 10,
+   "snippet": "11 Restaurants and hotels 9% 172.1 195.0 199.0 2.0% 15.6% 0.2 1.3",
    "status": "ok",
    "note": null
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "restaurants-and-hotels",
+   "period": "Aug-25",
+   "value": 172.1,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "11 Restaurants and hotels 9% 172.1 195.0 199.0 2.0% 15.6% 0.2 1.3",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban; 172.1 est hors de la plage plausible pour cpi_urban",
+    "fr": "unité « None » non autorisée pour cpi_urban; 172.1 est hors de la plage plausible pour cpi_urban"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "restaurants-and-hotels",
+   "period": "Jul-26",
+   "value": 195.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "11 Restaurants and hotels 9% 172.1 195.0 199.0 2.0% 15.6% 0.2 1.3",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban; 195.0 est hors de la plage plausible pour cpi_urban",
+    "fr": "unité « None » non autorisée pour cpi_urban; 195.0 est hors de la plage plausible pour cpi_urban"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "restaurants-and-hotels",
+   "period": "Aug-26",
+   "value": 199.0,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "11 Restaurants and hotels 9% 172.1 195.0 199.0 2.0% 15.6% 0.2 1.3",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban; 199.0 est hors de la plage plausible pour cpi_urban",
+    "fr": "unité « None » non autorisée pour cpi_urban; 199.0 est hors de la plage plausible pour cpi_urban"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "restaurants-and-hotels",
+   "period": "on Jul. 2026",
+   "value": 2.0,
+   "unit": {
+    "en": "%",
+    "fr": "%"
+   },
+   "page": 10,
+   "snippet": "11 Restaurants and hotels 9% 172.1 195.0 199.0 2.0% 15.6% 0.2 1.3",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "restaurants-and-hotels",
+   "period": "on Aug. 2025",
+   "value": 15.6,
+   "unit": {
+    "en": "%",
+    "fr": "%"
+   },
+   "page": 10,
+   "snippet": "11 Restaurants and hotels 9% 172.1 195.0 199.0 2.0% 15.6% 0.2 1.3",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "restaurants-and-hotels",
+   "period": "1 month",
+   "value": 0.2,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "11 Restaurants and hotels 9% 172.1 195.0 199.0 2.0% 15.6% 0.2 1.3",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban · les parties somment à 2.8 mais le document publie 1.8",
+    "fr": "unité « None » non autorisée pour cpi_urban · les parties somment à 2.8 mais le document publie 1.8"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "restaurants-and-hotels",
+   "period": "12 months",
+   "value": 1.3,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "11 Restaurants and hotels 9% 172.1 195.0 199.0 2.0% 15.6% 0.2 1.3",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban · les parties somment à 20.6 mais le document publie 15.7",
+    "fr": "unité « None » non autorisée pour cpi_urban · les parties somment à 20.6 mais le document publie 15.7"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "miscellaneous-goods-and-services",
+   "period": "Weights",
+   "value": 6,
+   "unit": {
+    "en": "%",
+    "fr": "%"
+   },
+   "page": 10,
+   "snippet": "12 Miscellaneous goods and services 6% 147.1 160.5 166.7 3.9% 13.3% 0.2 0.7",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "miscellaneous-goods-and-services",
+   "period": "Aug-25",
+   "value": 147.1,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "12 Miscellaneous goods and services 6% 147.1 160.5 166.7 3.9% 13.3% 0.2 0.7",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban; 147.1 est hors de la plage plausible pour cpi_urban",
+    "fr": "unité « None » non autorisée pour cpi_urban; 147.1 est hors de la plage plausible pour cpi_urban"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "miscellaneous-goods-and-services",
+   "period": "Jul-26",
+   "value": 160.5,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "12 Miscellaneous goods and services 6% 147.1 160.5 166.7 3.9% 13.3% 0.2 0.7",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban; 160.5 est hors de la plage plausible pour cpi_urban",
+    "fr": "unité « None » non autorisée pour cpi_urban; 160.5 est hors de la plage plausible pour cpi_urban"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "miscellaneous-goods-and-services",
+   "period": "Aug-26",
+   "value": 166.7,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "12 Miscellaneous goods and services 6% 147.1 160.5 166.7 3.9% 13.3% 0.2 0.7",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban; 166.7 est hors de la plage plausible pour cpi_urban",
+    "fr": "unité « None » non autorisée pour cpi_urban; 166.7 est hors de la plage plausible pour cpi_urban"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "miscellaneous-goods-and-services",
+   "period": "on Jul. 2026",
+   "value": 3.9,
+   "unit": {
+    "en": "%",
+    "fr": "%"
+   },
+   "page": 10,
+   "snippet": "12 Miscellaneous goods and services 6% 147.1 160.5 166.7 3.9% 13.3% 0.2 0.7",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "miscellaneous-goods-and-services",
+   "period": "on Aug. 2025",
+   "value": 13.3,
+   "unit": {
+    "en": "%",
+    "fr": "%"
+   },
+   "page": 10,
+   "snippet": "12 Miscellaneous goods and services 6% 147.1 160.5 166.7 3.9% 13.3% 0.2 0.7",
+   "status": "ok",
+   "note": null
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "miscellaneous-goods-and-services",
+   "period": "1 month",
+   "value": 0.2,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "12 Miscellaneous goods and services 6% 147.1 160.5 166.7 3.9% 13.3% 0.2 0.7",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban · les parties somment à 2.8 mais le document publie 1.8",
+    "fr": "unité « None » non autorisée pour cpi_urban · les parties somment à 2.8 mais le document publie 1.8"
+   }
+  },
+  {
+   "indicator": "cpi_urban",
+   "area": "miscellaneous-goods-and-services",
+   "period": "12 months",
+   "value": 0.7,
+   "unit": {
+    "en": "",
+    "fr": ""
+   },
+   "page": 10,
+   "snippet": "12 Miscellaneous goods and services 6% 147.1 160.5 166.7 3.9% 13.3% 0.2 0.7",
+   "status": "warn",
+   "note": {
+    "en": "unité « None » non autorisée pour cpi_urban · les parties somment à 20.6 mais le document publie 15.7",
+    "fr": "unité « None » non autorisée pour cpi_urban · les parties somment à 20.6 mais le document publie 15.7"
+   }
   }
  ],
  "indicators": {
-  "inflation_annual": {
-   "fr": "Ijanisha ry'ihinduka ry'ibiciro ku mwaka",
-   "en": "Annual price change rate"
-  },
-  "inflation_monthly": {
-   "fr": "Ijanisha ry'ihinduka ry'ibiciro ku kwezi",
-   "en": "Monthly price change rate"
+  "cpi_urban": {
+   "fr": "Consumer Price Index, Urban Index (Feb 2014=100)",
+   "en": "Consumer Price Index, Urban Index (Feb 2014=100)"
   }
  },
  "i18n": {
@@ -1671,12 +2983,12 @@ const DATA = /*__DATA__*/{
    "fBuiltBody": "Python, an LLM extraction pipeline, Chart.js. No tracking, no cookies, no server — a single HTML file.",
    "stamp": "Dashboard generated on {date}. Figures are the responsibility of the source institution; the presentation is the responsibility of the team that built this page.",
    "syntheticWarn": "Demonstration data — fictional country, for training purposes only.",
-   "kicker": "Statistics of Rwanda",
-   "title": "Inflation",
-   "subtitle": "Annual and monthly consumer price inflation rates",
+   "kicker": "STATISTICS OF RWANDA",
+   "title": "Consumer Price Index – Urban",
+   "subtitle": "",
    "ovTitle": "Overview",
-   "ovLede": "Inflation rates expressed as percent change over the previous period, by area.",
-   "limBody": "",
+   "ovLede": "The urban consumer price index measures price changes for a basket of goods and services.",
+   "limBody": "The following cells require review: values –0.9, –1.0, –1.8, 0.3 and 0.8 printed on page 10 would fill gaps. The component totals sum to 2.8 but the published document reports 1.8; they sum to 20.6 while the published figure is 15.7. Additionally, the unit “None” is not authorized for the CPI urban series.",
    "publisher": "National Institute of Statistics",
    "period": ""
   },
@@ -1714,30 +3026,14 @@ const DATA = /*__DATA__*/{
    "fBuiltBody": "Python, une chaîne d'extraction par LLM, Chart.js. Aucun traceur, aucun cookie, aucun serveur — un seul fichier HTML.",
    "stamp": "Tableau de bord généré le {date}. Les chiffres relèvent de la responsabilité de l'institution source ; la présentation relève de la responsabilité de l'équipe qui a construit cette page.",
    "syntheticWarn": "Données de démonstration — pays fictif, à usage pédagogique uniquement.",
-   "kicker": "Statistiques du Rwanda",
-   "title": "Inflation",
-   "subtitle": "Taux d’inflation des prix à la consommation annuels et mensuels",
-   "ovTitle": "Aperçu",
-   "ovLede": "Taux d’inflation exprimés en pourcentage de variation par rapport à la période précédente, par zone.",
-   "limBody": "",
+   "kicker": "STATISTIQUES DU RWANDA",
+   "title": "Indice des prix à la consommation – Urbain",
+   "subtitle": "",
+   "ovTitle": "Vue d’ensemble",
+   "ovLede": "L’indice des prix à la consommation urbain mesure les variations de prix d’un panier de biens et services.",
+   "limBody": "Les cellules suivantes doivent être revues : les valeurs –0,9, –1,0, –1,8, 0,3 et 0,8 imprimées à la page 10 combleraient les écarts. Les parties totalisent 2,8 alors que le document publié indique 1,8 ; elles totalisent 20,6 alors que le chiffre publié est 15,7. De plus, l’unité « None » n’est pas autorisée pour la série CPI urbain.",
    "publisher": "Institut National de la Statistique",
    "period": ""
-  }
- },
- "overviewScatter": {
-  "x": "inflation_annual",
-  "y": "inflation_monthly",
-  "title": {
-   "en": "Monthly price change rate against Annual price change rate",
-   "fr": "Ijanisha ry'ihinduka ry'ibiciro ku kwezi et Ijanisha ry'ihinduka ry'ibiciro ku mwaka"
-  },
-  "sub": {
-   "en": "One point per area — an association, not a causal claim",
-   "fr": "Un point par zone — une association, pas une relation causale"
-  },
-  "src": {
-   "en": "No significance test performed.",
-   "fr": "Aucun test de significativité réalisé."
   }
  }
 }/*__ENDDATA__*/;
