@@ -48,7 +48,7 @@ population_residente,Vallée de l'Est,Part (%),17.4,%,2,openai/gpt-oss-120b,True
 population_residente,Vallée de l'Est,Densité (hab/km2),97.0,hab/km2,2,openai/gpt-oss-120b,True,True,True,True,match,verified,
 population_residente,Hauts Plateaux,Population,2489.0,thousands,2,openai/gpt-oss-120b,True,True,True,True,match,verified,
 population_residente,Hauts Plateaux,Part (%),13.3,%,2,openai/gpt-oss-120b,True,True,True,True,match,verified,
-population_residente,Hauts Plateaux,Densité (hab/km2),,,2,openai/gpt-oss-120b,False,True,False,True,no-row,dropped,None n'est pas imprimé sur la page 2 | unité « None » non autorisée pour population_residente
+population_residente,Hauts Plateaux,Densité (hab/km2),,hab/km2,2,openai/gpt-oss-120b,False,True,True,True,no-row,dropped,None n'est pas imprimé sur la page 2
 population_residente,Extrême Ouest,Population,2218.0,thousands,2,openai/gpt-oss-120b,True,True,True,True,match,verified,
 population_residente,Extrême Ouest,Part (%),11.8,%,2,openai/gpt-oss-120b,True,True,True,True,match,verified,
 population_residente,Extrême Ouest,Densité (hab/km2),23.0,hab/km2,2,openai/gpt-oss-120b,True,True,True,True,match,verified,
