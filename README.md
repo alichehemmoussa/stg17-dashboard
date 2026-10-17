@@ -1,3 +1,9 @@
+**Tableau de bord en ligne : <https://alichehemmoussa.github.io/stg17-dashboard/>**
+
+Reconstruit en exécutant le notebook de ce dépôt sur la publication source. Dernière publication le 2026-10-17.
+
+---
+
 # Variation trimestrielle de l’indice d’ensemble et par secteur
 
 Tableau de bord bilingue (EN/FR) construit à partir de **d'Affaires (ICA) - SERVICE**, pages 3, 6, 9.
