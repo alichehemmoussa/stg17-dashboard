@@ -1,12 +1,6 @@
-**Tableau de bord en ligne : <https://alichehemmoussa.github.io/stg17-dashboard/>**
+# Variation trimestrielle de l’indice d’ensemble et par secteur
 
-Reconstruit en exécutant le notebook de ce dépôt sur la publication source. Dernière publication le 2026-10-14.
-
----
-
-# Indicateurs clés du marché du travail, démographiques et d’inclusion numérique
-
-Tableau de bord bilingue (EN/FR) construit à partir de **Bulletin statistique trimestriel**, pages 1, 2.
+Tableau de bord bilingue (EN/FR) construit à partir de **d'Affaires (ICA) - SERVICE**, pages 3, 6, 9.
 
 Built during the STG17 technical workshop *Emerging Issues, Emerging Practice*
 (African Development Bank / AU STATAFRIC), lab 02 — from a statistical document
@@ -39,9 +33,9 @@ Results of the run that produced this page:
 
 | Outcome | Cells |
 |---|---|
-| verified | 76 |
+| verified | 11 |
 | published but flagged | 0 |
-| discarded | 1 |
+| discarded | 0 |
 
 ## Reproducing this
 
