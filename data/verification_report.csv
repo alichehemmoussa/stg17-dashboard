@@ -1,11 +1,181 @@
 indicator,area,period,value,unit,page,model,provenance,evidence,unit_range,arithmetic,cross_read,status,reason
-evolution_prix_export,graisse et huiles,T2 2026 (quarterly),16.4,%,7,openai/gpt-oss-120b,True,True,True,True,no-row,verified,
-evolution_prix_export,graisse et huiles,T2 2026 (annual),-0.9,%,7,openai/gpt-oss-120b,True,False,True,True,no-row,dropped,la ligne source citée n'apparaît pas sur cette page
-evolution_prix_export,Matériels de transport,T2 2026 (quarterly),4.4,%,7,openai/gpt-oss-120b,True,False,True,True,no-row,dropped,la ligne source citée n'apparaît pas sur cette page
-evolution_prix_export,Matériels de transport,T2 2026 (annual),-1.0,%,7,openai/gpt-oss-120b,True,False,True,True,no-row,dropped,la ligne source citée n'apparaît pas sur cette page
-evolution_prix_export,Matières plastiques et caoutchouc,T2 2026 (quarterly),13.9,%,7,openai/gpt-oss-120b,True,False,True,True,no-row,dropped,la ligne source citée n'apparaît pas sur cette page
-evolution_prix_export,Matières plastiques et caoutchouc,T2 2026 (annual),3.7,%,7,openai/gpt-oss-120b,True,False,True,True,no-row,dropped,la ligne source citée n'apparaît pas sur cette page
-evolution_prix_export,Produits minéraux,T2 2026 (quarterly),-13.3,%,7,openai/gpt-oss-120b,True,True,True,True,no-row,verified,
-evolution_prix_export,Produits minéraux,T2 2026 (annual),-13.9,%,7,openai/gpt-oss-120b,True,False,True,True,no-row,dropped,la ligne source citée n'apparaît pas sur cette page
-evolution_prix_export,Produits des industries alimentaires,T2 2026 (quarterly),-4.0,%,7,openai/gpt-oss-120b,True,False,True,True,no-row,dropped,la ligne source citée n'apparaît pas sur cette page
-evolution_prix_export,Produits des industries alimentaires,T2 2026 (annual),1.2,%,7,openai/gpt-oss-120b,True,False,True,True,no-row,dropped,la ligne source citée n'apparaît pas sur cette page
+cpi_urban_aug2026,GENERAL INDEX,Code,0.0,,10,openai/gpt-oss-120b,True,True,False,True,absent,review,"unité «  » non autorisée pour cpi_urban_aug2026 | 0.0 n'est nulle part sur la ligne « GENERAL INDEX » ; cette ligne contient [100.0, 188.3, 214.0, 217.8, 1.8, 15.7]"
+cpi_urban_aug2026,GENERAL INDEX,Categories,,,10,openai/gpt-oss-120b,False,True,False,True,no-row,dropped,None n'est pas imprimé sur la page 10 | unité «  » non autorisée pour cpi_urban_aug2026
+cpi_urban_aug2026,GENERAL INDEX,Weights,100.0,%,10,openai/gpt-oss-120b,True,True,True,True,row-only,verified,
+cpi_urban_aug2026,GENERAL INDEX,Aug-25,188.3,,10,openai/gpt-oss-120b,True,True,False,True,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026; 188.3 est hors de la plage plausible pour cpi_urban_aug2026
+cpi_urban_aug2026,GENERAL INDEX,Jul-26,214.0,,10,openai/gpt-oss-120b,True,True,False,True,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026; 214.0 est hors de la plage plausible pour cpi_urban_aug2026
+cpi_urban_aug2026,GENERAL INDEX,Aug-26,217.8,,10,openai/gpt-oss-120b,True,True,False,True,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026; 217.8 est hors de la plage plausible pour cpi_urban_aug2026
+cpi_urban_aug2026,GENERAL INDEX,on Jul. 2026,1.8,%,10,openai/gpt-oss-120b,True,True,True,True,row-only,verified,
+cpi_urban_aug2026,GENERAL INDEX,on Aug. 2025,15.7,%,10,openai/gpt-oss-120b,True,True,True,True,row-only,verified,
+cpi_urban_aug2026,GENERAL INDEX,1 month,1.8,%,10,openai/gpt-oss-120b,True,True,True,False,row-only,review,les parties somment à 2.8 mais le document publie 1.8
+cpi_urban_aug2026,GENERAL INDEX,12 months,15.7,%,10,openai/gpt-oss-120b,True,True,True,False,row-only,review,les parties somment à 20.6 mais le document publie 15.7
+cpi_urban_aug2026,Food and non-alcoholic beverages,Code,1.0,,10,openai/gpt-oss-120b,True,True,False,True,absent,review,"unité «  » non autorisée pour cpi_urban_aug2026 | 1.0 n'est nulle part sur la ligne « Food and non-alcoholic beverages » ; cette ligne contient [27.0, 241.4, 270.7, 280.7, 3.7, 16.3]"
+cpi_urban_aug2026,Food and non-alcoholic beverages,Categories,,,10,openai/gpt-oss-120b,False,True,False,True,no-row,dropped,None n'est pas imprimé sur la page 10 | unité «  » non autorisée pour cpi_urban_aug2026
+cpi_urban_aug2026,Food and non-alcoholic beverages,Weights,27.0,%,10,openai/gpt-oss-120b,True,True,True,True,row-only,verified,
+cpi_urban_aug2026,Food and non-alcoholic beverages,Aug-25,241.4,,10,openai/gpt-oss-120b,True,True,False,True,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026; 241.4 est hors de la plage plausible pour cpi_urban_aug2026
+cpi_urban_aug2026,Food and non-alcoholic beverages,Jul-26,270.7,,10,openai/gpt-oss-120b,True,True,False,True,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026; 270.7 est hors de la plage plausible pour cpi_urban_aug2026
+cpi_urban_aug2026,Food and non-alcoholic beverages,Aug-26,280.7,,10,openai/gpt-oss-120b,True,True,False,True,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026; 280.7 est hors de la plage plausible pour cpi_urban_aug2026
+cpi_urban_aug2026,Food and non-alcoholic beverages,on Jul. 2026,3.7,%,10,openai/gpt-oss-120b,True,True,True,True,row-only,verified,
+cpi_urban_aug2026,Food and non-alcoholic beverages,on Aug. 2025,16.3,%,10,openai/gpt-oss-120b,True,True,True,True,row-only,verified,
+cpi_urban_aug2026,Food and non-alcoholic beverages,1 month,1.3,,10,openai/gpt-oss-120b,True,True,False,False,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026 | les parties somment à 2.8 mais le document publie 1.8 | cellule à relire : 0.3 est imprimé page 10 et comblerait l'écart
+cpi_urban_aug2026,Food and non-alcoholic beverages,12 months,5.7,,10,openai/gpt-oss-120b,True,True,False,False,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026 | les parties somment à 20.6 mais le document publie 15.7 | cellule à relire : 0.8 est imprimé page 10 et comblerait l'écart
+cpi_urban_aug2026,Bread and cereals,Code,,,10,openai/gpt-oss-120b,False,True,False,True,no-row,dropped,None n'est pas imprimé sur la page 10 | unité «  » non autorisée pour cpi_urban_aug2026
+cpi_urban_aug2026,Bread and cereals,Categories,,,10,openai/gpt-oss-120b,False,True,False,True,no-row,dropped,None n'est pas imprimé sur la page 10 | unité «  » non autorisée pour cpi_urban_aug2026
+cpi_urban_aug2026,Bread and cereals,Weights,5.0,%,10,openai/gpt-oss-120b,True,True,True,True,row-only,verified,
+cpi_urban_aug2026,Bread and cereals,Aug-25,197.4,,10,openai/gpt-oss-120b,True,True,False,True,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026; 197.4 est hors de la plage plausible pour cpi_urban_aug2026
+cpi_urban_aug2026,Bread and cereals,Jul-26,210.0,,10,openai/gpt-oss-120b,True,True,False,True,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026; 210.0 est hors de la plage plausible pour cpi_urban_aug2026
+cpi_urban_aug2026,Bread and cereals,Aug-26,211.3,,10,openai/gpt-oss-120b,True,True,False,True,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026; 211.3 est hors de la plage plausible pour cpi_urban_aug2026
+cpi_urban_aug2026,Bread and cereals,on Jul. 2026,0.6,%,10,openai/gpt-oss-120b,True,True,True,True,row-only,verified,
+cpi_urban_aug2026,Bread and cereals,on Aug. 2025,7.1,%,10,openai/gpt-oss-120b,True,True,True,True,row-only,verified,
+cpi_urban_aug2026,Bread and cereals,1 month,0.0,,10,openai/gpt-oss-120b,True,True,False,False,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026 | les parties somment à 2.8 mais le document publie 1.8 | cellule à relire : -1.0 est imprimé page 10 et comblerait l'écart
+cpi_urban_aug2026,Bread and cereals,12 months,0.4,,10,openai/gpt-oss-120b,True,True,False,False,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026 | les parties somment à 20.6 mais le document publie 15.7
+cpi_urban_aug2026,Meat,Code,,,10,openai/gpt-oss-120b,False,True,False,True,no-row,dropped,None n'est pas imprimé sur la page 10 | unité «  » non autorisée pour cpi_urban_aug2026
+cpi_urban_aug2026,Meat,Categories,,,10,openai/gpt-oss-120b,False,True,False,True,no-row,dropped,None n'est pas imprimé sur la page 10 | unité «  » non autorisée pour cpi_urban_aug2026
+cpi_urban_aug2026,Meat,Weights,2.0,%,10,openai/gpt-oss-120b,True,True,True,True,row-only,verified,
+cpi_urban_aug2026,Meat,Aug-25,297.5,,10,openai/gpt-oss-120b,True,True,False,True,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026; 297.5 est hors de la plage plausible pour cpi_urban_aug2026
+cpi_urban_aug2026,Meat,Jul-26,398.4,,10,openai/gpt-oss-120b,True,True,False,True,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026; 398.4 est hors de la plage plausible pour cpi_urban_aug2026
+cpi_urban_aug2026,Meat,Aug-26,406.6,,10,openai/gpt-oss-120b,True,True,False,True,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026; 406.6 est hors de la plage plausible pour cpi_urban_aug2026
+cpi_urban_aug2026,Meat,on Jul. 2026,2.1,%,10,openai/gpt-oss-120b,True,True,True,True,row-only,verified,
+cpi_urban_aug2026,Meat,on Aug. 2025,36.7,%,10,openai/gpt-oss-120b,True,True,True,True,row-only,verified,
+cpi_urban_aug2026,Meat,1 month,0.1,,10,openai/gpt-oss-120b,True,True,False,False,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026 | les parties somment à 2.8 mais le document publie 1.8 | cellule à relire : -0.9 est imprimé page 10 et comblerait l'écart
+cpi_urban_aug2026,Meat,12 months,1.1,,10,openai/gpt-oss-120b,True,True,False,False,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026 | les parties somment à 20.6 mais le document publie 15.7
+cpi_urban_aug2026,Milk cheese and eggs,Code,,,10,openai/gpt-oss-120b,False,True,False,True,no-row,dropped,None n'est pas imprimé sur la page 10 | unité «  » non autorisée pour cpi_urban_aug2026
+cpi_urban_aug2026,Milk cheese and eggs,Categories,,,10,openai/gpt-oss-120b,False,True,False,True,no-row,dropped,None n'est pas imprimé sur la page 10 | unité «  » non autorisée pour cpi_urban_aug2026
+cpi_urban_aug2026,Milk cheese and eggs,Weights,1.0,%,10,openai/gpt-oss-120b,True,True,True,True,row-only,verified,
+cpi_urban_aug2026,Milk cheese and eggs,Aug-25,216.8,,10,openai/gpt-oss-120b,True,True,False,True,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026; 216.8 est hors de la plage plausible pour cpi_urban_aug2026
+cpi_urban_aug2026,Milk cheese and eggs,Jul-26,227.9,,10,openai/gpt-oss-120b,True,True,False,True,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026; 227.9 est hors de la plage plausible pour cpi_urban_aug2026
+cpi_urban_aug2026,Milk cheese and eggs,Aug-26,228.2,,10,openai/gpt-oss-120b,True,True,False,True,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026; 228.2 est hors de la plage plausible pour cpi_urban_aug2026
+cpi_urban_aug2026,Milk cheese and eggs,on Jul. 2026,0.1,%,10,openai/gpt-oss-120b,True,True,True,True,row-only,verified,
+cpi_urban_aug2026,Milk cheese and eggs,on Aug. 2025,5.3,%,10,openai/gpt-oss-120b,True,True,True,True,row-only,verified,
+cpi_urban_aug2026,Milk cheese and eggs,1 month,0.0,,10,openai/gpt-oss-120b,True,True,False,False,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026 | les parties somment à 2.8 mais le document publie 1.8
+cpi_urban_aug2026,Milk cheese and eggs,12 months,0.1,,10,openai/gpt-oss-120b,True,True,False,False,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026 | les parties somment à 20.6 mais le document publie 15.7
+cpi_urban_aug2026,Vegetables,Code,,,10,openai/gpt-oss-120b,False,True,False,True,no-row,dropped,None n'est pas imprimé sur la page 10 | unité «  » non autorisée pour cpi_urban_aug2026
+cpi_urban_aug2026,Vegetables,Categories,,,10,openai/gpt-oss-120b,False,True,False,True,no-row,dropped,None n'est pas imprimé sur la page 10 | unité «  » non autorisée pour cpi_urban_aug2026
+cpi_urban_aug2026,Vegetables,Weights,9.0,%,10,openai/gpt-oss-120b,True,True,True,True,row-only,verified,
+cpi_urban_aug2026,Vegetables,Aug-25,269.4,,10,openai/gpt-oss-120b,True,True,False,True,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026; 269.4 est hors de la plage plausible pour cpi_urban_aug2026
+cpi_urban_aug2026,Vegetables,Jul-26,313.6,,10,openai/gpt-oss-120b,True,True,False,True,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026; 313.6 est hors de la plage plausible pour cpi_urban_aug2026
+cpi_urban_aug2026,Vegetables,Aug-26,336.0,,10,openai/gpt-oss-120b,True,True,False,True,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026; 336.0 est hors de la plage plausible pour cpi_urban_aug2026
+cpi_urban_aug2026,Vegetables,on Jul. 2026,7.1,%,10,openai/gpt-oss-120b,True,True,True,True,row-only,verified,
+cpi_urban_aug2026,Vegetables,on Aug. 2025,24.7,%,10,openai/gpt-oss-120b,True,True,True,True,row-only,verified,
+cpi_urban_aug2026,Vegetables,1 month,0.9,,10,openai/gpt-oss-120b,True,True,False,False,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026 | les parties somment à 2.8 mais le document publie 1.8
+cpi_urban_aug2026,Vegetables,12 months,3.1,,10,openai/gpt-oss-120b,True,True,False,False,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026 | les parties somment à 20.6 mais le document publie 15.7 | cellule à relire : -1.8 est imprimé page 10 et comblerait l'écart
+cpi_urban_aug2026,Non-alcoholic beverages,Code,1.2,,10,openai/gpt-oss-120b,True,True,False,True,absent,review,"unité «  » non autorisée pour cpi_urban_aug2026 | 1.2 n'est nulle part sur la ligne « Non-alcoholic beverages » ; cette ligne contient [1.0, 208.2, 223.9, 225.6, 0.8, 8.4]"
+cpi_urban_aug2026,Non-alcoholic beverages,Categories,,,10,openai/gpt-oss-120b,False,True,False,True,no-row,dropped,None n'est pas imprimé sur la page 10 | unité «  » non autorisée pour cpi_urban_aug2026
+cpi_urban_aug2026,Non-alcoholic beverages,Weights,1.0,%,10,openai/gpt-oss-120b,True,True,True,True,row-only,verified,
+cpi_urban_aug2026,Non-alcoholic beverages,Aug-25,208.2,,10,openai/gpt-oss-120b,True,True,False,True,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026; 208.2 est hors de la plage plausible pour cpi_urban_aug2026
+cpi_urban_aug2026,Non-alcoholic beverages,Jul-26,223.9,,10,openai/gpt-oss-120b,True,True,False,True,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026; 223.9 est hors de la plage plausible pour cpi_urban_aug2026
+cpi_urban_aug2026,Non-alcoholic beverages,Aug-26,225.6,,10,openai/gpt-oss-120b,True,True,False,True,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026; 225.6 est hors de la plage plausible pour cpi_urban_aug2026
+cpi_urban_aug2026,Non-alcoholic beverages,on Jul. 2026,0.8,%,10,openai/gpt-oss-120b,True,True,True,True,row-only,verified,
+cpi_urban_aug2026,Non-alcoholic beverages,on Aug. 2025,8.4,%,10,openai/gpt-oss-120b,True,True,True,True,row-only,verified,
+cpi_urban_aug2026,Non-alcoholic beverages,1 month,0.0,,10,openai/gpt-oss-120b,True,True,False,False,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026 | les parties somment à 2.8 mais le document publie 1.8
+cpi_urban_aug2026,Non-alcoholic beverages,12 months,0.1,,10,openai/gpt-oss-120b,True,True,False,False,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026 | les parties somment à 20.6 mais le document publie 15.7
+cpi_urban_aug2026,Alcoholic beverages tobacco and narcotics,Code,2.0,,10,openai/gpt-oss-120b,True,True,False,True,absent,review,"unité «  » non autorisée pour cpi_urban_aug2026 | 2.0 n'est nulle part sur la ligne « Alcoholic beverages tobacco and narcotics » ; cette ligne contient [5.0, 261.6, 283.4, 286.9, 1.2, 9.7]"
+cpi_urban_aug2026,Alcoholic beverages tobacco and narcotics,Categories,,,10,openai/gpt-oss-120b,False,True,False,True,no-row,dropped,None n'est pas imprimé sur la page 10 | unité «  » non autorisée pour cpi_urban_aug2026
+cpi_urban_aug2026,Alcoholic beverages tobacco and narcotics,Weights,5.0,%,10,openai/gpt-oss-120b,True,True,True,True,row-only,verified,
+cpi_urban_aug2026,Alcoholic beverages tobacco and narcotics,Aug-25,261.6,,10,openai/gpt-oss-120b,True,True,False,True,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026; 261.6 est hors de la plage plausible pour cpi_urban_aug2026
+cpi_urban_aug2026,Alcoholic beverages tobacco and narcotics,Jul-26,283.4,,10,openai/gpt-oss-120b,True,True,False,True,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026; 283.4 est hors de la plage plausible pour cpi_urban_aug2026
+cpi_urban_aug2026,Alcoholic beverages tobacco and narcotics,Aug-26,286.9,,10,openai/gpt-oss-120b,True,True,False,True,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026; 286.9 est hors de la plage plausible pour cpi_urban_aug2026
+cpi_urban_aug2026,Alcoholic beverages tobacco and narcotics,on Jul. 2026,1.2,%,10,openai/gpt-oss-120b,True,True,True,True,row-only,verified,
+cpi_urban_aug2026,Alcoholic beverages tobacco and narcotics,on Aug. 2025,9.7,%,10,openai/gpt-oss-120b,True,True,True,True,row-only,verified,
+cpi_urban_aug2026,Alcoholic beverages tobacco and narcotics,1 month,0.1,,10,openai/gpt-oss-120b,True,True,False,False,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026 | les parties somment à 2.8 mais le document publie 1.8
+cpi_urban_aug2026,Alcoholic beverages tobacco and narcotics,12 months,0.7,,10,openai/gpt-oss-120b,True,True,False,False,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026 | les parties somment à 20.6 mais le document publie 15.7
+cpi_urban_aug2026,Clothing and footwear,Code,3.0,,10,openai/gpt-oss-120b,True,True,False,True,absent,review,"unité «  » non autorisée pour cpi_urban_aug2026 | 3.0 n'est nulle part sur la ligne « Clothing and footwear » ; cette ligne contient [5.0, 168.4, 176.9, 177.2, 0.2, 5.2]"
+cpi_urban_aug2026,Clothing and footwear,Categories,,,10,openai/gpt-oss-120b,False,True,False,True,no-row,dropped,None n'est pas imprimé sur la page 10 | unité «  » non autorisée pour cpi_urban_aug2026
+cpi_urban_aug2026,Clothing and footwear,Weights,5.0,%,10,openai/gpt-oss-120b,True,True,True,True,row-only,verified,
+cpi_urban_aug2026,Clothing and footwear,Aug-25,168.4,,10,openai/gpt-oss-120b,True,True,False,True,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026; 168.4 est hors de la plage plausible pour cpi_urban_aug2026
+cpi_urban_aug2026,Clothing and footwear,Jul-26,176.9,,10,openai/gpt-oss-120b,True,True,False,True,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026; 176.9 est hors de la plage plausible pour cpi_urban_aug2026
+cpi_urban_aug2026,Clothing and footwear,Aug-26,177.2,,10,openai/gpt-oss-120b,True,True,False,True,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026; 177.2 est hors de la plage plausible pour cpi_urban_aug2026
+cpi_urban_aug2026,Clothing and footwear,on Jul. 2026,0.2,%,10,openai/gpt-oss-120b,True,True,True,True,row-only,verified,
+cpi_urban_aug2026,Clothing and footwear,on Aug. 2025,5.2,%,10,openai/gpt-oss-120b,True,True,True,True,row-only,verified,
+cpi_urban_aug2026,Clothing and footwear,1 month,0.0,,10,openai/gpt-oss-120b,True,True,False,False,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026 | les parties somment à 2.8 mais le document publie 1.8
+cpi_urban_aug2026,Clothing and footwear,12 months,0.2,,10,openai/gpt-oss-120b,True,True,False,False,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026 | les parties somment à 20.6 mais le document publie 15.7
+cpi_urban_aug2026,"Housing water, electricity, gas and other fuels",Code,4.0,,10,openai/gpt-oss-120b,True,True,False,True,absent,review,"unité «  » non autorisée pour cpi_urban_aug2026 | 4.0 n'est nulle part sur la ligne « Housing water, electricity, gas and other fuels » ; cette ligne contient [21.0, 144.3, 173.5, 173.8, 0.2, 20.4]"
+cpi_urban_aug2026,"Housing water, electricity, gas and other fuels",Categories,,,10,openai/gpt-oss-120b,False,True,False,True,no-row,dropped,None n'est pas imprimé sur la page 10 | unité «  » non autorisée pour cpi_urban_aug2026
+cpi_urban_aug2026,"Housing water, electricity, gas and other fuels",Weights,21.0,%,10,openai/gpt-oss-120b,True,True,True,True,row-only,verified,
+cpi_urban_aug2026,"Housing water, electricity, gas and other fuels",Aug-25,144.3,,10,openai/gpt-oss-120b,True,True,False,True,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026; 144.3 est hors de la plage plausible pour cpi_urban_aug2026
+cpi_urban_aug2026,"Housing water, electricity, gas and other fuels",Jul-26,173.5,,10,openai/gpt-oss-120b,True,True,False,True,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026; 173.5 est hors de la plage plausible pour cpi_urban_aug2026
+cpi_urban_aug2026,"Housing water, electricity, gas and other fuels",Aug-26,173.8,,10,openai/gpt-oss-120b,True,True,False,True,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026; 173.8 est hors de la plage plausible pour cpi_urban_aug2026
+cpi_urban_aug2026,"Housing water, electricity, gas and other fuels",on Jul. 2026,0.2,%,10,openai/gpt-oss-120b,True,True,True,True,row-only,verified,
+cpi_urban_aug2026,"Housing water, electricity, gas and other fuels",on Aug. 2025,20.4,%,10,openai/gpt-oss-120b,True,True,True,True,row-only,verified,
+cpi_urban_aug2026,"Housing water, electricity, gas and other fuels",1 month,0.0,,10,openai/gpt-oss-120b,True,True,False,False,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026 | les parties somment à 2.8 mais le document publie 1.8
+cpi_urban_aug2026,"Housing water, electricity, gas and other fuels",12 months,3.3,,10,openai/gpt-oss-120b,True,True,False,False,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026 | les parties somment à 20.6 mais le document publie 15.7
+cpi_urban_aug2026,Furnishings household equipment and routine household maintenance,Code,5.0,,10,openai/gpt-oss-120b,True,True,False,True,no-row,review,unité «  » non autorisée pour cpi_urban_aug2026
+cpi_urban_aug2026,Furnishings household equipment and routine household maintenance,Categories,,,10,openai/gpt-oss-120b,False,True,False,True,no-row,dropped,None n'est pas imprimé sur la page 10 | unité «  » non autorisée pour cpi_urban_aug2026
+cpi_urban_aug2026,Furnishings household equipment and routine household maintenance,Weights,4.0,%,10,openai/gpt-oss-120b,True,True,True,True,no-row,verified,
+cpi_urban_aug2026,Furnishings household equipment and routine household maintenance,Aug-25,173.4,,10,openai/gpt-oss-120b,True,True,False,True,no-row,review,unité «  » non autorisée pour cpi_urban_aug2026; 173.4 est hors de la plage plausible pour cpi_urban_aug2026
+cpi_urban_aug2026,Furnishings household equipment and routine household maintenance,Jul-26,183.2,,10,openai/gpt-oss-120b,True,True,False,True,no-row,review,unité «  » non autorisée pour cpi_urban_aug2026; 183.2 est hors de la plage plausible pour cpi_urban_aug2026
+cpi_urban_aug2026,Furnishings household equipment and routine household maintenance,Aug-26,184.3,,10,openai/gpt-oss-120b,True,True,False,True,no-row,review,unité «  » non autorisée pour cpi_urban_aug2026; 184.3 est hors de la plage plausible pour cpi_urban_aug2026
+cpi_urban_aug2026,Furnishings household equipment and routine household maintenance,on Jul. 2026,0.6,%,10,openai/gpt-oss-120b,True,True,True,True,no-row,verified,
+cpi_urban_aug2026,Furnishings household equipment and routine household maintenance,on Aug. 2025,6.3,%,10,openai/gpt-oss-120b,True,True,True,True,no-row,verified,
+cpi_urban_aug2026,Furnishings household equipment and routine household maintenance,1 month,0.0,,10,openai/gpt-oss-120b,True,True,False,False,no-row,review,unité «  » non autorisée pour cpi_urban_aug2026 | les parties somment à 2.8 mais le document publie 1.8
+cpi_urban_aug2026,Furnishings household equipment and routine household maintenance,12 months,0.2,,10,openai/gpt-oss-120b,True,True,False,False,no-row,review,unité «  » non autorisée pour cpi_urban_aug2026 | les parties somment à 20.6 mais le document publie 15.7
+cpi_urban_aug2026,Health,Code,6.0,,10,openai/gpt-oss-120b,True,True,False,True,absent,review,"unité «  » non autorisée pour cpi_urban_aug2026 | 6.0 n'est nulle part sur la ligne « Health » ; cette ligne contient [1.0, 193.4, 195.5, 195.6, 0.0, 1.2]"
+cpi_urban_aug2026,Health,Categories,,,10,openai/gpt-oss-120b,False,True,False,True,no-row,dropped,None n'est pas imprimé sur la page 10 | unité «  » non autorisée pour cpi_urban_aug2026
+cpi_urban_aug2026,Health,Weights,1.0,%,10,openai/gpt-oss-120b,True,True,True,True,row-only,verified,
+cpi_urban_aug2026,Health,Aug-25,193.4,,10,openai/gpt-oss-120b,True,True,False,True,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026; 193.4 est hors de la plage plausible pour cpi_urban_aug2026
+cpi_urban_aug2026,Health,Jul-26,195.5,,10,openai/gpt-oss-120b,True,True,False,True,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026; 195.5 est hors de la plage plausible pour cpi_urban_aug2026
+cpi_urban_aug2026,Health,Aug-26,195.6,,10,openai/gpt-oss-120b,True,True,False,True,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026; 195.6 est hors de la plage plausible pour cpi_urban_aug2026
+cpi_urban_aug2026,Health,on Jul. 2026,0.0,%,10,openai/gpt-oss-120b,True,True,True,True,row-only,verified,
+cpi_urban_aug2026,Health,on Aug. 2025,1.2,%,10,openai/gpt-oss-120b,True,True,True,True,row-only,verified,
+cpi_urban_aug2026,Health,1 month,0.0,,10,openai/gpt-oss-120b,True,True,False,False,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026 | les parties somment à 2.8 mais le document publie 1.8
+cpi_urban_aug2026,Health,12 months,0.0,,10,openai/gpt-oss-120b,True,True,False,False,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026 | les parties somment à 20.6 mais le document publie 15.7
+cpi_urban_aug2026,Transport,Code,7.0,,10,openai/gpt-oss-120b,False,True,False,True,absent,dropped,"7.0 n'est pas imprimé sur la page 10 | unité «  » non autorisée pour cpi_urban_aug2026 | 7.0 n'est nulle part sur la ligne « Transport » ; cette ligne contient [12.0, 201.0, 249.2, 249.6, 0.2, 24.2]"
+cpi_urban_aug2026,Transport,Categories,,,10,openai/gpt-oss-120b,False,True,False,True,no-row,dropped,None n'est pas imprimé sur la page 10 | unité «  » non autorisée pour cpi_urban_aug2026
+cpi_urban_aug2026,Transport,Weights,12.0,%,10,openai/gpt-oss-120b,True,True,True,True,row-only,verified,
+cpi_urban_aug2026,Transport,Aug-25,201.0,,10,openai/gpt-oss-120b,True,True,False,True,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026; 201.0 est hors de la plage plausible pour cpi_urban_aug2026
+cpi_urban_aug2026,Transport,Jul-26,249.2,,10,openai/gpt-oss-120b,True,True,False,True,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026; 249.2 est hors de la plage plausible pour cpi_urban_aug2026
+cpi_urban_aug2026,Transport,Aug-26,249.6,,10,openai/gpt-oss-120b,True,True,False,True,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026; 249.6 est hors de la plage plausible pour cpi_urban_aug2026
+cpi_urban_aug2026,Transport,on Jul. 2026,0.2,%,10,openai/gpt-oss-120b,True,True,True,True,row-only,verified,
+cpi_urban_aug2026,Transport,on Aug. 2025,24.2,%,10,openai/gpt-oss-120b,True,True,True,True,row-only,verified,
+cpi_urban_aug2026,Transport,1 month,0.0,,10,openai/gpt-oss-120b,True,True,False,False,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026 | les parties somment à 2.8 mais le document publie 1.8
+cpi_urban_aug2026,Transport,12 months,3.2,,10,openai/gpt-oss-120b,True,True,False,False,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026 | les parties somment à 20.6 mais le document publie 15.7
+cpi_urban_aug2026,Communication,Code,8.0,,10,openai/gpt-oss-120b,True,True,False,True,absent,review,"unité «  » non autorisée pour cpi_urban_aug2026 | 8.0 n'est nulle part sur la ligne « Communication » ; cette ligne contient [3.0, 114.3, 118.2, 117.9, -0.3, 3.2]"
+cpi_urban_aug2026,Communication,Categories,,,10,openai/gpt-oss-120b,False,True,False,True,no-row,dropped,None n'est pas imprimé sur la page 10 | unité «  » non autorisée pour cpi_urban_aug2026
+cpi_urban_aug2026,Communication,Weights,3.0,%,10,openai/gpt-oss-120b,True,True,True,True,row-only,verified,
+cpi_urban_aug2026,Communication,Aug-25,114.3,,10,openai/gpt-oss-120b,True,True,False,True,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026; 114.3 est hors de la plage plausible pour cpi_urban_aug2026
+cpi_urban_aug2026,Communication,Jul-26,118.2,,10,openai/gpt-oss-120b,True,True,False,True,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026; 118.2 est hors de la plage plausible pour cpi_urban_aug2026
+cpi_urban_aug2026,Communication,Aug-26,117.9,,10,openai/gpt-oss-120b,True,True,False,True,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026; 117.9 est hors de la plage plausible pour cpi_urban_aug2026
+cpi_urban_aug2026,Communication,on Jul. 2026,-0.3,%,10,openai/gpt-oss-120b,True,True,True,True,row-only,verified,
+cpi_urban_aug2026,Communication,on Aug. 2025,3.2,%,10,openai/gpt-oss-120b,True,True,True,True,row-only,verified,
+cpi_urban_aug2026,Communication,1 month,0.0,,10,openai/gpt-oss-120b,True,True,False,False,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026 | les parties somment à 2.8 mais le document publie 1.8
+cpi_urban_aug2026,Communication,12 months,0.1,,10,openai/gpt-oss-120b,True,True,False,False,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026 | les parties somment à 20.6 mais le document publie 15.7
+cpi_urban_aug2026,Recreation and culture,Code,9.0,,10,openai/gpt-oss-120b,True,True,False,True,absent,review,"unité «  » non autorisée pour cpi_urban_aug2026 | 9.0 n'est nulle part sur la ligne « Recreation and culture » ; cette ligne contient [3.0, 154.0, 162.2, 162.6, 0.2, 5.6]"
+cpi_urban_aug2026,Recreation and culture,Categories,,,10,openai/gpt-oss-120b,False,True,False,True,no-row,dropped,None n'est pas imprimé sur la page 10 | unité «  » non autorisée pour cpi_urban_aug2026
+cpi_urban_aug2026,Recreation and culture,Weights,3.0,%,10,openai/gpt-oss-120b,True,True,True,True,row-only,verified,
+cpi_urban_aug2026,Recreation and culture,Aug-25,154.0,,10,openai/gpt-oss-120b,True,True,False,True,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026; 154.0 est hors de la plage plausible pour cpi_urban_aug2026
+cpi_urban_aug2026,Recreation and culture,Jul-26,162.2,,10,openai/gpt-oss-120b,True,True,False,True,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026; 162.2 est hors de la plage plausible pour cpi_urban_aug2026
+cpi_urban_aug2026,Recreation and culture,Aug-26,162.6,,10,openai/gpt-oss-120b,True,True,False,True,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026; 162.6 est hors de la plage plausible pour cpi_urban_aug2026
+cpi_urban_aug2026,Recreation and culture,on Jul. 2026,0.2,%,10,openai/gpt-oss-120b,True,True,True,True,row-only,verified,
+cpi_urban_aug2026,Recreation and culture,on Aug. 2025,5.6,%,10,openai/gpt-oss-120b,True,True,True,True,row-only,verified,
+cpi_urban_aug2026,Recreation and culture,1 month,0.0,,10,openai/gpt-oss-120b,True,True,False,False,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026 | les parties somment à 2.8 mais le document publie 1.8
+cpi_urban_aug2026,Recreation and culture,12 months,0.1,,10,openai/gpt-oss-120b,True,True,False,False,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026 | les parties somment à 20.6 mais le document publie 15.7
+cpi_urban_aug2026,Education,Code,10.0,,10,openai/gpt-oss-120b,True,True,False,True,absent,review,"unité «  » non autorisée pour cpi_urban_aug2026 | 10.0 n'est nulle part sur la ligne « Education » ; cette ligne contient [3.0, 155.5, 176.2, 176.2, 0.0, 13.3]"
+cpi_urban_aug2026,Education,Categories,,,10,openai/gpt-oss-120b,False,True,False,True,no-row,dropped,None n'est pas imprimé sur la page 10 | unité «  » non autorisée pour cpi_urban_aug2026
+cpi_urban_aug2026,Education,Weights,3.0,%,10,openai/gpt-oss-120b,True,True,True,True,row-only,verified,
+cpi_urban_aug2026,Education,Aug-25,155.5,,10,openai/gpt-oss-120b,True,True,False,True,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026; 155.5 est hors de la plage plausible pour cpi_urban_aug2026
+cpi_urban_aug2026,Education,Jul-26,176.2,,10,openai/gpt-oss-120b,True,True,False,True,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026; 176.2 est hors de la plage plausible pour cpi_urban_aug2026
+cpi_urban_aug2026,Education,Aug-26,176.2,,10,openai/gpt-oss-120b,True,True,False,True,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026; 176.2 est hors de la plage plausible pour cpi_urban_aug2026
+cpi_urban_aug2026,Education,on Jul. 2026,0.0,%,10,openai/gpt-oss-120b,True,True,True,True,row-only,verified,
+cpi_urban_aug2026,Education,on Aug. 2025,13.3,%,10,openai/gpt-oss-120b,True,True,True,True,row-only,verified,
+cpi_urban_aug2026,Education,1 month,0.0,,10,openai/gpt-oss-120b,True,True,False,False,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026 | les parties somment à 2.8 mais le document publie 1.8
+cpi_urban_aug2026,Education,12 months,0.3,,10,openai/gpt-oss-120b,True,True,False,False,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026 | les parties somment à 20.6 mais le document publie 15.7
+cpi_urban_aug2026,Restaurants and hotels,Code,11.0,,10,openai/gpt-oss-120b,True,True,False,True,absent,review,"unité «  » non autorisée pour cpi_urban_aug2026 | 11.0 n'est nulle part sur la ligne « Restaurants and hotels » ; cette ligne contient [9.0, 172.1, 195.0, 199.0, 2.0, 15.6]"
+cpi_urban_aug2026,Restaurants and hotels,Categories,,,10,openai/gpt-oss-120b,False,True,False,True,no-row,dropped,None n'est pas imprimé sur la page 10 | unité «  » non autorisée pour cpi_urban_aug2026
+cpi_urban_aug2026,Restaurants and hotels,Weights,9.0,%,10,openai/gpt-oss-120b,True,True,True,True,row-only,verified,
+cpi_urban_aug2026,Restaurants and hotels,Aug-25,172.1,,10,openai/gpt-oss-120b,True,True,False,True,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026; 172.1 est hors de la plage plausible pour cpi_urban_aug2026
+cpi_urban_aug2026,Restaurants and hotels,Jul-26,195.0,,10,openai/gpt-oss-120b,True,True,False,True,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026; 195.0 est hors de la plage plausible pour cpi_urban_aug2026
+cpi_urban_aug2026,Restaurants and hotels,Aug-26,199.0,,10,openai/gpt-oss-120b,True,True,False,True,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026; 199.0 est hors de la plage plausible pour cpi_urban_aug2026
+cpi_urban_aug2026,Restaurants and hotels,on Jul. 2026,2.0,%,10,openai/gpt-oss-120b,True,True,True,True,row-only,verified,
+cpi_urban_aug2026,Restaurants and hotels,on Aug. 2025,15.6,%,10,openai/gpt-oss-120b,True,True,True,True,row-only,verified,
+cpi_urban_aug2026,Restaurants and hotels,1 month,0.2,,10,openai/gpt-oss-120b,True,True,False,False,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026 | les parties somment à 2.8 mais le document publie 1.8
+cpi_urban_aug2026,Restaurants and hotels,12 months,1.3,,10,openai/gpt-oss-120b,True,True,False,False,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026 | les parties somment à 20.6 mais le document publie 15.7
+cpi_urban_aug2026,Miscellaneous goods and services,Code,12.0,,10,openai/gpt-oss-120b,True,True,False,True,absent,review,"unité «  » non autorisée pour cpi_urban_aug2026 | 12.0 n'est nulle part sur la ligne « Miscellaneous goods and services » ; cette ligne contient [6.0, 147.1, 160.5, 166.7, 3.9, 13.3]"
+cpi_urban_aug2026,Miscellaneous goods and services,Categories,,,10,openai/gpt-oss-120b,False,True,False,True,no-row,dropped,None n'est pas imprimé sur la page 10 | unité «  » non autorisée pour cpi_urban_aug2026
+cpi_urban_aug2026,Miscellaneous goods and services,Weights,6.0,%,10,openai/gpt-oss-120b,True,True,True,True,row-only,verified,
+cpi_urban_aug2026,Miscellaneous goods and services,Aug-25,147.1,,10,openai/gpt-oss-120b,True,True,False,True,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026; 147.1 est hors de la plage plausible pour cpi_urban_aug2026
+cpi_urban_aug2026,Miscellaneous goods and services,Jul-26,160.5,,10,openai/gpt-oss-120b,True,True,False,True,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026; 160.5 est hors de la plage plausible pour cpi_urban_aug2026
+cpi_urban_aug2026,Miscellaneous goods and services,Aug-26,166.7,,10,openai/gpt-oss-120b,True,True,False,True,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026; 166.7 est hors de la plage plausible pour cpi_urban_aug2026
+cpi_urban_aug2026,Miscellaneous goods and services,on Jul. 2026,3.9,%,10,openai/gpt-oss-120b,True,True,True,True,row-only,verified,
+cpi_urban_aug2026,Miscellaneous goods and services,on Aug. 2025,13.3,%,10,openai/gpt-oss-120b,True,True,True,True,row-only,verified,
+cpi_urban_aug2026,Miscellaneous goods and services,1 month,0.2,,10,openai/gpt-oss-120b,True,True,False,False,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026 | les parties somment à 2.8 mais le document publie 1.8
+cpi_urban_aug2026,Miscellaneous goods and services,12 months,0.7,,10,openai/gpt-oss-120b,True,True,False,False,row-only,review,unité «  » non autorisée pour cpi_urban_aug2026 | les parties somment à 20.6 mais le document publie 15.7
