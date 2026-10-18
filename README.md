@@ -1,12 +1,6 @@
-**Tableau de bord en ligne : <https://alichehemmoussa.github.io/stg17-dashboard/>**
+# Évolution des prix à l'exportation
 
-Reconstruit en exécutant le notebook de ce dépôt sur la publication source. Dernière publication le 2026-10-18.
-
----
-
-# Tableau de bord statistique
-
-Tableau de bord bilingue (EN/FR) construit à partir de **d'Affaires (ICA) - SERVICE**, pages 3, 6, 9.
+Tableau de bord bilingue (EN/FR) construit à partir de **DJIBOUTI**, pages 7, 8, 9.
 
 Built during the STG17 technical workshop *Emerging Issues, Emerging Practice*
 (African Development Bank / AU STATAFRIC), lab 02 — from a statistical document
@@ -26,8 +20,8 @@ to a public dashboard.
 
 1. Text extracted page by page with `pdfplumber`.
 2. Each table read **twice and independently**: once by a rules-only reader, once by
-   `rules-only`
-   via Google Gemini. Le modèle ayant lu chaque cellule est consigné
+   `openai/gpt-oss-120b`
+   via Groq. Le modèle ayant lu chaque cellule est consigné
    dans `data/verification_report.csv`.
 3. Every cell passed through five checks — page provenance, quoted evidence, unit and
    range, reconciliation with published totals, and agreement between the two readings.
@@ -39,9 +33,9 @@ Results of the run that produced this page:
 
 | Outcome | Cells |
 |---|---|
-| verified | 360 |
+| verified | 2 |
 | published but flagged | 0 |
-| discarded | 0 |
+| discarded | 8 |
 
 ## Reproducing this
 
