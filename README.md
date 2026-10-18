@@ -1,3 +1,9 @@
+**Tableau de bord en ligne : <https://alichehemmoussa.github.io/stg17-dashboard/>**
+
+Reconstruit en exécutant le notebook de ce dépôt sur la publication source. Dernière publication le 2026-10-18.
+
+---
+
 # Indice des Prix à la Consommation – Contributions de l'Indice Urbain
 
 Tableau de bord bilingue (EN/FR) construit à partir de **STATISTICS OF RWANDA**, pages 10, 11, 12.
