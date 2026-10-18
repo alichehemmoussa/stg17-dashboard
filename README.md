@@ -1,10 +1,4 @@
-**Tableau de bord en ligne : <https://alichehemmoussa.github.io/stg17-dashboard/>**
-
-Reconstruit en exécutant le notebook de ce dépôt sur la publication source. Dernière publication le 2026-10-17.
-
----
-
-# Variation trimestrielle de l’indice d’ensemble et par secteur
+# Tableau de bord statistique
 
 Tableau de bord bilingue (EN/FR) construit à partir de **d'Affaires (ICA) - SERVICE**, pages 3, 6, 9.
 
@@ -26,8 +20,8 @@ to a public dashboard.
 
 1. Text extracted page by page with `pdfplumber`.
 2. Each table read **twice and independently**: once by a rules-only reader, once by
-   `openai/gpt-oss-120b`
-   via Groq. Le modèle ayant lu chaque cellule est consigné
+   `rules-only`
+   via Google Gemini. Le modèle ayant lu chaque cellule est consigné
    dans `data/verification_report.csv`.
 3. Every cell passed through five checks — page provenance, quoted evidence, unit and
    range, reconciliation with published totals, and agreement between the two readings.
@@ -39,7 +33,7 @@ Results of the run that produced this page:
 
 | Outcome | Cells |
 |---|---|
-| verified | 11 |
+| verified | 360 |
 | published but flagged | 0 |
 | discarded | 0 |
 
