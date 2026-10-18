@@ -1,3 +1,9 @@
+**Tableau de bord en ligne : <https://alichehemmoussa.github.io/stg17-dashboard/>**
+
+Reconstruit en exécutant le notebook de ce dépôt sur la publication source. Dernière publication le 2026-10-18.
+
+---
+
 # Évolution des prix à l'exportation
 
 Tableau de bord bilingue (EN/FR) construit à partir de **DJIBOUTI**, pages 7, 8, 9.
