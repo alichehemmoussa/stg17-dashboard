@@ -1,12 +1,6 @@
-**Tableau de bord en ligne : <https://alichehemmoussa.github.io/stg17-dashboard/>**
+# Indice des Prix à la Consommation – Contributions de l'Indice Urbain
 
-Reconstruit en exécutant le notebook de ce dépôt sur la publication source. Dernière publication le 2026-10-18.
-
----
-
-# Évolution des prix à l'exportation
-
-Tableau de bord bilingue (EN/FR) construit à partir de **DJIBOUTI**, pages 7, 8, 9.
+Tableau de bord bilingue (EN/FR) construit à partir de **STATISTICS OF RWANDA**, pages 10, 11, 12.
 
 Built during the STG17 technical workshop *Emerging Issues, Emerging Practice*
 (African Development Bank / AU STATAFRIC), lab 02 — from a statistical document
@@ -39,9 +33,9 @@ Results of the run that produced this page:
 
 | Outcome | Cells |
 |---|---|
-| verified | 2 |
-| published but flagged | 0 |
-| discarded | 8 |
+| verified | 54 |
+| published but flagged | 103 |
+| discarded | 23 |
 
 ## Reproducing this
 
